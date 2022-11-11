@@ -1,5 +1,6 @@
-console.log('hoi');
+import { createApp } from 'vue'
+import TheNavigation from "./components/TheNavigation.vue";
 
-import TheNavigation from "./components/TheNavigation";
-window.Vue = Vue;
-Vue.component('TheNavigation', TheNavigation)
+const app = createApp({})
+
+app.component('TheNavigation', TheNavigation)

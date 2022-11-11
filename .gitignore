@@ -3,6 +3,7 @@
 /public/css/tailwind.css
 /public/js/site.js
 
+/public/build
 /public/hot
 /public/storage
 /public/vendor/statamic

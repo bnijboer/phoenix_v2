@@ -5,19 +5,31 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title ?? site:name }}</title>
-        <link rel="stylesheet" href="{{ mix src='css/tailwind.css' }}">
-        <script defer src="{{ mix src='/js/site.js' }}"></script>
+        <link rel="stylesheet" href="/css/tailwind.css">
+        <script defer src="/js/site.js"></script>
     </head>
     <body>
         <div id="app">
             <div class="wrapper">
                 <header>
-                    {{ partial:layout/header }}
+                    <TheNavigation></TheNavigation>
                 </header>
 
                 <div class="flex">
                     <aside class="sidebar">
-                        {{ partial:layout/sidebar }}
+                        <a href="/">
+                            <img
+                                alt="Logo"
+                                src="/assets/logo.png"
+                            >
+                        </a>
+
+                        <ul class="mt-8 space-y-4">
+                            <li class="hover:text-indigo-400">Home</li>
+                            <li class="hover:text-indigo-400">About</li>
+                            <li class="hover:text-indigo-400">Blogs</li>
+                            <li class="hover:text-indigo-400">Contact Us</li>
+                        </ul>
                     </aside>
 
                     <main>
@@ -28,7 +40,7 @@
                 </div>
 
                 <footer>
-                    {{ partial:layout/footer }}
+                    footer
                 </footer>
             </div>
         </div>
