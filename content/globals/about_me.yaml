@@ -1,0 +1,76 @@
+title: 'Over mij'
+data:
+  image: about-me-photo.jpg
+  title: 'Over mij'
+  body:
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          marks:
+            -
+              type: bold
+          text: 'Hallo, mijn naam is Hermine, een behoorlijk doorsnee mens met een godin in mij.'
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: "\_"
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: 'Aan de buitenkant ben ik een hartstikke gewone vrouw; bijna 40 jaar gelukkig getrouwd, moeder van 6 kinderen, vele flauwe baantjes gehad. Ik woon in Drenthe met mijn man, 4 honden, 3 katten en een heleboel kleinvee. De kinderen staan op eigen benen.'
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: "\_"
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: 'Ruim 15 jaar geleden ben ik gediagnosticeerd met SCA2. Heel kort gezegd; door een aangeboren hersenafwijking doen mijn spieren niet wat ik wil. Lange tijd had ik daar weinig last van maar de laatste jaren nemen de problemen hand over hand toe. Ik wek de indruk altijd dronken te zijn vooral doordat mijn bewegingen en spraak ongecoördineerd zijn. Inmiddels ben ik volledig afgekeurd voor werk en hele dagen thuis en veel van mijn hobby’s kan ik niet meer uitvoeren.'
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: "\_"
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: 'Al mijn hele leven speel ik met de godin in mij onze kaartspelletjes. Maar sinds een aantal jaren wint zij veel te vaak en kan ik mijn gelukskaarten niet meer vinden. Dat bevalt me allemaal niks en middels deze blog wil ik het kistje kaarten terugvinden. De bedoeling is dat ik elke week iets nieuws plaats dus zet me onder je favorieten en check af en toe.'
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: 'Het kistje gelukskaarten kan nooit ver weg zijn...'
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: '*****************************************************************************************************'
+    -
+      type: paragraph
+    -
+      type: paragraph
+    -
+      type: paragraph
+    -
+      type: paragraph
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: '(Commentaar, complimentjes, kritiek en ideeën kunnen naar herminesblogpost@gmail.com)'

@@ -1,0 +1,9 @@
+<div class="heading-primary text-center mb-6">Resultaten voor '{{ title }}':</div>
+
+<div class="px-16 mb-20">
+    <hr class="hr-primary">
+</div>
+
+{{ collection:blogposts paginate="5" as="posts" :taxonomy:tags="slug" }}
+    {{ partial:results :posts=posts }}
+{{ /collection:blogposts }}

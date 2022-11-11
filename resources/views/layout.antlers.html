@@ -6,11 +6,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title ?? site:name }}</title>
         <link rel="stylesheet" href="{{ mix src='css/tailwind.css' }}">
+        <script defer src="{{ mix src='/js/site.js' }}"></script>
     </head>
-    <body class="bg-gray-100 font-sans leading-normal text-gray-800">
-        <div class="mx-auto px-2 lg:min-h-screen flex flex-col items-center justify-center">
-            {{ template_content }}
+    <body>
+        <div id="app">
+            <div class="wrapper">
+                <header>
+                    {{ partial:layout/header }}
+                </header>
+
+                <div class="flex">
+                    <aside class="sidebar">
+                        {{ partial:layout/sidebar }}
+                    </aside>
+
+                    <main>
+                        <div class="content">
+                            {{ template_content }}
+                        </div>
+                    </main>
+                </div>
+
+                <footer>
+                    {{ partial:layout/footer }}
+                </footer>
+            </div>
         </div>
-        <script src="{{ mix src='/js/site.js' }}"></script>
     </body>
 </html>

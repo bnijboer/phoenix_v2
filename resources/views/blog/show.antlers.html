@@ -1,0 +1,61 @@
+<article>
+    <section class="blogpost-details-date">
+        {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
+    </section>
+
+    <h1 class="blogpost-details-title">{{ title }}</h1>
+
+    {{ if header_image }}
+        <figure>
+            <img
+                src="{{ header_image }}"
+                alt="Header afbeelding"
+                class="blogpost-details-header-image"
+            >
+
+            {{ if caption }}
+                <figcaption>{{ caption }}</figcaption>
+            {{ /if }}
+        </figure>
+    {{ /if }}
+
+    <section class="blogpost-details-body">
+        {{ body }}
+            {{ text }}
+        {{ /body }}
+    </section>
+
+    {{ if source }}
+        <section class="blogpost-details-source">
+            Bron: {{ source }}
+        </section>
+    {{ /if }}
+
+    <div class="px-72 py-12">
+        <hr class="hr-primary">
+    </div>
+
+    {{ if tags }}
+        <section class="blogpost-details-tags">
+            {{ tags }}
+                <a
+                    href="{{ url }}"
+                    class="tag-item {{ unless last }}mr-2{{ /unless }}"
+                >
+                    {{ title }}
+                </a>
+            {{ /tags }}
+        </section>
+    {{ /if }}
+
+    <div class="flex justify-center space-x-8 mt-16">
+        <a
+            href="{{ homepage }}"
+            class="button button-primary"
+        >
+            Terug naar overzicht
+        </a>
+    </div>
+</article>
+
+<comment-section :blogpost-id="{{ id | to_json | entities }}"></comment-section>

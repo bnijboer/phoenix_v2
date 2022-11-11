@@ -1,0 +1,11 @@
+{{ about_me }}
+    <welcome :about="{{ title | to_json | entities }}"></welcome>
+{{ /about_me }}
+
+<welcome :about="[
+    {{ about_me }}
+         {
+             title: '{{ title }}'
+         },
+    {{ /about_me }}
+]"></welcome>
