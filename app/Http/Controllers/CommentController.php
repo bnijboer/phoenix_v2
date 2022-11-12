@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
     public function index(Request $request)
     {
-        $postUuid = $request->postUuid;
+        $post = Post::whereUuid($request->postUuid)->first();
 
-        return $postUuid;
+        return $post->comments;
+    }
+
+    public function store(Request $request)
+    {
+        $post = Post::firstOrNew(['uuid' => $request->postUuid]);
+
+        $post->save();
+
+        return $post;
     }
 }

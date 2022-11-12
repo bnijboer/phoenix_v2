@@ -23,3 +23,4 @@ Route::get('/greeting', function () {
 });
 
 Route::get('/comments', [CommentController::class, 'index']);
+Route::post('/comments', [CommentController::class, 'store']);

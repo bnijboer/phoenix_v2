@@ -10,12 +10,6 @@
 </template>
 
 <script setup>
-import axios from "axios";
 
-const postUuid = '1234-smth-6969-test';
-
-axios
-    .get(`/comments?postUuid=${postUuid}`)
-    .then((response) => console.log(response.data));
 
 </script>
