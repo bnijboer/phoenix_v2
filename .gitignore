@@ -1,7 +1,7 @@
 /node_modules
 
-/public/css/tailwind.css
-/public/js/site.js
+/public/css
+/public/js
 
 /public/build
 /public/hot
