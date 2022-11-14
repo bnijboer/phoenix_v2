@@ -1,18 +1,14 @@
 import { createApp } from 'vue'
-import NavLinks from './components/nav-links'
-import CommentCreate from './components/comments/comment-create'
-import CommentIndex from './components/comments/comment-index'
-import CommentItem from './components/comments/comment-item'
+import TheHeader from './components/layout/the-header'
+import TheSidebar from './components/layout/the-sidebar'
+import TheFooter from './components/layout/the-footer'
 import CommentSection from './components/comments/comment-section'
-import ContentComponent from './components/content-component'
 
 const app = createApp({})
 
-app.component('nav-links', NavLinks);
-app.component('comment-create', CommentCreate);
-app.component('comment-index', CommentIndex);
-app.component('comment-item', CommentItem);
-app.component('comment-section', CommentSection);
-app.component('content-component', ContentComponent);
+app.component('the-header', TheHeader)
+    .component('the-sidebar', TheSidebar)
+    .component('the-footer', TheFooter)
+    .component('comment-section', CommentSection)
 
 app.mount('#app')

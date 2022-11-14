@@ -1,23 +1,28 @@
 <template>
     <div>
-        <div v-for="(comment, index) in comments" :key="index">
-            <comment-item :comment="comment"></comment-item>
-        </div>
+        <h1>Comments</h1>
+
+        <comment-item
+            v-for="(comment, index) in comments"
+            :key="index"
+            :comment="comment"
+        ></comment-item>
     </div>
 </template>
 
 <script setup>
-import axios from "axios";
+import {inject, onBeforeMount, ref} from 'vue';
 import CommentItem from "./comment-item";
+import CommentService from "./../../services/comment-service"
 
-const props = defineProps({
-    'postUuid': String
-});
+const comments = ref({});
+const postUuid = inject('postUuid');
 
-let comments = [];
+async function getComments() {
+    comments.value = await CommentService.getComments(postUuid);
+}
 
-axios
-    .get(`/comments?postUuid=${props.postUuid}`)
-    .then((response) => comments = response.data)
-    .catch((error) => console.log(error.message));
+onBeforeMount(async () => {
+    getComments();
+})
 </script>

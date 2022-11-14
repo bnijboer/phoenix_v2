@@ -11,39 +11,23 @@
     <body>
         <div id="app">
             <div class="wrapper">
-                <header class="flex">
-                    <div class="w-96 bg-blue-200">
-                        <a
-                            href="/"
-                        >
-<!--                            <img-->
-<!--                                alt="Logo"-->
-<!--                                src="/assets/logo.png"-->
-<!--                            >-->
-                        </a>
-                    </div>
+                <the-header></the-header>
 
-                    <nav-links></nav-links>
-                </header>
-
-                <div class="flex">
+                <div class="flex grow">
                     <aside class="sidebar">
-                        about
+                        <the-sidebar></the-sidebar>
                     </aside>
 
                     <main>
                         <div class="content">
-<!--                            <content-component-->
-<!--                                :content="{{ page | to_json | entities }}">-->
-<!--                            ></content-component>-->
                             {{ template_content }}
+
+<!--                            <post-index :posts="{{ collection:blogposts as='posts' }}{{ posts | to_json | entities }}{{ /collection:blogposts }}"></post-index>-->
                         </div>
                     </main>
                 </div>
 
-                <footer>
-                    footer
-                </footer>
+                <the-footer></the-footer>
             </div>
         </div>
     </body>

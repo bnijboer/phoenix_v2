@@ -1,8 +1,8 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <label for="comment">Reactie:</label>
-            <textarea v-model="comment" id="comment" name="comment"></textarea>
+            <label for="body">Reactie:</label>
+            <textarea v-model="body" id="body" name="body" autofocus></textarea>
 
             <button type="submit">Versturen</button>
         </form>
@@ -10,23 +10,18 @@
 </template>
 
 <script setup>
-import axios from "axios";
+import { inject } from 'vue'
+import CommentService from "../../services/comment-service";
 
-const props = defineProps({
-    'postUuid': String
-});
+let body = '';
+const postUuid = inject('postUuid');
 
-let comment = '';
-
-const onSubmit = () => {
-    const request = {
-        'comment': comment,
-        'postUuid': props.postUuid
+async function onSubmit() {
+    const commentRequest = {
+        'body': body,
     }
 
-    axios
-        .post(`/comments`, request)
-        .then((response) => console.log(response.data))
-        .catch((error) => console.log(error.message));
+    await CommentService.createComment(postUuid, commentRequest)
+        .then((response) => console.log(response));
 }
 </script>
