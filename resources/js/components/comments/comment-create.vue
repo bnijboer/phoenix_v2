@@ -5,6 +5,7 @@
             <textarea v-model="body" id="body" name="body" autofocus></textarea>
 
             <button type="submit">Versturen</button>
+            <v-button :type="'submit'">Versturen</v-button>
         </form>
     </div>
 </template>
@@ -12,6 +13,7 @@
 <script setup>
 import { inject } from 'vue'
 import CommentService from "../../services/comment-service";
+import VButton from "../ui/v-button";
 
 let body = '';
 const postUuid = inject('postUuid');

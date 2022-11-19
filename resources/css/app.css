@@ -10,7 +10,7 @@
     }
 
     header {
-        @apply flex bg-blue-400 p-4;
+        @apply bg-blue-400;
     }
 
     .sidebar {
@@ -18,7 +18,7 @@
     }
 
     main {
-        @apply mx-auto bg-red-100 grow w-full;
+        @apply mx-auto bg-red-100 grow;
     }
 
     .content {

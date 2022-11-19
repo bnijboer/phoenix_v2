@@ -1,11 +1,11 @@
 <template>
     <div>
-        {{ comment.body }}
+        {{ comment }}
     </div>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
     'comment': {
         type: Object,
     }

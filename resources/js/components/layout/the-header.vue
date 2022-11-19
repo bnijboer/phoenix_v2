@@ -1,11 +1,11 @@
 <template>
-    <header class="flex">
-        <div class="w-96 bg-blue-200">
-            <nav-links></nav-links>
+    <header class="flex h-36">
+        <div class="flex flex-col justify-end mx-auto lg:ml-96">
+            <nav-menu></nav-menu>
         </div>
     </header>
 </template>
 
 <script setup>
-import NavLinks from "./nav-links";
+import NavMenu from "./nav-menu";
 </script>
