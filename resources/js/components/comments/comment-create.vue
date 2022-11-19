@@ -6,6 +6,9 @@
 
             <v-button :type="'submit'" @submit.prevent="onSubmit">Versturen</v-button>
         </form>
+
+        <login :status="'notLoggedIn'"></login>
+<!--        <register></register>-->
     </div>
 </template>
 
@@ -13,13 +16,13 @@
 import { inject, ref } from 'vue'
 import CommentService from "../../services/comment-service";
 import VButton from "../ui/v-button";
+import Login from "../auth/login";
+import Register from "../auth/register";
 
 let body = '';
 const postUuid = inject('postUuid');
 
 async function onSubmit() {
-    console.log('trst');
-
     const commentRequest = {
         'body': body,
     }
