@@ -1,5 +1,5 @@
 <template>
-    <nav-menu>
+    <nav>
         <ul class="flex space">
             <li class="mx-2">
                 <nav-link :url="'/'">Home</nav-link>
@@ -8,7 +8,7 @@
                 <nav-link :url="'/about'">About</nav-link>
             </li>
         </ul>
-    </nav-menu>
+    </nav>
 </template>
 
 <script setup>

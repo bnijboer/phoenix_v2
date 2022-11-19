@@ -4,14 +4,13 @@
             <label for="body">Reactie:</label>
             <textarea v-model="body" id="body" name="body" autofocus></textarea>
 
-            <button type="submit">Versturen</button>
-            <v-button :type="'submit'">Versturen</v-button>
+            <v-button :type="'submit'" @submit.prevent="onSubmit">Versturen</v-button>
         </form>
     </div>
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import CommentService from "../../services/comment-service";
 import VButton from "../ui/v-button";
 
@@ -19,6 +18,8 @@ let body = '';
 const postUuid = inject('postUuid');
 
 async function onSubmit() {
+    console.log('trst');
+
     const commentRequest = {
         'body': body,
     }
