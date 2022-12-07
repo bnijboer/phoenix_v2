@@ -101,7 +101,7 @@ return [
     */
 
     'guards' => [
-        'cp' => 'web',
+        'cp' => 'cp',
         'web' => 'web',
     ],
 

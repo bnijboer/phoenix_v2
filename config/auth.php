@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'cp' => [
+            'driver' => 'session',
+            'provider' => 'cp_users',
+        ],
     ],
 
     /*
@@ -60,14 +65,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+         'users' => [
+             'driver' => 'eloquent',
+             'model' => App\Models\User::class,
+         ],
+
+        'cp_users' => [
             'driver' => 'statamic',
         ],
-
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\User::class,
-        // ],
 
         // 'users' => [
         //     'driver' => 'database',
