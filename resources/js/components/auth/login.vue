@@ -6,13 +6,13 @@
 
         <form @submit.prevent="submit">
             <div>
-                <input-label for="email" value="Email" />
+                <input-label for="email" value="E-mail" />
                 <text-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
 <!--                <input-error class="mt-2" :message="form.errors.email" />-->
             </div>
 
             <div class="mt-4">
-                <input-label for="password" value="Password" />
+                <input-label for="password" value="Wachtwoord" />
                 <text-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
 <!--                <input-error class="mt-2" :message="form.errors.password" />-->
             </div>
@@ -20,7 +20,7 @@
             <div class="block mt-4">
                 <label class="flex items-center">
                     <checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    <span class="ml-2 text-sm text-gray-600">Onthoud mij</span>
                 </label>
             </div>
 
@@ -34,7 +34,7 @@
 <!--                </primary-button>-->
 
                 <primary-button class="ml-4">
-                    Log in
+                    Inloggen
                 </primary-button>
             </div>
         </form>

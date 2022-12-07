@@ -9,6 +9,9 @@
 
         <login :status="'notLoggedIn'"></login>
 <!--        <register></register>-->
+
+
+        <button @click="logout">Uitloggen</button>
     </div>
 </template>
 
@@ -18,9 +21,11 @@ import CommentService from "../../services/comment-service";
 import VButton from "../ui/v-button";
 import Login from "../auth/login";
 import Register from "../auth/register";
+import AuthenticationService from "../../services/authentication-service";
 
 let body = '';
 const postUuid = inject('postUuid');
+
 
 async function onSubmit() {
     const commentRequest = {
@@ -28,6 +33,11 @@ async function onSubmit() {
     }
 
     await CommentService.createComment(postUuid, commentRequest)
-        .then((response) => console.log(response));
+        .then(response => console.log(response));
+}
+
+function logout() {
+    AuthenticationService.logout()
+        .then(response => console.log(response));
 }
 </script>
