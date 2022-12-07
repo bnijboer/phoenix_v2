@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { inject, ref } from 'vue'
+import { inject } from 'vue'
 import CommentService from "../../services/comment-service";
 import VButton from "../ui/v-button";
 

@@ -18,12 +18,6 @@ export default {
         return await axios.post('/logout')
             .then(response => response.data)
             .catch(error => console.log(error.message));
-    },
-
-    async getUser() {
-        return await axios.get('/user')
-            .then(response => response.data)
-            .catch(error => console.log(error.message));
     }
 }
 </script>

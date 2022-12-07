@@ -42,28 +42,27 @@
 </template>
 
 <script setup>
-import AuthenticationService from "../../services/authentication-service";
-import Checkbox from "../utilities/checkbox"
-import InputError from "../utilities/input-error";
-import InputLabel from "../utilities/input-label";
-import PrimaryButton from "../utilities/primary-buton"
-import TextInput from "../utilities/text-input";
+    import Checkbox from "../utilities/checkbox"
+    import InputError from "../utilities/input-error";
+    import InputLabel from "../utilities/input-label";
+    import PrimaryButton from "../utilities/primary-buton"
+    import TextInput from "../utilities/text-input";
+    import {useSecurityStore} from "../../store/security-store";
 
-defineProps({
-    // canResetPassword: Boolean,
-    status: String,
-});
+    defineProps({
+        // canResetPassword: Boolean,
+        status: String,
+    });
 
-const form = {
-    email: '',
-    password: '',
-    remember: false
-};
+    const userStore = useSecurityStore();
 
-const submit = () => {
-    form.username = form.email;
+    const form = {
+        email: '',
+        password: '',
+        remember: false
+    };
 
-    AuthenticationService.login(form)
-        .then((response) => console.log(response));
-};
+    const submit = () => {
+        userStore.login(form);
+    };
 </script>

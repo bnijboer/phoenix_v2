@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isLoggedIn">
+        <div v-if="state.user">
             <comment-create></comment-create>
 
             <comment-index></comment-index>
@@ -18,10 +18,10 @@
 <script setup>
     import Login from "../auth/login";
     import Register from "../auth/register";
-    import AuthenticationService from "../../services/authentication-service";
     import CommentIndex from "./comment-index";
     import CommentCreate from "./comment-create";
-    import {onBeforeMount, provide, ref} from 'vue'
+    import {computed, onBeforeMount, provide, reactive, ref} from 'vue'
+    import {useSecurityStore} from "../../store/security-store";
 
     const props = defineProps({
         'postUuid': {
@@ -31,18 +31,25 @@
 
     provide('postUuid', props.postUuid);
 
-    const isLoggedIn = ref(false);
-
-    onBeforeMount(() => {
-        AuthenticationService.getUser()
-            .then(response => {
-                isLoggedIn.value = true;
-            })
-            .catch(error => console.log(error.message));
+    const userStore = useSecurityStore();
+    const state = reactive({
+        user: null
     });
 
-    function logout() {
-        AuthenticationService.logout()
-            .then(response => console.log(response));
+    onBeforeMount(() => {
+        if (!userStore.user) {
+            getUser();
+        }
+    });
+
+    async function getUser() {
+        await userStore.getUser();
+        state.user = userStore.user;
+
+        console.log(state.user);
+    }
+
+    async function logout() {
+        await userStore.logout();
     }
 </script>
