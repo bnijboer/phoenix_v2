@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="state.user">
+        <div v-if="user">
             <comment-create></comment-create>
 
             <comment-index></comment-index>
@@ -20,7 +20,7 @@
     import Register from "../auth/register";
     import CommentIndex from "./comment-index";
     import CommentCreate from "./comment-create";
-    import {computed, onBeforeMount, provide, reactive, ref} from 'vue'
+    import {computed, provide} from 'vue'
     import {useSecurityStore} from "../../store/security-store";
 
     const props = defineProps({
@@ -29,27 +29,15 @@
         }
     });
 
+    const userStore = useSecurityStore();
+
     provide('postUuid', props.postUuid);
 
-    const userStore = useSecurityStore();
-    const state = reactive({
-        user: null
+    const user = computed(() => {
+        return userStore.user;
     });
 
-    onBeforeMount(() => {
-        if (!userStore.user) {
-            getUser();
-        }
-    });
-
-    async function getUser() {
-        await userStore.getUser();
-        state.user = userStore.user;
-
-        console.log(state.user);
-    }
-
-    async function logout() {
-        await userStore.logout();
+    function logout() {
+        userStore.logout();
     }
 </script>

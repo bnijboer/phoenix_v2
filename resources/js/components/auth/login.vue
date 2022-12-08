@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
+        <div v-if="props.status" class="mb-4 font-medium text-sm text-green-600">
+            {{ props.status }}
         </div>
 
         <form @submit.prevent="submit">
@@ -33,9 +33,9 @@
 <!--                    Log in-->
 <!--                </primary-button>-->
 
-                <primary-button class="ml-4">
+                <button class="ml-4" @click="login">
                     Inloggen
-                </primary-button>
+                </button>
             </div>
         </form>
     </div>
@@ -49,7 +49,7 @@
     import TextInput from "../utilities/text-input";
     import {useSecurityStore} from "../../store/security-store";
 
-    defineProps({
+    const props = defineProps({
         // canResetPassword: Boolean,
         status: String,
     });
@@ -62,7 +62,7 @@
         remember: false
     };
 
-    const submit = () => {
+    function login() {
         userStore.login(form);
-    };
+    }
 </script>

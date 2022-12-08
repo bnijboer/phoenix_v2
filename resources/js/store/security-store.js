@@ -6,10 +6,6 @@ export const useSecurityStore = defineStore("security", {
         user: null,
     }),
 
-    // getters: {
-    //     isLoggedIn: (state) => !!state.user,
-    // },
-
     actions: {
         async getUser() {
             try {

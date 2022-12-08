@@ -33,32 +33,33 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <primary-button class="ml-4">
+                <button class="ml-4" @click="register">
                     Registreren
-                </primary-button>
+                </button>
             </div>
         </form>
     </div>
 </template>
 
 <script setup>
-import AuthenticationService from "../../services/authentication-service";
-import Checkbox from "../utilities/checkbox"
-import InputError from "../utilities/input-error";
-import InputLabel from "../utilities/input-label";
-import PrimaryButton from "../utilities/primary-buton"
-import TextInput from "../utilities/text-input";
+    import Checkbox from "../utilities/checkbox"
+    import InputError from "../utilities/input-error";
+    import InputLabel from "../utilities/input-label";
+    import PrimaryButton from "../utilities/primary-buton"
+    import TextInput from "../utilities/text-input";
+    import {useSecurityStore} from "../../store/security-store";
 
-const form = {
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    remember: false
-};
+    const form = {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        remember: false
+    };
 
-const submit = () => {
-    AuthenticationService.register(form)
-        .then((response) => console.log(response));
-};
+    const userStore = useSecurityStore();
+
+    function register() {
+        userStore.login(form);
+    }
 </script>

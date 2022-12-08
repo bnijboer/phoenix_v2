@@ -1,29 +1,31 @@
 <template>
     <div>
-        <form @submit.prevent="onSubmit">
+        <form @submit.prevent>
             <label for="body">Reactie:</label>
-            <textarea v-model="body" id="body" name="body" autofocus></textarea>
+            <textarea v-model="comment.body" id="body" name="body" autofocus required></textarea>
 
-            <v-button :type="'submit'" @submit.prevent="onSubmit">Versturen</v-button>
+            <button @click="submit">Versturen</button>
         </form>
     </div>
 </template>
 
 <script setup>
-import { inject } from 'vue'
-import CommentService from "../../services/comment-service";
-import VButton from "../ui/v-button";
+    import {inject, reactive} from 'vue'
+    import CommentService from "../../services/comment-service";
 
-let body = '';
-const postUuid = inject('postUuid');
+    const postUuid = inject('postUuid');
 
+    const comment = reactive({
+        body: null
+    });
 
-async function onSubmit() {
-    const commentRequest = {
-        'body': body,
+    async function submit() {
+        try {
+            await CommentService.createComment(postUuid, comment);
+
+            comment.body = null;
+        } catch (error) {
+            console.log(error.message);
+        }
     }
-
-    await CommentService.createComment(postUuid, commentRequest)
-        .then(response => console.log(response));
-}
 </script>

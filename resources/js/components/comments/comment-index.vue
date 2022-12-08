@@ -19,10 +19,14 @@ const comments = ref({});
 const postUuid = inject('postUuid');
 
 async function getComments() {
-    comments.value = await CommentService.getComments(postUuid);
+    try {
+        comments.value = await CommentService.getComments(postUuid);
+    } catch(error) {
+        console.log(error.message);
+    }
 }
 
-onBeforeMount(async () => {
+onBeforeMount(() => {
     getComments();
 })
 </script>
