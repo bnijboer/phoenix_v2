@@ -1,39 +1,37 @@
 import {defineStore} from "pinia";
 import axios from "axios";
 
-export const useSecurityStore = defineStore("security", {
+export const useSecurityStore = defineStore('security', {
     state: () => ({
         user: null,
     }),
 
     actions: {
         async getUser() {
-            try {
+            if (!this.user) {
                 const response = await axios.get('/user');
 
                 this.user = await response.data;
-            } catch(error) {
-                console.log(error.message);
             }
+
+            return this.user;
         },
 
         async login(formData) {
             try {
-                const response = await axios.post('/login', formData);
-
-                this.user = await response.data;
-            } catch(error) {
-                console.log(error.message);
+                await axios.post('/login', formData);
+            } catch (error) {
+                console.log(error);
+                return error;
             }
         },
 
         async register(formData) {
             try {
-                const response = await axios.post('/register', formData);
-
-                this.user = await response.data;
-            } catch(error) {
-                console.log(error.message);
+                await axios.post('/register', formData);
+            } catch (error) {
+                console.log(error);
+                return error;
             }
         },
 
@@ -43,7 +41,8 @@ export const useSecurityStore = defineStore("security", {
 
                 this.user = null;
             } catch(error) {
-                console.log(error.message);
+                console.log(error);
+                return error;
             }
         },
     },

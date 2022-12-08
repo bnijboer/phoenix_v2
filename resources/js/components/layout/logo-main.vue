@@ -5,6 +5,7 @@
         <img
             alt="Logo"
             src="/assets/logo.png"
+            class="logo"
         >
     </a>
 </template>

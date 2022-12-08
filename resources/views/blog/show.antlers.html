@@ -1,10 +1,4 @@
 <article>
-    <section class="blogpost-details-date">
-        {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
-    </section>
-
-    <h1 class="blogpost-details-title">{{ title }}</h1>
-
     {{ if header_image }}
         <figure>
             <img
@@ -19,7 +13,15 @@
         </figure>
     {{ /if }}
 
-    <section class="blogpost-details-body">
+    <section class="flex justify-end">
+        <div>
+            {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
+        </div>
+    </section>
+
+    <h1 class="mt-4">{{ title }}</h1>
+
+    <section class="post-body mt-12">
         {{ body }}
             {{ text }}
         {{ /body }}
@@ -31,30 +33,30 @@
         </section>
     {{ /if }}
 
-    <div class="px-72 py-12">
-        <hr class="hr-primary">
-    </div>
-
     {{ if tags }}
         <section class="blogpost-details-tags">
             {{ tags }}
-                <a
-                    href="{{ url }}"
-                    class="tag-item {{ unless last }}mr-2{{ /unless }}"
-                >
-                    {{ title }}
-                </a>
+            <a
+                href="{{ url }}"
+                class="tag-item {{ unless last }}mr-2{{ /unless }}"
+            >
+                {{ title }}
+            </a>
             {{ /tags }}
         </section>
     {{ /if }}
 
-    <div class="flex justify-center space-x-8 mt-16">
+    <div class="text-center">
         <a
             href="{{ homepage }}"
-            class="button button-primary"
+            class="btn-default"
         >
             Terug naar overzicht
         </a>
+    </div>
+
+    <div class="py-12">
+        <hr class="hr-primary">
     </div>
 </article>
 

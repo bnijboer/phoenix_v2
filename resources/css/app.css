@@ -5,12 +5,40 @@
 @import "tailwindcss/utilities";
 
 @layer base {
+    body {
+        font-family: 'Raleway', sans-serif;
+    }
+
+    h1 {
+        @apply text-5xl text-primary tracking-wide;
+        font-family: 'Merriweather', serif;
+    }
+
+    h2 {
+        @apply text-3xl text-primary tracking-wide;
+        font-family: 'Merriweather', serif;
+    }
+
+    h3 {
+        @apply text-2xl text-primary tracking-wide;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    p {
+        margin-bottom: 28px;
+    }
+
+    .post-body {
+        @apply text-gray-900 text-lg;
+        line-height: 2;
+    }
+
     .wrapper {
         @apply min-h-screen antialiased flex flex-col;
     }
 
     header {
-        @apply bg-blue-400;
+        /*@apply bg-blue-400;*/
     }
 
     .sidebar {
@@ -18,14 +46,36 @@
     }
 
     main {
-        @apply mx-auto bg-red-100 grow;
+        @apply mx-auto bg-purple-100 grow;
     }
 
     .content {
-        @apply w-full sm:w-3/4 bg-red-200 mx-auto p-4;
+        @apply w-full sm:w-2/3 mx-auto bg-white p-8;
     }
 
     footer {
         @apply bg-purple-200 flex justify-center p-4;
     }
+
+    .logo {
+        @apply h-32;
+        object-fit: contain;
+    }
+}
+
+@layer components {
+    .nav-link {
+        @apply p-2 uppercase font-semibold tracking-wide text-primary hover:text-primary-accent hover:border-primary-accent hover:border-b hover:border-primary;
+    }
+
+    .btn-default {
+        @apply inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-accent active:bg-primary-accent focus:outline-none focus:bg-primary-accent transition ease-in-out duration-300;
+    }
+
+    .btn-success {
+        @apply inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:border-green-700 transition ease-in-out duration-300;
+    }
+}
+
+@layer utilities {
 }

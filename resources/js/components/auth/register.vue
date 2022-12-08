@@ -59,7 +59,17 @@
 
     const userStore = useSecurityStore();
 
-    function register() {
-        userStore.login(form);
+    async function login() {
+        try {
+            await userStore.register(form);
+
+            showModal.value = false;
+        } catch(error) {
+            console.log(error.message);
+        }
+    }
+
+    function cancel(close) {
+        close();
     }
 </script>

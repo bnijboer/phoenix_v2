@@ -1,53 +1,63 @@
 <template>
-    <div>
-        <div v-if="props.status" class="mb-4 font-medium text-sm text-green-600">
-            {{ props.status }}
-        </div>
+    <form-modal
+        v-model="showModal"
+        @confirm="login"
+        @cancel="cancel"
+        :actions="actions"
+    >
+        <template #title>Inloggen</template>
 
-        <form @submit.prevent="submit">
-            <div>
-                <input-label for="email" value="E-mail" />
-                <text-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
-<!--                <input-error class="mt-2" :message="form.errors.email" />-->
-            </div>
+        <form @submit.prevent>
+            <input-component
+                v-model="form.email"
+                type="email"
+                name="email"
+                required
+                autofocus
+            >
+                E-mail
+            </input-component>
 
-            <div class="mt-4">
-                <input-label for="password" value="Wachtwoord" />
-                <text-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
-<!--                <input-error class="mt-2" :message="form.errors.password" />-->
-            </div>
+            <ul v-if="errors.email.length" class="mt-1 text-xs text-red-600">
+                <li v-for="(errorMessage, index) in errors.email" :key="index">
+                    {{ errorMessage }}
+                </li>
+            </ul>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Onthoud mij</span>
-                </label>
-            </div>
+            <input-component
+                v-model="form.password"
+                type="password"
+                name="password"
+                required
+                class="mt-4"
+            >
+                Wachtwoord
+            </input-component>
 
-            <div class="flex items-center justify-end mt-4">
-                <!--            <a v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">-->
-                <!--                Forgot your password?-->
-                <!--            </a>-->
+            <ul v-if="errors.password.length" class="mt-1 text-xs text-red-600">
+                <li v-for="(errorMessage, index) in errors.password" :key="index">
+                    {{ errorMessage }}
+                </li>
+            </ul>
 
-<!--                <primary-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">-->
-<!--                    Log in-->
-<!--                </primary-button>-->
-
-                <button class="ml-4" @click="login">
-                    Inloggen
-                </button>
-            </div>
+<!--            <div class="block mt-4">-->
+<!--                <label class="flex items-center">-->
+<!--                    <checkbox name="remember" v-model:checked="form.remember" />-->
+<!--                    <span class="ml-2 text-sm text-gray-600">Onthoud mij</span>-->
+<!--                </label>-->
+<!--            </div>-->
         </form>
-    </div>
+    </form-modal>
+
+    <button class="btn-default" @click="showModal = true">Inloggen</button>
 </template>
 
 <script setup>
     import Checkbox from "../utilities/checkbox"
-    import InputError from "../utilities/input-error";
-    import InputLabel from "../utilities/input-label";
-    import PrimaryButton from "../utilities/primary-buton"
-    import TextInput from "../utilities/text-input";
     import {useSecurityStore} from "../../store/security-store";
+    import FormModal from "../modals/form-modal";
+    import {reactive, ref, watch} from "vue";
+    import InputComponent from "../utilities/input-component";
 
     const props = defineProps({
         // canResetPassword: Boolean,
@@ -55,14 +65,81 @@
     });
 
     const userStore = useSecurityStore();
-
-    const form = {
+    const showModal = ref(false);
+    const form = reactive({
         email: '',
         password: '',
         remember: false
-    };
+    });
 
-    function login() {
-        userStore.login(form);
+    const actions = {
+        confirm: 'Log in',
+        cancel: 'Annuleren',
+    }
+
+    const errors = reactive({
+        'email': [],
+        'password': [],
+    });
+
+    async function login() {
+        errors.email = [];
+        errors.password = [];
+
+        validate();
+
+        if (errors.email.length) {
+            return;
+        }
+
+        try {
+            await userStore.login(form);
+
+            showModal.value = false;
+        } catch(error) {
+            console.log(error.message);
+        }
+    }
+
+    function cancel(close) {
+        close();
+    }
+
+    function validate() {
+        if (!required(form.email)) {
+            errors.email.push('Dit veld is verplicht');
+        }
+
+        if (!isValidEmail(form.email)) {
+            errors.email.push('Ongeldig e-mailadres');
+        }
+
+        if (!required(form.password)) {
+            errors.password.push('Dit veld is verplicht');
+        }
+    }
+
+    function required(v) {
+        if (typeof v === 'object') {
+            return false;
+        }
+
+        if (typeof v === 'boolean') {
+            return false;
+        }
+
+        if (v === 0) {
+            return false;
+        }
+
+        if (typeof v === 'string' && v.trim().length === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function isValidEmail(v) {
+        return (v ? /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) : true);
     }
 </script>
