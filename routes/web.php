@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/comments', [CommentController::class, 'store']);
 
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        return new UserResource($request->user());
     });
 });

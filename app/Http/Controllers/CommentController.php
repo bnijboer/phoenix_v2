@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,21 +14,20 @@ class CommentController extends Controller
     {
         try {
             $post = Post::whereUuid($request->postUuid)->first();
-            $comments = $post->comments;
+
+            $comments = $post->comments->latest()->get();
         } catch (\ErrorException $e) {
             $comments = [];
         }
 
-        return $comments;
+        return CommentResource::collection($comments);
     }
 
     public function store(Request $request, CommentRequest $commentRequest)
     {
-        $user = Auth::user();
-
         $post = Post::firstOrCreate(['uuid' => $request->postUuid]);
 
-        return $user->comments()->create([
+        return Auth::user()->comments()->create([
             'body' => $commentRequest->body,
             'post_id' => $post->id
         ]);

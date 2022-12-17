@@ -29,8 +29,7 @@
     }
 
     .post-body {
-        @apply text-gray-900 text-lg;
-        line-height: 2;
+        @apply text-gray-900 text-lg leading-relaxed;
     }
 
     .wrapper {
@@ -64,6 +63,10 @@
 }
 
 @layer components {
+    .comment {
+        @apply text-gray-700 leading-relaxed text-sm border border-secondary rounded-md p-4;
+    }
+
     .nav-link {
         @apply p-2 uppercase font-semibold tracking-wide text-primary hover:text-primary-accent hover:border-primary-accent hover:border-b hover:border-primary;
     }
