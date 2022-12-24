@@ -4,6 +4,6 @@
     <hr class="hr-primary">
 </div>
 
-{{ collection:blogposts paginate="5" as="posts" :taxonomy:tags="slug" }}
+{{ collection:blog paginate="5" as="posts" :taxonomy:tags="slug" }}
     {{ partial:results :posts=posts }}
-{{ /collection:blogposts }}
+{{ /collection:blog }}
