@@ -15,7 +15,7 @@ class CommentController extends Controller
         try {
             $post = Post::whereUuid($request->postUuid)->first();
 
-            $comments = $post->comments->latest()->get();
+            $comments = $post->comments;
         } catch (\ErrorException $e) {
             $comments = [];
         }
@@ -27,9 +27,11 @@ class CommentController extends Controller
     {
         $post = Post::firstOrCreate(['uuid' => $request->postUuid]);
 
-        return Auth::user()->comments()->create([
+        $comment = Auth::user()->comments()->create([
             'body' => $commentRequest->body,
             'post_id' => $post->id
         ]);
+
+        return new CommentResource($comment);
     }
 }

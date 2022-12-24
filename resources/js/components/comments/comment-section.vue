@@ -1,25 +1,36 @@
 <template>
-    <div v-if="user" class="flex justify-center">
+    <div class="flex justify-center">
         <div class="w-3/4">
-            <section>
-                <form @submit.prevent>
+            <section class="mb-16">
+                <form v-if="user" @submit.prevent>
                     <textarea
                         v-model="comment.body"
                         id="body"
                         name="body"
-                        placeholder="Reageren..."
+                        placeholder="Wat vind je van deze post?"
                         required
                         class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
                     ></textarea>
 
-                    <button class="btn-default block ml-auto mt-4" @click="submitComment">Versturen</button>
+                    <button class="btn-default block ml-auto mt-4" @click="submitComment">Reageren</button>
                 </form>
+                <div v-else class="flex justify-center">
+                    <div class="space-y-4">
+                        <div>Log in om te kunnen reageren.</div>
+
+                        <login />
+
+                        <register />
+                    </div>
+                </div>
             </section>
 
             <section>
-                <h3 class="mb-8">Reacties:</h3>
+                <div class="text-center mb-8">
+                    <h3>Reacties:</h3>
+                </div>
 
-                <div v-if="comment.length" class="space-y-4">
+                <div v-if="comments.length" class="space-y-4">
                     <div
                         v-for="(comment, index) in comments"
                         :key="index"
@@ -52,21 +63,13 @@
             </section>
         </div>
     </div>
-    <div v-else>
-        <div class="w-3/4">
-            <login></login>
-
-            Geen account? Klik hier om er een aan te maken:
-            <register></register>
-        </div>
-    </div>
 </template>
 
 <script setup>
     import {formatDutchDate} from "../../helpers/miscellaneous";
     import Login from "../auth/login";
     import Register from "../auth/register";
-    import {computed, onBeforeMount, reactive, ref} from 'vue'
+    import {onBeforeMount, reactive, ref} from 'vue'
     import {useSecurityStore} from "../../store/security-store";
     import CommentService from "../../services/comment-service";
 
@@ -78,43 +81,36 @@
 
     const securityStore = useSecurityStore();
 
-    const user = computed(() => securityStore.getUser());
+    const user = ref(null);
 
     const showModal = ref(false);
-    const comments = ref({});
+    const comments = ref([]);
     const comment = reactive({
         body: '',
-        createdAt: ''
+        createdAt: '',
     });
 
-    onBeforeMount(() => {
-        if (user) {
-            getComments();
-        }
-    })
+    onBeforeMount(async () => {
+        user.value = await securityStore.getUser();
+
+        await getComments();
+    });
 
     async function getComments() {
         try {
             comments.value = await CommentService.getComments(props.postUuid);
-            console.log(comments.value);
         } catch(error) {
             console.log(error.message);
         }
     }
 
-    function confirm() {
-        showModal.value = false
-    }
-
-    function cancel(close) {
-        close();
-    }
-
     async function submitComment() {
         try {
-            await CommentService.createComment(props.postUuid, comment);
+            const newComment = await CommentService.createComment(props.postUuid, comment);
 
             comment.body = '';
+
+            comments.value.unshift(newComment);
         } catch (error) {
             console.log(error.message);
         }

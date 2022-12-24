@@ -49,14 +49,16 @@
         </form>
     </form-modal>
 
-    <button class="btn-default" @click="showModal = true">Inloggen</button>
+    <div class="flex justify-center">
+        <button class="btn-default" @click="showModal = true">Inloggen</button>
+    </div>
 </template>
 
 <script setup>
-    import Checkbox from "../utilities/checkbox"
+    import Checkbox from "../utilities/checkbox";
     import {useSecurityStore} from "../../store/security-store";
     import FormModal from "../modals/form-modal";
-    import {reactive, ref, watch} from "vue";
+    import {reactive, ref} from "vue";
     import InputComponent from "../utilities/input-component";
 
     const props = defineProps({
@@ -65,6 +67,7 @@
     });
 
     const userStore = useSecurityStore();
+
     const showModal = ref(false);
     const form = reactive({
         email: '',

@@ -16,11 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/comments', [CommentController::class, 'index']);
-    Route::post('/comments', [CommentController::class, 'store']);
+Route::get('/comments', [CommentController::class, 'index']);
 
-    Route::get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) {
+    if ($request->user()) {
         return new UserResource($request->user());
-    });
+    }
+
+    return null;
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/comments', [CommentController::class, 'store']);
 });

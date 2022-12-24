@@ -4,24 +4,29 @@ import axios from "axios";
 export const useSecurityStore = defineStore('security', {
     state: () => ({
         user: null,
+        isLoggedIn: false,
     }),
 
     actions: {
         async getUser() {
-            if (!this.user) {
+            try {
                 const response = await axios.get('/user');
 
-                this.user = await response.data;
-            }
+                this.user = response.data.data;
+                this.isLoggedIn = true;
 
-            return this.user;
+                return this.user;
+            } catch (error) {
+                return error;
+            }
         },
 
         async login(formData) {
             try {
                 await axios.post('/login', formData);
+
+                this.isLoggedIn = true;
             } catch (error) {
-                console.log(error);
                 return error;
             }
         },
@@ -30,7 +35,6 @@ export const useSecurityStore = defineStore('security', {
             try {
                 await axios.post('/register', formData);
             } catch (error) {
-                console.log(error);
                 return error;
             }
         },
@@ -41,7 +45,6 @@ export const useSecurityStore = defineStore('security', {
 
                 this.user = null;
             } catch(error) {
-                console.log(error);
                 return error;
             }
         },

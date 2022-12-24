@@ -3,50 +3,44 @@
         Er zijn geen posts gevonden...
     </article>
 {{ else }}
-    {{ posts }}
-        <a
-            href="{{ url }}"
-            class="group"
-        >
-            <article class="blogpost-preview {{ unless first }}mt-32{{ /unless }}">
-                {{ if header_image }}
-                    <div
-                        class="mb-8"
-                        style="background: url('{{ header_image }}') center no-repeat; background-size: cover;"
-                    >
-                        <div class="h-160 blogpost-preview-image group-hover:blogpost-preview-image-hover"></div>
-                    </div>
-                {{ /if }}
-
-                <section class="text-gray-800 text-sm">
-                    {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
-                </section>
-
-                <h2 class="mt-4">
-                    {{ title }}
-                </h2>
-
-                {{ if description_text }}
-                    <section class="text-gray-900 text-lg mt-8">
-                        {{ description_text }}
+    <div class="grid grid-cols-2 gap-8">
+        {{ posts }}
+            <a href="{{ url }}" class="group p-4 border border-gray-900">
+                <article>
+                    <section class="text-gray-800 text-sm">
+                        {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
                     </section>
-                {{ /if }}
 
-                {{ if tags }}
-                    <section class="blogpost-preview-tags">
-                        {{ tags }}
-                            <a
-                                href="{{ url }}"
-                                class="tag-item {{ unless last }}mr-2{{ /unless }}"
-                            >
-                                {{ title }}
-                            </a>
-                        {{ /tags }}
-                    </section>
-                {{ /if }}
-            </article>
-        </a>
-    {{ /posts }}
+                    {{ if header_image }}
+                        <img
+                            src="{{ header_image }}"
+                            alt="Preview afbeelding"
+                        >
+                    {{ /if }}
+
+                    <h2 class="mt-4">
+                        {{ title }}
+                    </h2>
+
+                    {{ if description_text }}
+                        <section class="text-gray-900 text-lg mt-8">
+                            {{ description_text }}
+                        </section>
+                    {{ /if }}
+
+                    {{ if tags }}
+                        <section class="space-x-2">
+                            {{ tags }}
+                                <a href="{{ url }}">
+                                    {{ title }}
+                                </a>
+                            {{ /tags }}
+                        </section>
+                    {{ /if }}
+                </article>
+            </a>
+        {{ /posts }}
+    </div>
 
     {{ paginate }}
         {{ if total_pages > 1 }}

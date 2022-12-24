@@ -9,7 +9,9 @@
         },
 
         async createComment(postUuid, commentRequest) {
-            await axios.post(`/comments?postUuid=${postUuid}`, commentRequest);
+            const response = await axios.post(`/comments?postUuid=${postUuid}`, commentRequest);
+
+            return response.data.data;
         }
     }
 </script>
