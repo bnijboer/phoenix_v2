@@ -3,19 +3,17 @@
         Er zijn geen posts gevonden...
     </article>
 {{ else }}
-    <div class="grid grid-cols-2 gap-8">
+    <div class="grid grid-cols-2 gap-16">
         {{ posts }}
             <article class="post-preview">
                 <a href="{{ url }}" class="group">
-                    {{ if header_image }}
-                        <img
-                            src="{{ header_image }}"
-                            alt="Preview afbeelding"
-                            class="preview-image"
-                        >
-                    {{ /if }}
+                    <img
+                        src="{{ header_image ?? '/assets/preview-default.jpg' }}"
+                        alt="Preview afbeelding"
+                        class="preview-image"
+                    >
 
-                    <section class="p-4">
+                    <section class="px-6 pt-4 pb-8">
                         <div class="text-gray-800 text-sm">
                             {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
                         </div>
@@ -25,16 +23,16 @@
                         </h2>
 
                         {{ if description_text }}
-                            <section class="text-gray-900 text-lg mt-8">
+                            <div class="text-gray-900 text-lg mt-8">
                                 {{ description_text }}
-                            </section>
+                            </div>
                         {{ /if }}
 
                         {{ if tags }}
-                            <div class="space-x-2">
+                            <div class="mt-8">
                                 {{ tags }}
-                                    <a href="{{ url }}">
-                                        {{ title }}
+                                    <a href="{{ url }}" class="tag mr-2">
+                                        #{{ title }}
                                     </a>
                                 {{ /tags }}
                             </div>

@@ -49,7 +49,7 @@
     }
 
     .content {
-        @apply w-full sm:w-2/3 mx-auto bg-white p-8;
+        @apply w-full sm:w-3/4 mx-auto bg-white p-16;
     }
 
     footer {
@@ -69,6 +69,10 @@
 
     .preview-image {
         @apply h-80 w-full object-cover;
+    }
+
+    .tag {
+        @apply text-gray-800 text-sm border border-secondary rounded-lg p-2;
     }
 
     .comment {
