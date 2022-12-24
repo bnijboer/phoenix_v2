@@ -63,6 +63,14 @@
 }
 
 @layer components {
+    .post-preview {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .preview-image {
+        @apply h-80 w-full object-cover;
+    }
+
     .comment {
         @apply text-gray-700 leading-relaxed text-sm border border-secondary rounded-md p-4;
     }

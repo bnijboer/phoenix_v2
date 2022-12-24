@@ -5,38 +5,41 @@
 {{ else }}
     <div class="grid grid-cols-2 gap-8">
         {{ posts }}
-            <article class="border border-gray-900 p-4">
+            <article class="post-preview">
                 <a href="{{ url }}" class="group">
-                    <section class="text-gray-800 text-sm">
-                        {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
-                    </section>
-
                     {{ if header_image }}
                         <img
                             src="{{ header_image }}"
                             alt="Preview afbeelding"
+                            class="preview-image"
                         >
                     {{ /if }}
 
-                    <h2 class="mt-4">
-                        {{ title }}
-                    </h2>
+                    <section class="p-4">
+                        <div class="text-gray-800 text-sm">
+                            {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
+                        </div>
 
-                    {{ if description_text }}
-                        <section class="text-gray-900 text-lg mt-8">
-                            {{ description_text }}
-                        </section>
-                    {{ /if }}
+                        <h2 class="mt-4">
+                            {{ title }}
+                        </h2>
 
-                    {{ if tags }}
-                        <section class="space-x-2">
-                            {{ tags }}
-                                <a href="{{ url }}">
-                                    {{ title }}
-                                </a>
-                            {{ /tags }}
-                        </section>
-                    {{ /if }}
+                        {{ if description_text }}
+                            <section class="text-gray-900 text-lg mt-8">
+                                {{ description_text }}
+                            </section>
+                        {{ /if }}
+
+                        {{ if tags }}
+                            <div class="space-x-2">
+                                {{ tags }}
+                                    <a href="{{ url }}">
+                                        {{ title }}
+                                    </a>
+                                {{ /tags }}
+                            </div>
+                        {{ /if }}
+                    </section>
                 </a>
             </article>
         {{ /posts }}
