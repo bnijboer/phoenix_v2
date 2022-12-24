@@ -5,8 +5,8 @@
 {{ else }}
     <div class="grid grid-cols-2 gap-8">
         {{ posts }}
-            <a href="{{ url }}" class="group p-4 border border-gray-900">
-                <article>
+            <article class="border border-gray-900 p-4">
+                <a href="{{ url }}" class="group">
                     <section class="text-gray-800 text-sm">
                         {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
                     </section>
@@ -37,8 +37,8 @@
                             {{ /tags }}
                         </section>
                     {{ /if }}
-                </article>
-            </a>
+                </a>
+            </article>
         {{ /posts }}
     </div>
 

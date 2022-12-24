@@ -38,7 +38,12 @@ return [
     */
 
     'widgets' => [
-        'getting_started',
+//        'getting_started',
+        [
+            'type' => 'collection',
+            'collection' => 'blog',
+            'width' => 100
+        ],
     ],
 
     /*
