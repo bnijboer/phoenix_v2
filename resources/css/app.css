@@ -33,7 +33,7 @@
     }
 
     .about {
-        @apply flex flex-row lg:flex-col text-justify grow;
+        @apply text-justify grow;
     }
 
     main {
@@ -41,7 +41,7 @@
     }
 
     .content {
-        @apply p-16 xl:px-24;
+        @apply px-12 xl:px-24 pb-16;
     }
 
     footer {
