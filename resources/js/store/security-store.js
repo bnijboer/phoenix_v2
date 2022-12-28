@@ -23,7 +23,9 @@ export const useSecurityStore = defineStore('security', {
 
         async login(formData) {
             try {
-                await axios.post('/login', formData);
+                await axios.post('/login', formData, {
+                    withCredentials: true
+                });
 
                 this.isLoggedIn = true;
             } catch (error) {
