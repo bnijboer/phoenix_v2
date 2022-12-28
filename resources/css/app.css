@@ -28,16 +28,12 @@
         margin-bottom: 28px;
     }
 
-    .post-body {
-        @apply text-gray-900 text-lg leading-relaxed;
-    }
-
     .wrapper {
         @apply min-h-screen antialiased flex flex-col;
     }
 
-    .sidebar {
-        @apply hidden lg:block w-2/5 text-justify;
+    .about {
+        @apply flex flex-row lg:flex-col text-justify grow;
     }
 
     main {
@@ -45,7 +41,7 @@
     }
 
     .content {
-        @apply w-full mx-auto bg-white px-64 pb-16;
+        @apply p-16 xl:px-24;
     }
 
     footer {
@@ -58,6 +54,10 @@
 }
 
 @layer components {
+    .post-body {
+        @apply text-gray-900 text-lg leading-relaxed;
+    }
+
     .post-preview {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }

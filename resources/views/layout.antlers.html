@@ -15,16 +15,16 @@
             <div class="wrapper">
                 <the-header></the-header>
 
-                <div class="flex grow">
+                <div class="flex flex-col-reverse lg:flex-row grow">
                     <main>
                         <div class="content">
                             {{ template_content }}
                         </div>
                     </main>
 
-                    <aside class="sidebar border-l border-gray-200">
+                    <section class="lg:w-2/5 border-l border-gray-200">
                         {{ partial:about }}
-                    </aside>
+                    </section>
                 </div>
 
                 <the-footer></the-footer>
