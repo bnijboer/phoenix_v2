@@ -6,11 +6,6 @@
                     Home
                 </nav-link>
             </li>
-            <li class="flex items-center">
-                <nav-link :url="'/about'">
-                    Over mij
-                </nav-link>
-            </li>
             <li v-if="user" class="flex items-center">
                 <button class="btn-default" @click="logout">Uitloggen</button>
             </li>
