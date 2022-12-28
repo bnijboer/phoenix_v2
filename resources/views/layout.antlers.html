@@ -16,15 +16,15 @@
                 <the-header></the-header>
 
                 <div class="flex grow">
-<!--                    <aside class="sidebar">-->
-<!--                        <the-sidebar></the-sidebar>-->
-<!--                    </aside>-->
-
                     <main>
                         <div class="content">
                             {{ template_content }}
                         </div>
                     </main>
+
+                    <aside class="sidebar border-l border-gray-200">
+                        {{ partial:about }}
+                    </aside>
                 </div>
 
                 <the-footer></the-footer>

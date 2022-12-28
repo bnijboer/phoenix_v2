@@ -36,20 +36,16 @@
         @apply min-h-screen antialiased flex flex-col;
     }
 
-    header {
-        /*@apply bg-blue-400;*/
-    }
-
     .sidebar {
-        @apply bg-blue-200 p-4 hidden lg:block w-96;
+        @apply hidden lg:block w-2/5 text-justify;
     }
 
     main {
-        @apply mx-auto bg-purple-100 grow;
+        @apply mx-auto grow;
     }
 
     .content {
-        @apply w-full sm:w-3/4 mx-auto bg-white p-16;
+        @apply w-full mx-auto bg-white px-64 pb-16;
     }
 
     footer {
@@ -57,8 +53,7 @@
     }
 
     .logo {
-        @apply h-32;
-        object-fit: contain;
+        @apply h-32 object-contain;
     }
 }
 
