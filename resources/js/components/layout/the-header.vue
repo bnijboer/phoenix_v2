@@ -35,13 +35,19 @@
 </template>
 
 <script setup>
-import NavLink from "../ui/nav-link";
-import {useSecurityStore} from "../../store/security-store";
-import {computed} from "vue";
+    import NavLink from "../ui/nav-link";
+    import {useSecurityStore} from "../../store/security-store";
+    import {onBeforeMount, ref} from "vue";
 
-const user = computed(() => useSecurityStore().user);
+    const securityStore = useSecurityStore();
 
-function logout() {
-    useSecurityStore().logout();
-}
+    const user = ref(null);
+
+    onBeforeMount(async () => {
+        user.value = await securityStore.getUser();
+    });
+
+    function logout() {
+        securityStore.logout();
+    }
 </script>
