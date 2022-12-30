@@ -9,19 +9,24 @@
         font-family: 'Raleway', sans-serif;
     }
 
-    h1 {
-        @apply text-5xl text-primary tracking-wide;
+    h1, h2, h3 {
+        @apply text-primary tracking-wide;
+    }
+
+    h1, h2 {
         font-family: 'Merriweather', serif;
+    }
+
+    h1 {
+        @apply text-5xl;
     }
 
     h2 {
-        @apply text-3xl text-primary tracking-wide;
-        font-family: 'Merriweather', serif;
+        @apply text-3xl;
     }
 
     h3 {
-        @apply text-2xl text-primary tracking-wide;
-        font-family: 'Raleway', sans-serif;
+        @apply text-2xl
     }
 
     p {
@@ -40,20 +45,29 @@
         @apply mx-auto grow;
     }
 
+    .sidebar {
+        @apply lg:w-2/5 border-l border-gray-200;
+    }
+
     .content {
-        @apply px-12 xl:px-24 pb-16;
+        @apply p-12 xl:px-24;
     }
 
     footer {
-        @apply bg-purple-200 flex justify-center p-4;
-    }
-
-    .logo {
-        @apply h-56 object-contain;
+        @apply text-gray-600 flex justify-center p-4;
     }
 }
 
 @layer components {
+    .logo {
+        @apply h-56 object-contain;
+    }
+
+    .blog-title {
+        @apply text-6xl -rotate-1;
+        font-family: 'Allura', sans-serif;
+    }
+
     .post-body {
         @apply text-gray-900 text-lg leading-relaxed;
     }

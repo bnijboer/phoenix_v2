@@ -1,29 +1,35 @@
 <template>
-    <header class="flex h-72">
-        <a
-            href="/"
-        >
-            <img
-                alt="Logo"
-                src="/assets/logo.png"
-                class="logo"
+    <header>
+        <nav class="absolute flex justify-end w-screen top-0 p-4">
+<!--            <ul class="flex space-x-8">-->
+<!--                <li class="flex items-center">-->
+<!--                    <nav-link :url="'/'">-->
+<!--                        Home-->
+<!--                    </nav-link>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+            <button
+                v-if="user"
+                class="btn-default"
+                @click="logout"
             >
-        </a>
+                Uitloggen
+            </button>
+        </nav>
 
-        <div class="flex flex-col justify-end mx-auto lg:ml-96">
-            <nav class="py-4">
-                <ul class="flex space-x-8">
-                    <li class="flex items-center">
-                        <nav-link :url="'/'">
-                            Home
-                        </nav-link>
-                    </li>
+        <div class="flex">
+            <a href="/">
+                <img
+                    alt="Logo"
+                    src="/assets/logo.png"
+                    class="logo"
+                >
+            </a>
 
-                    <li v-if="user" class="flex items-center">
-                        <button class="btn-default" @click="logout">Uitloggen</button>
-                    </li>
-                </ul>
-            </nav>
+            <div class="grow flex items-center">
+                <span class="blog-title ml-8">The Goddess In Me</span>
+            </div>
         </div>
     </header>
 </template>
