@@ -46,11 +46,11 @@
     }
 
     .sidebar {
-        @apply lg:w-2/5 border-l border-gray-200;
+        @apply border-l border-gray-200;
     }
 
     .content {
-        @apply p-12 xl:px-24;
+        @apply p-16 xl:px-24;
     }
 
     footer {
@@ -64,7 +64,7 @@
     }
 
     .blog-title {
-        @apply text-6xl -rotate-1;
+        @apply text-7xl -rotate-1;
         font-family: 'Allura', sans-serif;
     }
 

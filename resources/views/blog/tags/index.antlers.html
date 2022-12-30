@@ -1,9 +1,11 @@
-<div class="heading-primary text-center mb-6">Resultaten voor '{{ title }}':</div>
-
-<div class="px-16 mb-20">
-    <hr class="hr-primary">
+<div class="text-center mb-6">
+    <h1>Resultaten voor '{{ title }}'</h1>
 </div>
 
-{{ collection:blog paginate="5" as="posts" :taxonomy:tags="slug" }}
+<div class="px-16 mb-20">
+    <hr>
+</div>
+
+{{ collection:blog paginate="6" as="posts" :taxonomy:tags="slug" }}
     {{ partial:results :posts=posts }}
 {{ /collection:blog }}
