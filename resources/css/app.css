@@ -60,11 +60,11 @@
 
 @layer components {
     .logo {
-        @apply h-56 object-contain;
+        @apply h-40 md:h-56 object-contain;
     }
 
     .blog-title {
-        @apply text-7xl -rotate-1;
+        @apply text-4xl sm:text-5xl lg:text-7xl -rotate-1 pl-0 md:p-8;
         font-family: 'Allura', sans-serif;
     }
 

@@ -28,7 +28,7 @@
             </a>
 
             <div class="grow flex items-center">
-                <span class="blog-title ml-8">The Goddess In Me</span>
+                <span class="blog-title">The Goddess In Me</span>
             </div>
         </div>
     </header>
