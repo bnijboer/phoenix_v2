@@ -12,7 +12,7 @@
                         class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
                     ></textarea>
 
-                    <button class="btn-default block ml-auto mt-4" @click="submitComment">Reageren</button>
+                    <button class="button button-default block ml-auto mt-4" @click="submitComment">Reageren</button>
                 </form>
                 <div v-else class="flex justify-center">
                     <div class="space-y-4">

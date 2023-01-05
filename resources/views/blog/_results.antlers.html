@@ -1,78 +1,80 @@
-{{ if no_results }}
-    <article class="text-center">
-        Er zijn geen posts gevonden...
-    </article>
-{{ else }}
-    <div class="grid grid-cols-1 xl:grid-cols-2 gap-16">
-        {{ posts }}
-            <article class="post post-preview">
-                <a href="{{ url }}" class="group">
-                    <img
-                        src="{{ header_image ?? '/assets/preview-default.jpg' }}"
-                        alt="Preview afbeelding"
-                        class="featured-image"
-                    >
+<div class="p-8">
+    {{ if no_results }}
+        <div class="text-center">
+            Er zijn geen posts gevonden...
+        </div>
+    {{ else }}
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-16">
+            {{ posts }}
+                <article class="post post-preview">
+                    <a href="{{ url }}" class="group">
+                        <img
+                            src="{{ header_image ?? '/assets/preview-default.jpg' }}"
+                            alt="Preview afbeelding"
+                            class="featured-image"
+                        >
 
-                    <section class="px-6 pt-4 pb-8">
-                        <div class="post-date">
-                            {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
-                        </div>
-
-                        <h2 class="mt-4">
-                            {{ title }}
-                        </h2>
-
-                        {{ if description_text }}
-                            <div class="post-preview-text mt-8">
-                                {{ description_text }}
+                        <section class="px-6 pt-4 pb-8">
+                            <div class="post-date">
+                                {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
                             </div>
-                        {{ /if }}
 
-                        {{ if tags }}
-                            <div class="mt-8">
-                                {{ tags }}
-                                    <a href="{{ url }}" class="tag-item mr-2">
-                                        #{{ title }}
-                                    </a>
-                                {{ /tags }}
-                            </div>
-                        {{ /if }}
-                    </section>
-                </a>
-            </article>
-        {{ /posts }}
-    </div>
+                            <h2 class="mt-4">
+                                {{ title }}
+                            </h2>
 
-    {{ paginate }}
-        {{ if total_pages > 1 }}
-            <div class="flex justify-center mt-32">
-                <section class="justify-end w-20 {{ if prev_page }}hover:pr-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
-                    <a href="{{ prev_page }}">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="37.793"
-                            height="33.142">
+                            {{ if description_text }}
+                                <div class="post-preview-text mt-8">
+                                    {{ description_text }}
+                                </div>
+                            {{ /if }}
+
+                            {{ if tags }}
+                                <div class="mt-8">
+                                    {{ tags }}
+                                        <a href="{{ url }}" class="tag-item mr-2">
+                                            #{{ title }}
+                                        </a>
+                                    {{ /tags }}
+                                </div>
+                            {{ /if }}
+                        </section>
+                    </a>
+                </article>
+            {{ /posts }}
+        </div>
+
+        {{ paginate }}
+            {{ if total_pages > 1 }}
+                <div class="flex justify-center mt-32">
+                    <section class="justify-end w-20 {{ if prev_page }}hover:pr-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
+                        <a href="{{ prev_page }}">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="37.793"
+                                height="33.142">
                                 <path
                                     d="M15.886 32.849L.293 17.257a1 1 0 010-1.414L15.883.254a1 1 0 011.409 1.414l-13.9 13.9h33.4a1 1 0 110 2H3.432l13.86 13.864a1 1 0 11-1.407 1.415z"
                                 />
-                        </svg>
-                    </a>
-                </section>
+                            </svg>
+                        </a>
+                    </section>
 
-                <section class="flex items-center justify-start w-20 {{ if next_page }}hover:pl-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
-                    <a href="{{ next_page }}">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="37.793"
-                            height="33.142"
-                        >
-                            <path
-                                d="M21.907.293L37.5 15.885a1 1 0 010 1.414L21.91 32.888a1 1 0 01-1.409-1.414l13.9-13.9h-33.4a1 1 0 110-2h33.36L20.501 1.71A1 1 0 1121.908.295z"
-                            />
-                        </svg>
-                    </a>
-                </section>
-            </div>
-        {{ /if }}
-    {{ /paginate }}
-{{ /if }}
+                    <section class="flex items-center justify-start w-20 {{ if next_page }}hover:pl-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
+                        <a href="{{ next_page }}">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="37.793"
+                                height="33.142"
+                            >
+                                <path
+                                    d="M21.907.293L37.5 15.885a1 1 0 010 1.414L21.91 32.888a1 1 0 01-1.409-1.414l13.9-13.9h-33.4a1 1 0 110-2h33.36L20.501 1.71A1 1 0 1121.908.295z"
+                                />
+                            </svg>
+                        </a>
+                    </section>
+                </div>
+            {{ /if }}
+        {{ /paginate }}
+    {{ /if }}
+</div>

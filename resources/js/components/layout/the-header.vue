@@ -11,23 +11,23 @@
 
             <button
                 v-if="user"
-                class="btn-success"
+                class="button button-success"
                 @click="logout"
             >
                 Uitloggen
             </button>
         </nav>
 
-        <div>
-            <a class="inline-flex" href="/">
+        <div class="pt-8">
+            <a class="inline-flex pl-8" href="/">
                 <img
                     alt="Logo"
                     src="/assets/logo.png"
-                    class="logo"
+                    class="logo-main"
                 >
 
                 <div class="banner">
-                    <div class="banner-text">The Goddess In Me</div>
+                    <div class="banner-title">The Goddess In Me</div>
                 </div>
             </a>
         </div>

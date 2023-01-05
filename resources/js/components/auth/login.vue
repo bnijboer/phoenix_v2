@@ -50,7 +50,7 @@
     </form-modal>
 
     <div class="flex justify-center">
-        <button class="btn-success" @click="showModal = true">Inloggen</button>
+        <button class="button button-success" @click="showModal = true">Inloggen</button>
     </div>
 </template>
 

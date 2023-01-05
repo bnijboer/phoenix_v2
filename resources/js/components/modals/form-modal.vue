@@ -15,14 +15,14 @@
 
         <div class="flex-shrink-0 flex justify-between items-center pt-4">
             <button
-                class="btn-default"
+                class="button button-default"
                 @click="$emit('cancel', close)"
             >
                 {{ actions.cancel }}
             </button>
 
             <button
-                class="btn-success"
+                class="button button-success"
                 @click="$emit('confirm', close)"
             >
                 {{ actions.confirm }}
