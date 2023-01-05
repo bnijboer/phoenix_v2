@@ -5,16 +5,16 @@
 {{ else }}
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-16">
         {{ posts }}
-            <article class="post-preview">
+            <article class="post post-preview">
                 <a href="{{ url }}" class="group">
                     <img
                         src="{{ header_image ?? '/assets/preview-default.jpg' }}"
                         alt="Preview afbeelding"
-                        class="preview-image"
+                        class="featured-image"
                     >
 
                     <section class="px-6 pt-4 pb-8">
-                        <div class="text-gray-800 text-sm">
+                        <div class="post-date">
                             {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
                         </div>
 
@@ -23,7 +23,7 @@
                         </h2>
 
                         {{ if description_text }}
-                            <div class="text-gray-900 text-lg mt-8">
+                            <div class="post-preview-text mt-8">
                                 {{ description_text }}
                             </div>
                         {{ /if }}
@@ -31,7 +31,7 @@
                         {{ if tags }}
                             <div class="mt-8">
                                 {{ tags }}
-                                    <a href="{{ url }}" class="tag mr-2">
+                                    <a href="{{ url }}" class="tag-item mr-2">
                                         #{{ title }}
                                     </a>
                                 {{ /tags }}

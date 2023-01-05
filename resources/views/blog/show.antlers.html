@@ -1,63 +1,65 @@
-<article>
-    {{ if header_image }}
-        <figure>
-            <img
-                src="{{ header_image }}"
-                alt="Header afbeelding"
-                class="blogpost-details-header-image"
-            >
+<div class="post post-details">
+    <article>
+        {{ if header_image }}
+            <figure>
+                <img
+                    src="{{ header_image }}"
+                    alt="Header afbeelding"
+                    class="featured-image"
+                >
 
-            {{ if caption }}
-                <figcaption>{{ caption }}</figcaption>
-            {{ /if }}
-        </figure>
-    {{ /if }}
+                {{ if caption }}
+                    <figcaption>{{ caption }}</figcaption>
+                {{ /if }}
+            </figure>
+        {{ /if }}
 
-    <section class="flex justify-end">
-        <div>
+        <div class="post-date text-right">
             {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
         </div>
-    </section>
 
-    <h1 class="mt-4">{{ title }}</h1>
+        <h1 class="mt-4">
+            {{ title }}
+        </h1>
 
-    <section class="post-body mt-12">
-        {{ body }}
-            {{ text }}
-        {{ /body }}
-    </section>
-
-    {{ if source }}
-        <section class="blogpost-details-source">
-            Bron: {{ source }}
+        <section class="post-body mt-16">
+            {{ body }}
+                {{ text }}
+            {{ /body }}
         </section>
-    {{ /if }}
 
-    {{ if tags }}
-        <section class="blogpost-details-tags">
-            {{ tags }}
+        {{ if source }}
+            <div class="post-source mt-8">
+                Bron: {{ source }}
+            </div>
+        {{ /if }}
+
+        {{ if tags }}
+            <section class="text-center mt-8">
+                {{ tags }}
+                    <a
+                        href="{{ url }}"
+                        class="tag-item {{ unless last }}mr-2{{ /unless }}"
+                    >
+                        #{{ title }}
+                    </a>
+                {{ /tags }}
+            </section>
+        {{ /if }}
+
+        <div class="text-right mt-32">
             <a
-                href="{{ url }}"
-                class="tag-item {{ unless last }}mr-2{{ /unless }}"
+                href="{{ homepage }}"
+                class="btn-default"
             >
-                {{ title }}
+                Terug
             </a>
-            {{ /tags }}
-        </section>
-    {{ /if }}
+        </div>
 
-    <div class="text-center">
-        <a
-            href="{{ homepage }}"
-            class="btn-default"
-        >
-            Terug naar overzicht
-        </a>
-    </div>
+        <div class="py-12">
+            <hr>
+        </div>
+    </article>
 
-    <div class="py-12">
-        <hr class="hr-primary">
-    </div>
-</article>
-
-<comment-section :post-uuid="{{ id | to_json | entities }}"></comment-section>
+    <comment-section :post-uuid="{{ id | to_json | entities }}"></comment-section>
+</div>

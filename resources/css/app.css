@@ -7,6 +7,15 @@
 @layer base {
     body {
         font-family: 'Raleway', sans-serif;
+        background-image: linear-gradient(
+            30deg,
+            hsl(265deg 79% 89%) -2%,
+            hsl(274deg 70% 96%) 11%,
+            hsl(290deg 60% 99%) 30%,
+            hsl(0deg 0% 100%) 52%,
+            hsl(0deg 0% 100%) 75%,
+            hsl(0deg 0% 100%) 100%
+        );
     }
 
     h1, h2, h3 {
@@ -37,18 +46,6 @@
         @apply min-h-screen antialiased flex flex-col;
     }
 
-    .about {
-        @apply text-justify grow;
-    }
-
-    main {
-        @apply mx-auto grow;
-    }
-
-    .sidebar {
-        @apply border-l border-gray-200;
-    }
-
     .content {
         @apply p-16 xl:px-24;
     }
@@ -56,20 +53,55 @@
     footer {
         @apply text-gray-600 flex justify-center p-4;
     }
+
+    .sidebar {
+        @apply h-full bg-white;
+    }
+
+    .about {
+        @apply text-justify grow;
+    }
+
+    .about-image {
+        @apply rounded-full h-72 w-72 object-cover shadow-lg;
+    }
+
+    .about-body {
+        @apply overflow-hidden border-l border-gray-200 px-8;
+    }
 }
 
 @layer components {
+    .nav-bar {
+        @apply absolute flex justify-end w-screen top-0 p-4;
+    }
+
     .logo {
         @apply h-40 md:h-56 object-contain;
     }
 
-    .blog-title {
-        @apply text-4xl sm:text-5xl lg:text-7xl -rotate-1 pl-0 md:p-8;
+    .banner {
+        @apply flex items-center;
+    }
+
+    .banner-text {
+        @apply text-4xl sm:text-5xl lg:text-7xl -rotate-1 ml-0 md:ml-16 p-8;
         font-family: 'Allura', sans-serif;
     }
 
-    .post-body {
-        @apply text-gray-900 text-lg leading-relaxed;
+    .post {
+        @apply bg-white;
+    }
+
+    .post-details {
+        @apply p-16;
+        -webkit-box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);
+        -moz-box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);
+        box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);
+    }
+
+    .post-preview {
+        @apply rounded-sm;
     }
 
     .post-preview {
@@ -77,11 +109,31 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
-    .preview-image {
-        @apply h-80 w-full object-cover rounded-t-sm;
+    .featured-image {
+        @apply w-full object-cover;
     }
 
-    .tag {
+    .post-date {
+        @apply text-gray-800 text-sm;
+    }
+
+    .post-body {
+        @apply text-gray-900 leading-relaxed;
+    }
+
+    .post-preview ~ .featured-image {
+        @apply h-80 rounded-t-sm;
+    }
+
+    .post-preview-text {
+        @apply text-lg text-gray-900;
+    }
+
+    .post-source {
+        @apply italic text-right;
+    }
+
+    .tag-item {
         @apply text-gray-800 text-sm border border-secondary rounded-lg p-2;
     }
 

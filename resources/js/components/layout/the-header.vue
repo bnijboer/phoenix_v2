@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="absolute flex justify-end w-screen top-0 p-4">
+        <nav class="nav-bar">
 <!--            <ul class="flex space-x-8">-->
 <!--                <li class="flex items-center">-->
 <!--                    <nav-link :url="'/'">-->
@@ -11,25 +11,25 @@
 
             <button
                 v-if="user"
-                class="btn-default"
+                class="btn-success"
                 @click="logout"
             >
                 Uitloggen
             </button>
         </nav>
 
-        <div class="flex">
-            <a href="/">
+        <div>
+            <a class="inline-flex" href="/">
                 <img
                     alt="Logo"
                     src="/assets/logo.png"
                     class="logo"
                 >
-            </a>
 
-            <div class="grow flex items-center">
-                <span class="blog-title">The Goddess In Me</span>
-            </div>
+                <div class="banner">
+                    <div class="banner-text">The Goddess In Me</div>
+                </div>
+            </a>
         </div>
     </header>
 </template>
