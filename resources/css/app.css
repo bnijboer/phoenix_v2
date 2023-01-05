@@ -94,7 +94,7 @@
     }
 
     .post-details {
-        @apply p-16;
+        @apply px-16 pb-32;
         -webkit-box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);
         -moz-box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);
         box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);
@@ -113,8 +113,12 @@
         @apply w-full object-cover;
     }
 
+    .post-preview ~ .post-date {
+        @apply text-sm;
+    }
+
     .post-date {
-        @apply text-gray-800 text-sm;
+        @apply text-gray-800;
     }
 
     .post-body {
