@@ -49,7 +49,7 @@
     }
 
     .content {
-        @apply p-16 xl:px-24;
+        @apply px-16 pt-6 pb-16 xl:px-24;
     }
 
     .nav-bar {
