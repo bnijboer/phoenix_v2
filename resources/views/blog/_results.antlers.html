@@ -4,7 +4,7 @@
             Er zijn geen posts gevonden...
         </div>
     {{ else }}
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-16">
+        <div class="post-results">
             {{ posts }}
                 <article class="post post-preview">
                     <a href="{{ url }}" class="group">
@@ -46,13 +46,14 @@
 
         {{ paginate }}
             {{ if total_pages > 1 }}
-                <div class="flex justify-center mt-32">
-                    <section class="justify-end w-20 {{ if prev_page }}hover:pr-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
+                <div class="flex justify-center mt-16">
+                    <section class="pagination-arrow justify-end {{ if prev_page }}hover:pr-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
                         <a href="{{ prev_page }}">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="37.793"
-                                height="33.142">
+                                height="33.142"
+                            >
                                 <path
                                     d="M15.886 32.849L.293 17.257a1 1 0 010-1.414L15.883.254a1 1 0 011.409 1.414l-13.9 13.9h33.4a1 1 0 110 2H3.432l13.86 13.864a1 1 0 11-1.407 1.415z"
                                 />
@@ -60,7 +61,7 @@
                         </a>
                     </section>
 
-                    <section class="flex items-center justify-start w-20 {{ if next_page }}hover:pl-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
+                    <section class="pagination-arrow {{ if next_page }}hover:pl-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
                         <a href="{{ next_page }}">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

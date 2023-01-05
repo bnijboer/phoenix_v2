@@ -89,6 +89,10 @@
         @apply overflow-hidden border-l border-gray-200 px-8;
     }
 
+    .post-results {
+        @apply grid grid-cols-1 xl:grid-cols-2 gap-16;
+    }
+
     .post {
         @apply bg-white;
     }
@@ -159,6 +163,10 @@
 
     .button-success {
         @apply bg-green-600 hover:bg-green-500 active:bg-green-700 focus:border-green-700;
+    }
+
+    .pagination-arrow {
+        @apply flex items-center w-20 mx-8;
     }
 }
 
