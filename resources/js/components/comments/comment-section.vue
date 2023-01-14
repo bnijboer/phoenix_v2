@@ -2,17 +2,20 @@
     <div class="flex justify-center">
         <div class="w-3/4">
             <section class="mb-16">
-                <form v-if="user" @submit.prevent>
-                    <textarea
-                        v-model="commentRequest.body"
-                        id="body"
-                        name="body"
-                        placeholder="Wat vind je van deze post?"
-                        class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
-                    ></textarea>
+                <validator v-if="user" :rules="rules">
+                    <form @submit.prevent>
+                        <textarea
+                            v-model="form.body"
+                            id="body"
+                            name="body"
+                            placeholder="Wat vind je van deze post?"
+                            class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
+                        ></textarea>
 
-                    <button class="button button-default block ml-auto mt-4" @click="submitComment">Reageren</button>
-                </form>
+                        <button class="button button-default block ml-auto mt-4" @click="submit">Reageren</button>
+                    </form>
+                </validator>
+
                 <div v-else class="flex justify-center">
                     <div class="space-y-4">
                         <div>Log in om te kunnen reageren.</div>
@@ -71,6 +74,8 @@
     import {onBeforeMount, reactive, ref} from 'vue'
     import {useSecurityStore} from "../../store/security-store";
     import CommentService from "../../services/comment-service";
+    import Validator from "../utilities/validator";
+    import {max, hasNoScriptTags, required} from "../../config/validation-rules";
 
     const props = defineProps({
         'postUuid': {
@@ -79,12 +84,15 @@
     });
 
     const securityStore = useSecurityStore();
-
     const user = ref(null);
-
     const showModal = ref(false);
     const comments = ref([]);
-    const commentRequest = reactive({
+
+    const rules = {
+        body: [required, (v) => max(v, 5), hasNoScriptTags]
+    };
+
+    const form = reactive({
         body: '',
     });
 
@@ -102,55 +110,15 @@
         }
     }
 
-    async function submitComment() {
+    async function submit() {
         try {
-            const required = (v) => v !== '';
-            const min = (v, minLength) => v.length >= minLength;
-            const max = (v, maxLength) => v.length <= maxLength;
-            const email = (v) => v ? /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) : true;
-            const password = (v, minLength) => {
-                if (minLength === void 0) {
-                    minLength = 8;
-                }
+            const comment = await CommentService.createComment(props.postUuid, form);
 
-                const regexp = new RegExp("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_\\W])[0-9a-zA-Z_\\W]{minLength,255}".replace("minLength", minLength.toString()));
+            form.body = '';
 
-                return v ? regexp.test(v) : true;
-            }
-            const passwordEqual = (v, otherPassword) => v ? v === otherPassword : true;
-            const hasNoScriptTags = (v) => !/<[a-z][\s\S]*>/.test(v);
-
-
-            const commentRules = {
-                body: [required, (v) => max(v, 5), hasNoScriptTags]
-            };
-
-            const loginRules = {
-                email: [required, email],
-                password: [required],
-            };
-
-            const registerRules = {
-                username: [required, , (v) => max(v, 20), hasNoScriptTags],
-                email: [required, email],
-                password: [required, password],
-                password_confirmation: [required, password, (v, otherPassword) => passwordEqual(v, otherPassword)],
-            };
-
-
-            // commentRules.forEach(rule => console.log(rule(commentRequest.body)));
-            passwordRules.forEach(rule => console.log(rule(commentRequest.body)));
-
-
-            // const newComment = await CommentService.createComment(props.postUuid, commentRequest);
-            //
-            // commentRequest.body = '';
-            //
-            // comments.value.unshift(newComment);
+            comments.value.unshift(comment);
         } catch (error) {
             console.log(error.message);
         }
     }
-
-
 </script>
