@@ -6,12 +6,13 @@
 
 <script setup>
     import errorMessages from "../../config/validation-errors";
+    import ValidationRules from "../../config/validation-rules";
 
     const props = defineProps({
         rules: {
             type: Object,
         },
-        form: {
+        request: {
             type: Object,
         }
     });
@@ -19,21 +20,26 @@
     const emit = defineEmits(['validated']);
 
     function onSubmit() {
-        const errors = validate(props.form);
+        const form = {
+            data: props.request,
+            errors: validate(props.request)
+        }
 
-        emit('validated', errors);
+        emit('validated', form);
     }
 
     function validate(data) {
         const errors = {};
 
         for (const [key, value] of Object.entries(data)) {
-            props.rules[key].forEach(rule => {
-                console.log(rule.name);
-                console.log(value);
-                if (!rule(value)) {
-                    // console.log('test');
-                    errors[key] = errorMessages[rule.name];
+            props.rules[key].forEach(item => {
+                const _rule = item.split(':');
+
+                const rule = _rule.shift();
+                const param = _rule.shift();
+
+                if (!ValidationRules[rule](value, param)) {
+                    errors[key] = errorMessages[rule];
                 }
             });
         }

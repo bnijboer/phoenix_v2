@@ -2,14 +2,18 @@
     <div class="flex justify-center">
         <div class="w-3/4">
             <section class="mb-16">
-                <validator v-if="user" :rules="rules" :form="form" @validated="submit">
+                <validator v-if="user" :rules="rules" :request="request" @validated="submit">
                     <textarea
-                        v-model="form.body"
+                        v-model="request.body"
                         id="body"
                         name="body"
                         placeholder="Wat vind je van deze post?"
                         class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
                     ></textarea>
+
+                    <p v-if="form.errors?.body">
+                        bla bla
+                    </p>
 
                     <button class="button button-default block ml-auto mt-4">Reageren</button>
                 </validator>
@@ -73,7 +77,8 @@
     import {useSecurityStore} from "../../store/security-store";
     import CommentService from "../../services/comment-service";
     import Validator from "../utilities/validator";
-    import {max, hasNoScriptTags, required, email} from "../../config/validation-rules";
+    // import {max, hasNoScriptTags, required, email} from "../../config/validation-rules";
+    import ValidationRules from "../../config/validation-rules";
 
     const props = defineProps({
         'postUuid': {
@@ -87,12 +92,15 @@
     const comments = ref([]);
 
     const rules = {
-        body: [required, email, (v) => max(v, 5), hasNoScriptTags]
+        // body: ['required'],
+        body: ['required', 'max:5']
     };
 
-    const form = reactive({
+    const request = reactive({
         body: '',
     });
+
+    const form = reactive({});
 
     onBeforeMount(async () => {
         user.value = await securityStore.getUser();
@@ -108,9 +116,9 @@
         }
     }
 
-    async function submit(event) {
-
-        console.log(event);
+    async function submit(validated) {
+        form.value = validated;
+        console.log(form.value);
         // try {
         //     const comment = await CommentService.createComment(props.postUuid, form);
         //
