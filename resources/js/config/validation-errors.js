@@ -1,4 +1,4 @@
-export const errors = {
+const errorMessages = {
     required: 'Dit veld is verplicht',
     max: 'Veld mag maximaal # tekens bevatten',
     min: 'Veld moet minimaal # tekens bevatten',
@@ -7,3 +7,5 @@ export const errors = {
     passwordEqual: 'Wachtwoorden zijn niet gelijk',
     hasNoScriptTags: 'Veld bevat tekens die niet zijn toegestaan',
 }
+
+export default errorMessages;

@@ -2,18 +2,16 @@
     <div class="flex justify-center">
         <div class="w-3/4">
             <section class="mb-16">
-                <validator v-if="user" :rules="rules">
-                    <form @submit.prevent>
-                        <textarea
-                            v-model="form.body"
-                            id="body"
-                            name="body"
-                            placeholder="Wat vind je van deze post?"
-                            class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
-                        ></textarea>
+                <validator v-if="user" :rules="rules" :form="form" @validated="submit">
+                    <textarea
+                        v-model="form.body"
+                        id="body"
+                        name="body"
+                        placeholder="Wat vind je van deze post?"
+                        class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
+                    ></textarea>
 
-                        <button class="button button-default block ml-auto mt-4" @click="submit">Reageren</button>
-                    </form>
+                    <button class="button button-default block ml-auto mt-4">Reageren</button>
                 </validator>
 
                 <div v-else class="flex justify-center">
@@ -75,7 +73,7 @@
     import {useSecurityStore} from "../../store/security-store";
     import CommentService from "../../services/comment-service";
     import Validator from "../utilities/validator";
-    import {max, hasNoScriptTags, required} from "../../config/validation-rules";
+    import {max, hasNoScriptTags, required, email} from "../../config/validation-rules";
 
     const props = defineProps({
         'postUuid': {
@@ -89,7 +87,7 @@
     const comments = ref([]);
 
     const rules = {
-        body: [required, (v) => max(v, 5), hasNoScriptTags]
+        body: [required, email, (v) => max(v, 5), hasNoScriptTags]
     };
 
     const form = reactive({
@@ -110,15 +108,17 @@
         }
     }
 
-    async function submit() {
-        try {
-            const comment = await CommentService.createComment(props.postUuid, form);
+    async function submit(event) {
 
-            form.body = '';
-
-            comments.value.unshift(comment);
-        } catch (error) {
-            console.log(error.message);
-        }
+        console.log(event);
+        // try {
+        //     const comment = await CommentService.createComment(props.postUuid, form);
+        //
+        //     form.body = '';
+        //
+        //     comments.value.unshift(comment);
+        // } catch (error) {
+        //     console.log(error.message);
+        // }
     }
 </script>
