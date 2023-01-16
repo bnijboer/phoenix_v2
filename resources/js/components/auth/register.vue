@@ -7,76 +7,66 @@
     >
         <template #title>Account aanmaken</template>
 
-        <validator :rules="rules">
-            <form @submit.prevent>
-                <input-component
-                    v-model="form.name"
-                    type="text"
-                    name="name"
-                    autofocus
-                >
-                    Gebruikersnaam
-                </input-component>
+        <base-form :rules="rules" :request="request" @validate="register">
+            <base-input
+                v-model="request.name"
+                type="text"
+                name="name"
+                autofocus
+            >
+                Gebruikersnaam
+            </base-input>
 
-                <ul v-if="errors.name.length" class="mt-1 text-xs text-red-600">
-                    <li v-for="(errorMessage, index) in errors.name" :key="index">
-                        {{ errorMessage }}
-                    </li>
-                </ul>
+            <p v-if="errors.name" class="validation-error">
+                {{ errors.name }}
+            </p>
 
-                <input-component
-                    v-model="form.email"
-                    type="email"
-                    name="email"
-                    class="mt-4"
-                >
-                    E-mail
-                </input-component>
+            <base-input
+                v-model="request.email"
+                type="email"
+                name="email"
+                class="mt-4"
+            >
+                E-mail
+            </base-input>
 
-                <ul v-if="errors.email.length" class="mt-1 text-xs text-red-600">
-                    <li v-for="(errorMessage, index) in errors.email" :key="index">
-                        {{ errorMessage }}
-                    </li>
-                </ul>
+            <p v-if="errors.email" class="validation-error">
+                {{ errors.email }}
+            </p>
 
-                <input-component
-                    v-model="form.password"
-                    type="password"
-                    name="password"
-                    class="mt-4"
-                >
-                    Wachtwoord
-                </input-component>
+            <base-input
+                v-model="request.password"
+                type="password"
+                name="password"
+                class="mt-4"
+            >
+                Wachtwoord
+            </base-input>
 
-                <ul v-if="errors.password.length" class="mt-1 text-xs text-red-600">
-                    <li v-for="(errorMessage, index) in errors.password" :key="index">
-                        {{ errorMessage }}
-                    </li>
-                </ul>
+            <p v-if="errors.password" class="validation-error">
+                {{ errors.password }}
+            </p>
 
-                <input-component
-                    v-model="form.password_confirmation"
-                    type="password"
-                    name="password_confirmation"
-                    class="mt-4"
-                >
-                    Wachtwoord bevestigen
-                </input-component>
+            <base-input
+                v-model="request.password_confirmation"
+                type="password"
+                name="password_confirmation"
+                class="mt-4"
+            >
+                Wachtwoord bevestigen
+            </base-input>
 
-                <ul v-if="errors.password_confirmation.length" class="mt-1 text-xs text-red-600">
-                    <li v-for="(errorMessage, index) in errors.password_confirmation" :key="index">
-                        {{ errorMessage }}
-                    </li>
-                </ul>
+            <p v-if="errors.password_confirmation" class="validation-error">
+                {{ errors.password_confirmation }}
+            </p>
 
-                <!--            <div class="block mt-4">-->
-                <!--                <label class="flex items-center">-->
-                <!--                    <checkbox name="remember" v-model:checked="form.remember" />-->
-                <!--                    <span class="ml-2 text-sm text-gray-600">Onthoud mij</span>-->
-                <!--                </label>-->
-                <!--            </div>-->
-            </form>
-        </validator>
+            <!--            <div class="block mt-4">-->
+            <!--                <label class="flex items-center">-->
+            <!--                    <base-checkbox name="remember" v-model:checked="request.remember" />-->
+            <!--                    <span class="ml-2 text-sm text-gray-600">Onthoud mij</span>-->
+            <!--                </label>-->
+            <!--            </div>-->
+        </base-form>
     </form-modal>
 
     <div class="text-center">
@@ -86,15 +76,14 @@
 </template>
 
 <script setup>
-    import Checkbox from "../utilities/checkbox";
     import {useSecurityStore} from "../../store/security-store";
     import FormModal from "../modals/form-modal";
     import {reactive, ref} from "vue";
-    import InputComponent from "../utilities/input-component";
-    import {max, email, hasNoScriptTags, password, passwordEqual, required} from "../../config/validation-rules";
-    import Validator from "../utilities/validator";
+    import BaseCheckbox from "../utilities/base-checkbox";
+    import BaseForm from "../utilities/base-form";
+    import BaseInput from "../utilities/base-input";
 
-    const form = reactive({
+    const request = reactive({
         name: '',
         email: '',
         password: '',
@@ -112,22 +101,23 @@
     }
 
     const rules = {
-        username: [required, (v) => max(v, 20), hasNoScriptTags],
-        email: [required, email],
-        password: [required, password],
-        password_confirmation: [required, password, (v, otherPassword) => passwordEqual(v, otherPassword)],
+        username: ['required', 'max:20', 'hasNoScriptTags'],
+        email: ['required', 'email'],
+        password: ['required', 'password'],
+        password_confirmation: ['required', 'password', `passwordEqual:${request.password}`],
     };
 
-    const errors = reactive({
-        'name': [],
-        'email': [],
-        'password': [],
-        'password_confirmation': [],
-    });
+    let errors = ref({});
 
-    async function register() {
+    async function register(form) {
+        errors.value = form.errors;
+
+        if (!form.validated) {
+            return;
+        }
+
         try {
-            await userStore.register(form);
+            await userStore.register(request);
 
             showModal.value = false;
         } catch(error) {

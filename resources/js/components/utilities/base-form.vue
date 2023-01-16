@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-    import errorMessages from "../../config/validation-errors";
+    import ErrorMessages from "../../config/validation-errors";
     import ValidationRules from "../../config/validation-rules";
 
     const props = defineProps({
@@ -17,15 +17,17 @@
         }
     });
 
-    const emit = defineEmits(['validated']);
+    const emit = defineEmits(['validate']);
 
     function onSubmit() {
+        const errors = validate(props.request);
+
         const form = {
-            data: props.request,
-            errors: validate(props.request)
+            validated: Object.keys(errors).length === 0,
+            errors: errors,
         }
 
-        emit('validated', form);
+        emit('validate', form);
     }
 
     function validate(data) {
@@ -39,7 +41,8 @@
                 const param = _rule.shift();
 
                 if (!ValidationRules[rule](value, param)) {
-                    errors[key] = errorMessages[rule];
+                    // errors.push({[key]: ErrorMessages[rule]});
+                    errors[key] = ErrorMessages[rule](param);
                 }
             });
         }

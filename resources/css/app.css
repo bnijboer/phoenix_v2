@@ -171,5 +171,7 @@
 }
 
 @layer utilities {
-
+    .validation-error {
+        @apply text-red-400 font-semibold text-sm mt-2;
+    }
 }

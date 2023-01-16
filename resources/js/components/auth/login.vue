@@ -7,46 +7,40 @@
     >
         <template #title>Inloggen</template>
 
-        <validator :rules="rules">
-            <form @submit.prevent>
-                <input-component
-                    v-model="form.email"
-                    type="email"
-                    name="email"
-                    autofocus
-                >
-                    E-mail
-                </input-component>
+        <base-form :rules="rules" :request="request" @validate="login">
+            <base-input
+                v-model="request.email"
+                type="email"
+                name="email"
+                autofocus
+            >
+                E-mail
+            </base-input>
 
-                <ul v-if="errors.email.length" class="mt-1 text-xs text-red-600">
-                    <li v-for="(errorMessage, index) in errors.email" :key="index">
-                        {{ errorMessage }}
-                    </li>
-                </ul>
+            <p v-if="errors.email" class="validation-error">
+                {{ errors.email }}
+            </p>
 
-                <input-component
-                    v-model="form.password"
-                    type="password"
-                    name="password"
-                    class="mt-4"
-                >
-                    Wachtwoord
-                </input-component>
+            <base-input
+                v-model="request.password"
+                type="password"
+                name="password"
+                class="mt-4"
+            >
+                Wachtwoord
+            </base-input>
 
-                <ul v-if="errors.password.length" class="mt-1 text-xs text-red-600">
-                    <li v-for="(errorMessage, index) in errors.password" :key="index">
-                        {{ errorMessage }}
-                    </li>
-                </ul>
+            <p v-if="errors.password" class="validation-error">
+                {{ errors.password }}
+            </p>
 
-    <!--            <div class="block mt-4">-->
-    <!--                <label class="flex items-center">-->
-    <!--                    <checkbox name="remember" v-model:checked="form.remember" />-->
-    <!--                    <span class="ml-2 text-sm text-gray-600">Onthoud mij</span>-->
-    <!--                </label>-->
-    <!--            </div>-->
-            </form>
-        </validator>
+<!--            <div class="block mt-4">-->
+<!--                <label class="flex items-center">-->
+<!--                    <base-checkbox name="remember" v-model:checked="request.remember" />-->
+<!--                    <span class="ml-2 text-sm text-gray-600">Onthoud mij</span>-->
+<!--                </label>-->
+<!--            </div>-->
+        </base-form>
     </form-modal>
 
     <div class="flex justify-center">
@@ -55,13 +49,12 @@
 </template>
 
 <script setup>
-    import Checkbox from "../utilities/checkbox";
     import {useSecurityStore} from "../../store/security-store";
     import FormModal from "../modals/form-modal";
     import {reactive, ref} from "vue";
-    import InputComponent from "../utilities/input-component";
-    import Validator from "../utilities/validator";
-    import {required, email} from "../../config/validation-rules";
+    import BaseCheckbox from "../utilities/base-checkbox";
+    import BaseForm from "../utilities/base-form";
+    import BaseInput from "../utilities/base-input";
 
     const props = defineProps({
         // canResetPassword: Boolean,
@@ -71,7 +64,7 @@
     const userStore = useSecurityStore();
 
     const showModal = ref(false);
-    const form = reactive({
+    const request = reactive({
         email: '',
         password: '',
         remember: false
@@ -83,18 +76,21 @@
     }
 
     const rules = {
-        email: [required, email],
-        password: [required],
+        email: ['required', 'email'],
+        password: ['required'],
     };
 
-    const errors = reactive({
-        'email': [],
-        'password': [],
-    });
+    let errors = ref({});
 
-    async function login() {
+    async function login(form) {
+        errors.value = form.errors;
+
+        if (!form.validated) {
+            return;
+        }
+
         try {
-            await userStore.login(form);
+            await userStore.login(request);
 
             showModal.value = false;
         } catch(error) {

@@ -2,7 +2,7 @@
     <div class="flex justify-center">
         <div class="w-3/4">
             <section class="mb-16">
-                <validator v-if="user" :rules="rules" :request="request" @validated="submit">
+                <base-form v-if="user" :rules="rules" :request="request" @validate="submit">
                     <textarea
                         v-model="request.body"
                         id="body"
@@ -11,12 +11,12 @@
                         class="block border border-primary outline-primary rounded-md w-full h-36 p-4"
                     ></textarea>
 
-                    <p v-if="form.errors?.body">
-                        bla bla
+                    <p v-if="errors.body" class="validation-error">
+                        {{ errors.body }}
                     </p>
 
                     <button class="button button-default block ml-auto mt-4">Reageren</button>
-                </validator>
+                </base-form>
 
                 <div v-else class="flex justify-center">
                     <div class="space-y-4">
@@ -76,9 +76,7 @@
     import {onBeforeMount, reactive, ref} from 'vue'
     import {useSecurityStore} from "../../store/security-store";
     import CommentService from "../../services/comment-service";
-    import Validator from "../utilities/validator";
-    // import {max, hasNoScriptTags, required, email} from "../../config/validation-rules";
-    import ValidationRules from "../../config/validation-rules";
+    import BaseForm from "../utilities/base-form";
 
     const props = defineProps({
         'postUuid': {
@@ -92,15 +90,14 @@
     const comments = ref([]);
 
     const rules = {
-        // body: ['required'],
-        body: ['required', 'max:5']
+        body: ['required', 'hasNoScriptTags'],
     };
 
     const request = reactive({
         body: '',
     });
 
-    const form = reactive({});
+    let errors = ref({});
 
     onBeforeMount(async () => {
         user.value = await securityStore.getUser();
@@ -116,17 +113,21 @@
         }
     }
 
-    async function submit(validated) {
-        form.value = validated;
-        console.log(form.value);
-        // try {
-        //     const comment = await CommentService.createComment(props.postUuid, form);
-        //
-        //     form.body = '';
-        //
-        //     comments.value.unshift(comment);
-        // } catch (error) {
-        //     console.log(error.message);
-        // }
+    async function submit(form) {
+        errors.value = form.errors;
+
+        if (!form.validated) {
+            return;
+        }
+
+        try {
+            const comment = await CommentService.createComment(props.postUuid, request);
+
+            request.body = '';
+
+            comments.value.unshift(comment);
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 </script>

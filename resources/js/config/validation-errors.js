@@ -1,11 +1,11 @@
-const errorMessages = {
-    required: 'Dit veld is verplicht',
-    max: 'Veld mag maximaal # tekens bevatten',
-    min: 'Veld moet minimaal # tekens bevatten',
-    email: 'Geen geldig e-mailadres',
-    password: 'Wachtwoord moet # tekens bevatten',
-    passwordEqual: 'Wachtwoorden zijn niet gelijk',
-    hasNoScriptTags: 'Veld bevat tekens die niet zijn toegestaan',
+const ErrorMessages = {
+    required: (v) => 'Dit veld is verplicht',
+    max: (v) => `Veld mag maximaal ${v} tekens bevatten`,
+    min: (v) => `Veld moet minimaal ${v} tekens bevatten`,
+    email: (v) => 'Geen geldig e-mailadres',
+    password: (v) => 'Wachtwoord moet # tekens bevatten',
+    passwordEqual: (v) => 'Wachtwoorden zijn niet gelijk',
+    hasNoScriptTags: (v) => 'Veld bevat tekens die niet zijn toegestaan',
 }
 
-export default errorMessages;
+export default ErrorMessages;
