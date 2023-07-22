@@ -49,5 +49,7 @@
 
     function logout() {
         securityStore.logout();
+
+        window.location.reload();
     }
 </script>

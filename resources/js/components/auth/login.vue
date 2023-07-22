@@ -83,19 +83,17 @@
     let errors = ref({});
 
     async function login(form) {
-        errors.value = form.errors;
+        // errors.value = form.errors;
+        //
+        // if (!form.validated) {
+        //     return;
+        // }
 
-        if (!form.validated) {
-            return;
-        }
+        await userStore.login(request);
 
-        try {
-            await userStore.login(request);
+        // showModal.value = false;
 
-            showModal.value = false;
-        } catch(error) {
-            console.log(error.message);
-        }
+        window.location.reload();
     }
 
     function cancel(close) {

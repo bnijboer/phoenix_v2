@@ -5,43 +5,54 @@
         </div>
     {{ else }}
         <div class="post-results">
-            {{ posts }}
-                <article class="post post-preview">
-                    <a href="{{ url }}" class="group">
-                        <img
-                            src="{{ header_image ?? '/assets/preview-default.jpg' }}"
-                            alt="Preview afbeelding"
-                            class="featured-image"
-                        >
+            <post-collection :posts="{{ posts | to_json | entities }}"></post-collection>
 
-                        <section class="px-6 pt-4 pb-8">
-                            <div class="post-date">
-                                {{ date format_localized="%A %e %B %Y" ucfirst="true" }}
-                            </div>
+<!--            {{ posts }}-->
+<!--                <article class="post post-preview">-->
+<!--                    <img-->
+<!--                        src="{{ header_image ?? '/assets/preview-default.jpg' }}"-->
+<!--                        alt="Preview afbeelding"-->
+<!--                        class="featured-image"-->
+<!--                    >-->
 
-                            <h2 class="mt-4">
-                                {{ title }}
-                            </h2>
+<!--                    <section class="px-6 pt-4 pb-8">-->
+<!--                        <div class="post-date">-->
+<!--                            {{ date format_localized="%A %e %B %Y" ucfirst="true" }}-->
+<!--                        </div>-->
 
-                            {{ if description_text }}
-                                <div class="post-preview-text mt-8">
-                                    {{ description_text }}
-                                </div>
-                            {{ /if }}
+<!--                        <h2 class="mt-4">-->
+<!--                            {{ title }}-->
+<!--                        </h2>-->
 
-                            {{ if tags }}
-                                <div class="mt-8">
-                                    {{ tags }}
-                                        <a href="{{ url }}" class="tag-item mr-2">
-                                            #{{ title }}
-                                        </a>
-                                    {{ /tags }}
-                                </div>
-                            {{ /if }}
-                        </section>
-                    </a>
-                </article>
-            {{ /posts }}
+<!--                        <post-body class="post-body mt-16">-->
+<!--                            {{ body }}-->
+<!--                                {{ text }}-->
+<!--                            {{ /body }}-->
+<!--                        </post-body>-->
+<!--                            <section class="post-body mt-16">-->
+<!--                                {{ body }}-->
+<!--                                    {{ text }}-->
+<!--                                {{ /body }}-->
+<!--                            </section>-->
+
+<!--                            {{ if description_text }}-->
+<!--                            <div class="post-preview-text mt-8">-->
+<!--                                {{ description_text }}-->
+<!--                            </div>-->
+<!--                            {{ /if }}-->
+
+<!--                        {{ if tags }}-->
+<!--                        <div class="mt-8">-->
+<!--                            {{ tags }}-->
+<!--                            <a href="{{ url }}" class="tag-item mr-2">-->
+<!--                                #{{ title }}-->
+<!--                            </a>-->
+<!--                            {{ /tags }}-->
+<!--                        </div>-->
+<!--                        {{ /if }}-->
+<!--                    </section>-->
+<!--                </article>-->
+<!--            {{ /posts }}-->
         </div>
 
         {{ paginate }}

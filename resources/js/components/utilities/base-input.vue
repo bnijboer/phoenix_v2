@@ -9,7 +9,6 @@
             :value="modelValue"
             :type="props.type"
             :name="props.name"
-            :id="props.name"
             :placeholder="props.placeholder"
             :required="props.required"
             :autofocus="props.autofocus"
