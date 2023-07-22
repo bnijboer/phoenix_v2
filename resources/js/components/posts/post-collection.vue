@@ -3,7 +3,9 @@
         <div
             v-for="post in props.posts"
         >
-            <post-item :post="post"></post-item>
+            <post-item
+                :post="post"
+            ></post-item>
 
             <hr>
         </div>
