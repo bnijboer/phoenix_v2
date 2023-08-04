@@ -20,11 +20,11 @@
 
         <div class="pt-8">
             <a class="inline-flex pl-8" href="/">
-                <img
-                    alt="Logo"
-                    src="/assets/logo.png"
-                    class="logo-main"
-                >
+<!--                <img-->
+<!--                    alt="Logo"-->
+<!--                    src="/assets/logo.png"-->
+<!--                    class="logo-main"-->
+<!--                >-->
 
                 <div class="banner">
                     <div class="banner-title">The Goddess In Me</div>
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-    import NavLink from "../ui/nav-link";
+    import NavLink from "../ui/nav-link.vue";
     import {useSecurityStore} from "../../store/security-store";
     import {onBeforeMount, ref} from "vue";
 

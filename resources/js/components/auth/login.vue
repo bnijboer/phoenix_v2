@@ -50,11 +50,11 @@
 
 <script setup>
     import {useSecurityStore} from "../../store/security-store";
-    import FormModal from "../modals/form-modal";
+    import FormModal from "../modals/form-modal.vue";
     import {reactive, ref} from "vue";
-    import BaseCheckbox from "../utilities/base-checkbox";
-    import BaseForm from "../utilities/base-form";
-    import BaseInput from "../utilities/base-input";
+    import BaseCheckbox from "../utilities/base-checkbox.vue";
+    import BaseForm from "../utilities/base-form.vue";
+    import BaseInput from "../utilities/base-input.vue";
 
     const props = defineProps({
         // canResetPassword: Boolean,

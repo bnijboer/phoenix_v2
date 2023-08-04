@@ -1,27 +1,22 @@
 <template>
     <div>
-        <div
+        <ul
             v-for="post in props.posts"
+            class="collapsible popout"
         >
-            <post-item
-                :post="post"
-            ></post-item>
-
-            <hr>
-        </div>
+            <li>
+                <post-item
+                    :post="post"
+                ></post-item>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script setup>
-    import {onMounted} from 'vue'
-
     const props = defineProps({
         'posts': {
             type: Array,
         }
     });
-
-    // onMounted(() => {
-    //     console.log(props.posts);
-    // });
 </script>

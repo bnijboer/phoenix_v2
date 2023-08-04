@@ -1,17 +1,55 @@
 <template>
     <div>
-        <div>{{ post.title }}</div>
+        <div class="card collapsible-header">
+            <div
+                v-if="post.header_image"
+                class="card-image waves-effect waves-block waves-light"
+            >
+                <img
+                    :src="post.header_image.url"
+                    alt="Blogpost preview afbeelding"
+                    class="preview-image"
+                >
+            </div>
 
-        <div v-if="isExpanded">
+            <div class="card-content">
+                <p
+                    class="activator grey-text text-darken-1"
+                    style="margin-bottom: 2rem"
+                >
+                    {{ formatDutchDate(post.date) }}
+                    <i class="material-icons right">expand_more</i>
+                </p>
+
+                <p
+                    class="card-title grey-text text-darken-4"
+                    style="margin-bottom: 1rem"
+                >
+                    {{ post.title }}
+                </p>
+
+                <p class="grey-text text-darken-1">
+                    {{ post.description_text }}
+                </p>
+            </div>
+        </div>
+        <div class="collapsible-body">
             <div v-for="element in post.body">
                 <div
                     v-if="element.type === 'text'"
                     v-html="element.text"
                 ></div>
                 <div v-else-if="element.type === 'image'">
-                    <img :src="element.image.url">
+                    <img
+                        :src="element.image.url"
+                        alt="Afbeelding niet gevonden"
+                        class="responsive-img"
+                    >
                 </div>
-                <div v-else-if="element.type === 'video'">
+                <div
+                    v-else-if="element.type === 'video'"
+                    class="video-container"
+                >
                     <iframe
                         :src="getYouTubeEmbedUrl(element.video)"
                         width="420"
@@ -23,20 +61,12 @@
                 </div>
             </div>
         </div>
-        <div v-else>
-            {{ post.description_text }}
-        </div>
-
-        <button
-            @click="toggleExpand"
-        >
-            <span v-html="isExpanded ? 'Terug' : 'Meer lezen...'"></span>
-        </button>
     </div>
 </template>
 
 <script setup>
     import {onMounted, ref} from 'vue'
+    import {formatDutchDate} from "@/helpers/miscellaneous";
 
     const props = defineProps({
         post: {
@@ -45,17 +75,6 @@
     });
 
     const isExpanded = ref(false);
-
-    // const props = withDefaults(defineProps({
-    //     post: {
-    //         type: Object
-    //     },
-    //     isExpanded: {
-    //         type: Boolean
-    //     }
-    // }), {
-    //     isExpanded: false
-    // });
 
     onMounted(() => {
         console.log(props.post);
