@@ -70,11 +70,11 @@
 </template>
 
 <script setup>
-    import {formatDutchDate} from "../../helpers/miscellaneous";
+    import {formatDutchDate} from "@/helpers/miscellaneous";
     import Login from "../auth/login.vue";
     import Register from "../auth/register.vue";
     import {onBeforeMount, reactive, ref} from 'vue'
-    import {useSecurityStore} from "../../store/security-store";
+    import {useSecurityStore} from "@/store/security-store";
     import CommentService from "../../services/comment-service.vue";
     import BaseForm from "../utilities/base-form.vue";
 

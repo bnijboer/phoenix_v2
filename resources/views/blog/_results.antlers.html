@@ -1,10 +1,9 @@
-<div class="px-8">
+<div>
     {{ if no_results }}
         <div class="text-center">
             Er zijn geen posts gevonden...
         </div>
     {{ else }}
-        <div class="post-results">
             <post-collection :posts="{{ posts | to_json | entities }}"></post-collection>
 
 <!--            {{ posts }}-->
@@ -53,40 +52,39 @@
 <!--                    </section>-->
 <!--                </article>-->
 <!--            {{ /posts }}-->
-        </div>
 
-        {{ paginate }}
-            {{ if total_pages > 1 }}
-                <div class="flex justify-center mt-16">
-                    <section class="pagination-arrow justify-end {{ if prev_page }}hover:pr-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
-                        <a href="{{ prev_page }}">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="37.793"
-                                height="33.142"
-                            >
-                                <path
-                                    d="M15.886 32.849L.293 17.257a1 1 0 010-1.414L15.883.254a1 1 0 011.409 1.414l-13.9 13.9h33.4a1 1 0 110 2H3.432l13.86 13.864a1 1 0 11-1.407 1.415z"
-                                />
-                            </svg>
-                        </a>
-                    </section>
+<!--        {{ paginate }}-->
+<!--            {{ if total_pages > 1 }}-->
+<!--                <div class="flex justify-center mt-16">-->
+<!--                    <section class="pagination-arrow justify-end {{ if prev_page }}hover:pr-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">-->
+<!--                        <a href="{{ prev_page }}">-->
+<!--                            <svg-->
+<!--                                xmlns="http://www.w3.org/2000/svg"-->
+<!--                                width="37.793"-->
+<!--                                height="33.142"-->
+<!--                            >-->
+<!--                                <path-->
+<!--                                    d="M15.886 32.849L.293 17.257a1 1 0 010-1.414L15.883.254a1 1 0 011.409 1.414l-13.9 13.9h33.4a1 1 0 110 2H3.432l13.86 13.864a1 1 0 11-1.407 1.415z"-->
+<!--                                />-->
+<!--                            </svg>-->
+<!--                        </a>-->
+<!--                    </section>-->
 
-                    <section class="pagination-arrow {{ if next_page }}hover:pl-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">
-                        <a href="{{ next_page }}">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="37.793"
-                                height="33.142"
-                            >
-                                <path
-                                    d="M21.907.293L37.5 15.885a1 1 0 010 1.414L21.91 32.888a1 1 0 01-1.409-1.414l13.9-13.9h-33.4a1 1 0 110-2h33.36L20.501 1.71A1 1 0 1121.908.295z"
-                                />
-                            </svg>
-                        </a>
-                    </section>
-                </div>
-            {{ /if }}
-        {{ /paginate }}
+<!--                    <section class="pagination-arrow {{ if next_page }}hover:pl-4 transition-all{{ else }}pointer-events-none opacity-10{{ /if }}">-->
+<!--                        <a href="{{ next_page }}">-->
+<!--                            <svg-->
+<!--                                xmlns="http://www.w3.org/2000/svg"-->
+<!--                                width="37.793"-->
+<!--                                height="33.142"-->
+<!--                            >-->
+<!--                                <path-->
+<!--                                    d="M21.907.293L37.5 15.885a1 1 0 010 1.414L21.91 32.888a1 1 0 01-1.409-1.414l13.9-13.9h-33.4a1 1 0 110-2h33.36L20.501 1.71A1 1 0 1121.908.295z"-->
+<!--                                />-->
+<!--                            </svg>-->
+<!--                        </a>-->
+<!--                    </section>-->
+<!--                </div>-->
+<!--            {{ /if }}-->
+<!--        {{ /paginate }}-->
     {{ /if }}
 </div>

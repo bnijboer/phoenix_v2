@@ -1,88 +1,70 @@
 <template>
-    <div>
-        <div class="card collapsible-header">
-            <div
-                v-if="post.header_image"
-                class="card-image waves-effect waves-block waves-light"
-            >
+    <Card style="box-shadow: none">
+        <template #header>
+            <div class="w-full">
                 <img
+                    v-if="post.header_image?.url"
                     :src="post.header_image.url"
                     alt="Blogpost preview afbeelding"
-                    class="preview-image"
-                >
+                    class="image-center w-full max-h-24rem"
+                />
             </div>
+        </template>
 
-            <div class="card-content">
-                <p
-                    class="activator grey-text text-darken-1"
-                    style="margin-bottom: 2rem"
-                >
-                    {{ formatDutchDate(post.date) }}
-                    <i class="material-icons right">expand_more</i>
-                </p>
+        <template #title>
+            <h1>{{ post.title }}</h1>
+        </template>
 
-                <p
-                    class="card-title grey-text text-darken-4"
-                    style="margin-bottom: 1rem"
-                >
-                    {{ post.title }}
-                </p>
-
-                <p class="grey-text text-darken-1">
-                    {{ post.description_text }}
-                </p>
-            </div>
-        </div>
-        <div class="collapsible-body">
-            <div v-for="element in post.body">
-                <div
-                    v-if="element.type === 'text'"
-                    v-html="element.text"
-                ></div>
-                <div v-else-if="element.type === 'image'">
+        <template #content>
+            <div :class="contentBodyClass">
+                <div v-for="element in post.body">
+                    <div
+                        v-if="element.type === 'text'"
+                        v-html="element.text"
+                    />
                     <img
+                        v-else-if="element.type === 'image'"
                         :src="element.image.url"
                         alt="Afbeelding niet gevonden"
-                        class="responsive-img"
+                        class="image-center w-full max-h-24rem"
                     >
-                </div>
-                <div
-                    v-else-if="element.type === 'video'"
-                    class="video-container"
-                >
-                    <iframe
-                        :src="getYouTubeEmbedUrl(element.video)"
-                        width="420"
-                        height="315"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
+                    <div
+                        v-else-if="element.type === 'video'"
+                        class="flex justify-content-center"
                     >
-                    </iframe>
+                        <iframe
+                            :src="getYouTubeEmbedUrl(element.video)"
+                            width="420"
+                            height="315"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </Card>
 </template>
 
 <script setup>
-    import {onMounted, ref} from 'vue'
+    import {computed, onMounted} from 'vue'
     import {formatDutchDate} from "@/helpers/miscellaneous";
+    import Card from 'primevue/card';
 
     const props = defineProps({
         post: {
             type: Object
         },
+        preview: {
+            type: Boolean
+        },
     });
 
-    const isExpanded = ref(false);
+    const contentBodyClass = computed(() => props.preview ? 'hidden' : '');
 
     onMounted(() => {
         console.log(props.post);
     });
-
-    function toggleExpand() {
-        isExpanded.value = !isExpanded.value;
-    }
 
     function getYouTubeEmbedUrl(videoUrl) {
         const urlSegments = videoUrl.split('/watch?v=');
