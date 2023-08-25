@@ -15,16 +15,28 @@ import TheSidebar from "@/components/layout/the-sidebar.vue";
 import PostCollection from "./components/posts/post-collection.vue";
 import PostItem from "./components/posts/post-item.vue";
 import CommentSection from './components/comments/comment-section.vue';
+import PostPreview from "@/components/posts/post-preview.vue";
+import PostIndexPage from "@/pages/posts/post-index-page.vue";
+import PostShowPage from "@/pages/posts/post-show-page.vue";
+
+const app = createApp({});
 
 const pinia = createPinia();
-const app = createApp({});
+
+// const modules = import.meta.glob("@/components/generic/*.vue", { eager: true });
+//
+// for (const path in modules) {
+//     const componentName = path.split("/").at(-1).split(".")[0];
+//     app.component(componentName, modules[path].default);
+// }
 
 app
     .component('app', App)
     .component('the-header', TheHeader)
     .component('the-sidebar', TheSidebar)
+    .component('post-index-page', PostIndexPage)
     .component('post-collection', PostCollection)
-    .component('post-preview', PostItem)
+    .component('post-preview', PostPreview)
     .component('post-item', PostItem)
     .component('comment-section', CommentSection)
 

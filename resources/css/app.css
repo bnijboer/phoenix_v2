@@ -1,23 +1,250 @@
-body {
-    /*font-family: 'Raleway', sans-serif;*/
-    background-image: linear-gradient(
-        30deg,
-        hsl(265deg 79% 89%) -2%,
-        hsl(274deg 70% 96%) 11%,
-        hsl(290deg 60% 99%) 30%,
-        hsl(0deg 0% 100%) 52%,
-        hsl(0deg 0% 100%) 75%,
-        hsl(0deg 0% 100%) 100%
-    );
+html, body {
+    margin: 0;
+    padding: 0;
 }
 
-.preview-image {
-    max-width: 100%;
-    max-height: 24rem;
+body {
+    /*font-family: 'Raleway', sans-serif;*/
+
+    /*background-image: linear-gradient(*/
+    /*    30deg,*/
+    /*    hsl(265deg 79% 89%) -2%,*/
+    /*    hsl(274deg 70% 96%) 11%,*/
+    /*    hsl(290deg 60% 99%) 30%,*/
+    /*    hsl(0deg 0% 100%) 52%,*/
+    /*    hsl(0deg 0% 100%) 75%,*/
+    /*    hsl(0deg 0% 100%) 100%*/
+    /*);*/
+}
+
+.image-center {
     object-fit: cover;
     object-position: center;
 }
 
+.p-9 {
+    padding: 7rem;
+}
+
+.p-10 {
+    padding: 8rem;
+}
+
+.p-11 {
+    padding: 9rem;
+}
+
+.p-12 {
+    padding: 10rem;
+}
+
+.p-13 {
+    padding: 11rem;
+}
+
+.p-14 {
+    padding: 12rem;
+}
+
+.p-15 {
+    padding: 13rem;
+}
+
+.p-16 {
+    padding: 14rem;
+}
+
+.px-9 {
+    padding-left: 7rem;
+    padding-right: 7rem;
+}
+
+.px-10 {
+    padding-left: 8rem;
+    padding-right: 8rem;
+}
+
+.px-11 {
+    padding-left: 9rem;
+    padding-right: 9rem;
+}
+
+.px-12 {
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+
+.px-13 {
+    padding-left: 11rem;
+    padding-right: 11rem;
+}
+
+.px-14 {
+    padding-left: 12rem;
+    padding-right: 12rem;
+}
+
+.px-15 {
+    padding-left: 13rem;
+    padding-right: 13rem;
+}
+
+.px-16 {
+    padding-left: 14rem;
+    padding-right: 14rem;
+}
+
+.py-9 {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.py-10 {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+.py-11 {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+}
+
+.py-12 {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+}
+
+.py-13 {
+    padding-top: 11rem;
+    padding-bottom: 11rem;
+}
+
+.py-14 {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+}
+
+.py-15 {
+    padding-top: 13rem;
+    padding-bottom: 13rem;
+}
+
+.py-16 {
+    padding-top: 14rem;
+    padding-bottom: 14rem;
+}
+
+.m-9 {
+    margin: 7rem;
+}
+
+.m-10 {
+    margin: 8rem;
+}
+
+.m-11 {
+    margin: 9rem;
+}
+
+.m-12 {
+    margin: 10rem;
+}
+
+.m-13 {
+    margin: 11rem;
+}
+
+.m-14 {
+    margin: 12rem;
+}
+
+.m-15 {
+    margin: 13rem;
+}
+
+.m-16 {
+    margin: 14rem;
+}
+
+.mx-9 {
+    margin-right: 7rem;
+    margin-left: 7rem;
+}
+
+.mx-10 {
+    margin-left: 8rem;
+    margin-right: 8rem;
+}
+
+.mx-11 {
+    margin-left: 9rem;
+    margin-right: 9rem;
+}
+
+.mx-12 {
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+.mx-13 {
+    margin-left: 11rem;
+    margin-right: 11rem;
+}
+
+.mx-14 {
+    margin-left: 12rem;
+    margin-right: 12rem;
+}
+
+.mx-15 {
+    margin-left: 13rem;
+    margin-right: 13rem;
+}
+
+.mx-16 {
+    margin-left: 14rem;
+    margin-right: 14rem;
+}
+
+.my-9 {
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+}
+
+.my-10 {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+}
+
+.my-11 {
+    margin-top: 9rem;
+    margin-bottom: 9rem;
+}
+
+.my-12 {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
+.my-13 {
+    margin-top: 11rem;
+    margin-bottom: 11rem;
+}
+
+.my-14 {
+    margin-top: 12rem;
+    margin-bottom: 12rem;
+}
+
+.my-15 {
+    margin-top: 13rem;
+    margin-bottom: 13rem;
+}
+
+.my-16 {
+    margin-top: 14rem;
+    margin-bottom: 14rem;
+}
 
 /*h1, h2, h3 {*/
 /*    @apply text-primary tracking-wide;*/

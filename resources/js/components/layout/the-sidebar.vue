@@ -16,8 +16,6 @@
 </template>
 
 <script setup>
-    import Divider from 'primevue/divider';
-
     const props = defineProps({
         about: {
             type: Object

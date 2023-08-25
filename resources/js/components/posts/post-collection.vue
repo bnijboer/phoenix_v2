@@ -1,47 +1,65 @@
 <template>
-    <div
-        v-for="(post, index) in posts"
-        :key="index"
-    >
-        <article class="px-0 lg:px-4 xl:px-8">
-            <div class="p-8">
-                <Divider
-                    v-if="index !== 0"
-                    type="dashed"
-                    align="center"
-                >
-                    <i class="pi pi-star text-indigo-200" />
-                </Divider>
-            </div>
-
-            <post-item
-                :post="post"
-                preview
-                @click="visible = true"
-            />
-        </article>
-
-        <Dialog
-            v-model:visible="visible"
-            :modal="false"
-            :draggable="false"
-            :style="{ 'min-width': '100vw', 'min-height': '100vw', 'box-shadow': 'none' }"
+    <div v-if="posts.length">
+        <div
+            v-for="(post, index) in posts"
+            :key="index"
         >
-            <post-item :post="post" />
-        </Dialog>
+            <article class="px-0 lg:px-4 xl:px-8">
+                <div class="p-8">
+                    <Divider
+                        v-if="index !== 0"
+                        type="dashed"
+                        align="center"
+                    >
+                        <i class="pi pi-star text-indigo-200" />
+                    </Divider>
+                </div>
+
+                <a :id="post.id"></a>
+
+                <post-preview
+                    :id="post.id"
+                    :header-image-url="post.headerImageUrl"
+                    :title="post.title"
+                    :preview-text="post.previewText"
+                    @click="expand(post.id)"
+                ></post-preview>
+
+<!--                <post-item-->
+<!--                    :id="post.id"-->
+<!--                    :preview="post.id !== active"-->
+<!--                    @click="expand(post.id)"-->
+<!--                />-->
+            </article>
+        </div>
+    </div>
+    <div v-else class="text-center">
+        Er zijn geen blogposts gevonden...
     </div>
 </template>
 
 <script setup>
     import {ref} from 'vue';
-    import Dialog from 'primevue/dialog';
     import Divider from 'primevue/divider';
 
     const props = defineProps({
-        'posts': {
+        posts: {
             type: Array,
-        }
+            default: [],
+        },
     });
 
-    const visible = ref(false);
+    const active = ref(null);
+
+    function expand(postId) {
+        active.value = postId;
+
+        setTimeout(() => {
+            document
+                .getElementById(postId)
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        }, 150)
+    }
 </script>
