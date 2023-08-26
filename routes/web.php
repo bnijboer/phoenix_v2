@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GlobalSetController;
 use App\Http\Controllers\PostController;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
@@ -17,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
+
+Route::get('/', function () {
+    return redirect()->route('posts.index');
+});
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/comments', [CommentController::class, 'index']);
+
+Route::get('/about', [GlobalSetController::class, 'about']);
 
 Route::get('/user', function (Request $request) {
     if ($request->user()) {

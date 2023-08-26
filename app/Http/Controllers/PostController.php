@@ -3,39 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PostPreviewResource;
-use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 use Statamic\Facades\Entry;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
-        $entry = Entry::query()
+        $page = (int) ($request->query('page') ?? 1);
+        $limit = $request->query('limit') ?? 5;
+        $total = Entry::whereCollection('blog')->count();
+
+        $posts = Entry::query()
             ->where('collection', 'blog')
-            ->forPage(
-                $request->query('page'),
-                $request->query('limit')
-            )
+            ->forPage($page, $limit)
             ->orderBy('date', 'desc')
             ->get();
 
-        return new JsonResponse([
-            'collection' => PostPreviewResource::collection($entry),
+        return Inertia::render('posts/index-page', [
+            'posts' => PostPreviewResource::collection($posts),
             'meta' => [
-                'page' => (int) $request->query('page'),
-                'total' => Entry::whereCollection('blog')->count(),
+                'page' => $page,
+                'total' => $total,
+                'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null
             ]
         ]);
     }
 
-    public function show(Request $request, string $id)
+    public function show(Request $request, string $id): Response
     {
         $entry = Entry::find($id);
 
-        $postDto = new PostResource($entry);
-
-        return new JsonResponse($postDto);
+        return Inertia::render('posts/show-page', [
+            'id' => $entry->id,
+            'title' => $entry->title,
+            'body' => $entry->body,
+            'headerImageUrl' => $entry->header_image?->url,
+            'originUrl' => $request->headers->get('originUrl') ?? route('posts.index'),
+            'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null
+        ]);
     }
 }

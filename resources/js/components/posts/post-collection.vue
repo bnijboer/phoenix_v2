@@ -17,13 +17,13 @@
 
                 <a :id="post.id"></a>
 
-                <post-preview
+                <PostPreview
                     :id="post.id"
                     :header-image-url="post.headerImageUrl"
                     :title="post.title"
                     :preview-text="post.previewText"
                     @click="expand(post.id)"
-                ></post-preview>
+                ></PostPreview>
 
 <!--                <post-item-->
 <!--                    :id="post.id"-->
@@ -41,6 +41,7 @@
 <script setup>
     import {ref} from 'vue';
     import Divider from 'primevue/divider';
+    import PostPreview from "@/components/posts/post-preview.vue";
 
     const props = defineProps({
         posts: {
