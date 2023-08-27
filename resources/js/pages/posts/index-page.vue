@@ -29,7 +29,7 @@
             </Link>
         </div>
 
-        <div class="text-center">
+        <div class="flex align-items-center justify-content-center">
             <Button @click="previous" :disabled="page === 1">
                 Volgende pagina
             </Button>
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import {computed, onBeforeMount, onMounted, ref} from 'vue';
+    import {computed, onBeforeMount, onMounted, ref} from 'vue';
     import Button from 'primevue/button';
     import Divider from 'primevue/divider';
     import PostPreview from "@/components/posts/post-preview.vue";

@@ -1,16 +1,58 @@
 <template>
     <div class="z-2">
-        <div>
+        <Link
+            href="/posts"
+            style="text-decoration: none;"
+        >
             <img
                 src="/assets/logo.png"
                 alt="Logo"
                 class="image-center max-w-5rem max-h-5rem"
             >
+        </Link>
+
+        <div class="flex justify-content-between my-4 px-2">
+            <nav class="flex align-items-center">
+                <Link
+                    href="/posts"
+                    class="px-2 mr-2"
+                    style="text-decoration: none;"
+                >
+                    Home
+                </Link>
+
+                <span v-if="$page.props.auth.user">
+                <Button
+                    class="px-2 mr-2"
+                    @click="logout"
+                >
+                    Uitloggen
+                </Button>
+            </span>
+                <div v-else>
+                    <Link
+                        href="/login"
+                        class="px-2 mr-2"
+                        style="text-decoration: none;"
+                    >
+                        Inloggen
+                    </Link>
+
+                    <Link
+                        href="/register"
+                        class="px-2 mr-2"
+                        style="text-decoration: none;"
+                    >
+                        Registeren
+                    </Link>
+                </div>
+            </nav>
+
+            <InputText placeholder="Search" type="text" />
         </div>
 
 <!--        <Menubar ref="menu" id="overlay_menu" :model="items" :popup="true">-->
 <!--            <template #end>-->
-<!--                <InputText placeholder="Search" type="text" />-->
 <!--            </template>-->
 <!--        </Menubar>-->
     </div>
@@ -18,42 +60,15 @@
 
 <script setup>
     import {onBeforeMount, ref} from "vue";
+    import {Link, router} from '@inertiajs/vue3'
+    import Button from 'primevue/button';
     import InputText from 'primevue/inputtext';
-    import Menubar from 'primevue/menubar';
-    // import {useSecurityStore} from "@/store/security-store";
-    //
-    // const securityStore = useSecurityStore();
 
-    const user = ref(null);
-    const menu = ref();
-    const items = ref([
-        {
-            label: 'Home',
-            icon: 'pi pi-fw pi-home'
-        },
-        {
-            label: 'Account',
-            icon: 'pi pi-fw pi-user',
-            items: [
-                {
-                    label: 'Instellingen',
-                    icon: 'pi pi-fw pi-cog'
-                },
-                {
-                    label: 'Uitloggen',
-                    icon: 'pi pi-fw pi-power-off'
-                }
-            ]
-        },
-    ]);
+    function logout() {
+        router.post('/logout');
 
-    // onBeforeMount(async () => {
-    //     user.value = await securityStore.getUser();
-    // });
-    //
-    // function logout() {
-    //     securityStore.logout();
-    //
-    //     // window.location.reload();
-    // }
+        // securityStore.logout();
+
+        // window.location.reload();
+    }
 </script>

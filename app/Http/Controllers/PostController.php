@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostPreviewResource;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 use Statamic\Facades\Entry;
@@ -36,13 +39,16 @@ class PostController extends Controller
     {
         $entry = Entry::find($id);
 
+        $comments = Comment::where('post_id', $entry->id)->get();
+
         return Inertia::render('posts/show-page', [
             'id' => $entry->id,
             'title' => $entry->title,
             'body' => $entry->body,
             'headerImageUrl' => $entry->header_image?->url,
             'originUrl' => $request->headers->get('originUrl') ?? route('posts.index'),
-            'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null
+            'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null,
+            'comments' => CommentResource::collection($comments)
         ]);
     }
 }

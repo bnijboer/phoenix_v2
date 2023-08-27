@@ -45,15 +45,22 @@
             </template>
         </Card>
 
-        <Link
-            :href="originUrl"
-            :headers="{ viewIndex: viewIndex  }"
-            style="text-decoration: none;"
-        >
-            <Button>
-                Terug naar overzicht
-            </Button>
-        </Link>
+        <CommentSection
+            :post-id="id"
+            :comments="comments.data"
+        />
+
+        <div class="mt-4">
+            <Link
+                :href="originUrl"
+                :headers="{ viewIndex: viewIndex  }"
+                style="text-decoration: none;"
+            >
+                <Button>
+                    Terug naar overzicht
+                </Button>
+            </Link>
+        </div>
     </div>
 </template>
 
@@ -61,6 +68,7 @@
     import {Link} from '@inertiajs/vue3'
     import Button from 'primevue/button';
     import Card from 'primevue/card';
+    import CommentSection from "@/components/comments/comment-section.vue";
 
     const props = defineProps({
         id: String,
@@ -68,7 +76,8 @@
         body: Object,
         headerImageUrl: String,
         originUrl: String,
-        viewIndex: Number
+        viewIndex: Number,
+        comments: Object
     });
 
     function getYouTubeEmbedUrl(videoUrl) {

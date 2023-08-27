@@ -16,7 +16,7 @@
 
         <footer class="flex justify-content-center">
             <div class="p-4">
-                © Brendan Nijboer 2022
+                © Brendan Nijboer 2023
             </div>
         </footer>
     </div>

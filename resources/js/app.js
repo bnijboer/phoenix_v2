@@ -20,21 +20,12 @@ createInertiaApp({
         return page
     },
     setup({ el, App, props, plugin }) {
-        // const VueApp = createApp({ render: () => h(app, props) });
-        //
-        // VueApp.config.globalProperties.$date = dayjs;
-        //
-        // VueApp.use(plugin)
-        //     .use(PrimeVue)
-        //     .mixin({ methods: { route } })
-        //     .mount(el);
-
         createApp({ render: () => h(App, props) })
             .use(PrimeVue)
             .use(plugin)
+            .use(pinia)
             .mount(el)
     },
 });
 
-// app.use(pinia)
 //     .use(vfmPlugin);
