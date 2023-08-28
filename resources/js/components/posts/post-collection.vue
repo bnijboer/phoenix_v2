@@ -5,15 +5,13 @@
             :key="index"
         >
             <article class="px-0 lg:px-4 xl:px-8">
-                <div class="p-8">
-                    <Divider
-                        v-if="index !== 0"
-                        type="dashed"
-                        align="center"
-                    >
-                        <i class="pi pi-star text-indigo-200" />
-                    </Divider>
-                </div>
+                <Divider
+                    v-if="index !== 0"
+                    type="dashed"
+                    align="center"
+                >
+                    <i class="pi pi-star text-indigo-200" />
+                </Divider>
 
                 <a :id="post.id"></a>
 
@@ -24,12 +22,6 @@
                     :preview-text="post.previewText"
                     @click="expand(post.id)"
                 ></PostPreview>
-
-<!--                <post-item-->
-<!--                    :id="post.id"-->
-<!--                    :preview="post.id !== active"-->
-<!--                    @click="expand(post.id)"-->
-<!--                />-->
             </article>
         </div>
     </div>

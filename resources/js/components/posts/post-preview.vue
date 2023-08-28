@@ -1,9 +1,8 @@
 <template>
     <Card style="box-shadow: none">
         <template #header>
-            <div class="w-full">
+            <div v-if="headerImageUrl" class="w-full">
                 <img
-                    v-if="headerImageUrl"
                     :src="headerImageUrl"
                     alt="Blogpost preview afbeelding"
                     class="image-center w-full max-h-24rem"
@@ -27,17 +26,9 @@
     import Card from 'primevue/card';
 
     const props = defineProps({
-        id: {
-            type: String
-        },
-        headerImageUrl: {
-            type: String
-        },
-        title: {
-            type: String
-        },
-        previewText: {
-            type: String
-        },
+        id: String,
+        headerImageUrl: String,
+        title: String,
+        previewText: String,
     });
 </script>

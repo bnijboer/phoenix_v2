@@ -5,15 +5,14 @@
             :key="index"
             :ref="(el) => (postRefs[index] = el)"
         >
-            <div class="p-8">
-                <Divider
-                    v-if="index !== 0"
-                    type="dashed"
-                    align="center"
-                >
-                    <i class="pi pi-star text-indigo-200" />
-                </Divider>
-            </div>
+            <Divider
+                v-if="index !== 0"
+                type="dashed"
+                align="center"
+                class="py-8"
+            >
+                <i class="pi pi-star text-indigo-200" />
+            </Divider>
 
             <Link
                 :href="`/posts/${post.id}`"
@@ -62,10 +61,10 @@
     const posts = ref([]);
     const loading = ref(false);
     const page = ref(1);
-    const limit = ref(5);
+    const limit = ref(10);
     const total = ref(0);
 
-    const totalPages = computed(() => Math.ceil(props.meta.total / 5))
+    const totalPages = computed(() => Math.ceil(props.meta.total / limit.value))
 
     const currentPage = computed(() => {
         return route('posts.index', {

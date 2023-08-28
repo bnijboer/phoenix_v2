@@ -6,7 +6,6 @@ use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostPreviewResource;
 use App\Models\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 use Statamic\Facades\Entry;
@@ -16,7 +15,7 @@ class PostController extends Controller
     public function index(Request $request): Response
     {
         $page = (int) ($request->query('page') ?? 1);
-        $limit = $request->query('limit') ?? 5;
+        $limit = $request->query('limit') ?? 10;
         $total = Entry::whereCollection('blog')->count();
 
         $posts = Entry::query()
@@ -48,6 +47,7 @@ class PostController extends Controller
             'headerImageUrl' => $entry->header_image?->url,
             'originUrl' => $request->headers->get('originUrl') ?? route('posts.index'),
             'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null,
+            'tags' => $entry->tags,
             'comments' => CommentResource::collection($comments)
         ]);
     }

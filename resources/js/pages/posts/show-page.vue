@@ -3,7 +3,7 @@
         <Card style="box-shadow: none">
             <template #header>
                 <div v-if="headerImageUrl" class="w-full">
-                    <img
+                    <Image
                         :src="headerImageUrl"
                         alt="Blogpost preview afbeelding"
                         class="image-center w-full max-h-24rem"
@@ -43,6 +43,18 @@
                     </div>
                 </div>
             </template>
+
+            <template #footer>
+                <div>
+                    <span
+                        v-for="(tag, index) in tags"
+                        :key="index"
+                        class="mr-1"
+                    >
+                        <Tag :value="tag.title" />
+                    </span>
+                </div>
+            </template>
         </Card>
 
         <CommentSection
@@ -68,7 +80,10 @@
     import {Link} from '@inertiajs/vue3'
     import Button from 'primevue/button';
     import Card from 'primevue/card';
+    import Image from 'primevue/image';
+    import Tag from 'primevue/tag';
     import CommentSection from "@/components/comments/comment-section.vue";
+    import {onMounted} from "vue";
 
     const props = defineProps({
         id: String,
@@ -77,7 +92,12 @@
         headerImageUrl: String,
         originUrl: String,
         viewIndex: Number,
+        tags: Array,
         comments: Object
+    });
+
+    onMounted(() => {
+        console.log(props.tags);
     });
 
     function getYouTubeEmbedUrl(videoUrl) {
