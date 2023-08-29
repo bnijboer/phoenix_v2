@@ -14,15 +14,12 @@
             </div>
         </div>
 
-        <footer class="flex justify-content-center">
-            <div class="p-4">
-                © Brendan Nijboer 2023
-            </div>
-        </footer>
+        <BaseFooter class="mt-8" />
     </div>
 </template>
 
 <script setup>
     import BaseSidebar from "@/pages/layout/base-sidebar.vue";
     import BaseHeader from "@/pages/layout/base-header.vue";
+    import BaseFooter from "@/pages/layout/base-footer.vue";
 </script>

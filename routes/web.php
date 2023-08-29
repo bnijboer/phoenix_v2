@@ -28,7 +28,9 @@ Route::get('/login', [PageController::class, 'login'])->name('security.login');
 Route::get('/register', [PageController::class, 'register'])->name('security.register');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/suggestions', [PostController::class, 'getPostSuggestions'])->name('posts.suggestions');
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+
 Route::get('/comments', [CommentController::class, 'index']);
 
 Route::get('/about', [GlobalSetController::class, 'about']);

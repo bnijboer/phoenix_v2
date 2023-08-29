@@ -4,17 +4,50 @@ html, body {
 }
 
 body {
-    /*font-family: 'Raleway', sans-serif;*/
+    font-family: 'Libre Baskerville', serif;
+    background: var(--purple-50);
+}
 
-    /*background-image: linear-gradient(*/
-    /*    30deg,*/
-    /*    hsl(265deg 79% 89%) -2%,*/
-    /*    hsl(274deg 70% 96%) 11%,*/
-    /*    hsl(290deg 60% 99%) 30%,*/
-    /*    hsl(0deg 0% 100%) 52%,*/
-    /*    hsl(0deg 0% 100%) 75%,*/
-    /*    hsl(0deg 0% 100%) 100%*/
-    /*);*/
+.sidebar {
+    background: white;
+    background: linear-gradient(180deg, rgba(256,256,256,1) 0%, var(--purple-50) 100%);
+}
+
+.sidebar-body {
+    color: var(--gray-900);
+    border-left: 1px dashed;
+    border-left-color: var(--indigo-100);
+}
+
+footer {
+    border-top: 1px dashed;
+    border-top-color: var(--indigo-100);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: 0.05em;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.overlay {
+    background: rgba(57, 57, 57, 0.5);
+    color: white;
+    letter-spacing: 0.05em;
+}
+
+.p-card-content {
+    color: var(--gray-800);
+    line-height: 1.625;
+}
+
+.post-title {
+    color: var(--purple-700);
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .image-center {
@@ -245,156 +278,3 @@ body {
     margin-top: 14rem;
     margin-bottom: 14rem;
 }
-
-/*h1, h2, h3 {*/
-/*    @apply text-primary tracking-wide;*/
-/*}*/
-
-/*h1, h2 {*/
-/*    font-family: 'Merriweather', serif;*/
-/*}*/
-
-/*h1 {*/
-/*    @apply text-5xl;*/
-/*}*/
-
-/*h2 {*/
-/*    @apply text-3xl;*/
-/*}*/
-
-/*h3 {*/
-/*    @apply text-2xl*/
-/*}*/
-
-/*p {*/
-/*    @apply mb-4;*/
-/*}*/
-
-/*.wrapper {*/
-/*    @apply min-h-screen antialiased flex flex-col;*/
-/*}*/
-
-/*.content {*/
-/*    @apply px-16 pt-6 pb-16 xl:px-24;*/
-/*}*/
-
-/*.nav-bar {*/
-/*    @apply z-30 absolute flex justify-end w-screen top-0 p-4;*/
-/*}*/
-
-/*.sidebar {*/
-/*    @apply h-full bg-white;*/
-/*}*/
-
-/*footer {*/
-/*    @apply text-gray-600 p-4;*/
-/*}*/
-
-/*.about {*/
-/*    @apply text-justify grow;*/
-/*}*/
-
-/*.logo-main {*/
-/*    @apply h-40 md:h-72 object-contain;*/
-/*}*/
-
-/*.banner {*/
-/*    @apply flex items-center;*/
-/*}*/
-
-/*.banner-title {*/
-/*    @apply text-4xl sm:text-5xl lg:text-7xl -rotate-1 py-8 pl-4 pr-8;*/
-/*    font-family: 'Allura', sans-serif;*/
-/*}*/
-
-/*.about-image {*/
-/*    @apply rounded-full w-60 h-60 object-cover shadow-lg;*/
-/* }*/
-
-/*.about-body {*/
-/*    @apply overflow-hidden border-l border-gray-200 px-8;*/
-/*}*/
-
-/*.post-results {*/
-/*    @apply grid grid-cols-1 xl:grid-cols-2 gap-16;*/
-/*}*/
-
-/*.post {*/
-/*    @apply bg-white;*/
-/*}*/
-
-/*.post-details {*/
-/*    @apply px-16 pb-32;*/
-/*    -webkit-box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);*/
-/*    -moz-box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);*/
-/*    box-shadow: -54px 69px 32px -71px rgba(181,138,237,1);*/
-/*}*/
-
-/*.post-preview {*/
-/*    @apply rounded-sm;*/
-/*}*/
-
-/*.post-preview {*/
-/*    @apply rounded-sm;*/
-/*    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
-/*}*/
-
-/*.featured-image {*/
-/*    @apply w-full object-cover;*/
-/*}*/
-
-/*.post-preview ~ .post-date {*/
-/*    @apply text-sm;*/
-/*}*/
-
-/*.post-date {*/
-/*    @apply text-gray-800;*/
-/*}*/
-
-/*.post-body {*/
-/*    @apply text-gray-900 leading-relaxed;*/
-/*}*/
-
-/*.post-preview ~ .featured-image {*/
-/*    @apply h-80 rounded-t-sm;*/
-/*}*/
-
-/*.post-preview-text {*/
-/*    @apply text-lg text-gray-900;*/
-/*}*/
-
-/*.post-source {*/
-/*    @apply italic text-right;*/
-/*}*/
-
-/*.tag-item {*/
-/*    @apply text-gray-800 text-sm border border-secondary rounded-lg p-2;*/
-/*}*/
-
-/*.comment {*/
-/*    @apply text-gray-700 leading-relaxed text-sm border border-secondary rounded-md p-4;*/
-/*}*/
-
-/*.nav-link {*/
-/*    @apply p-2 uppercase font-semibold tracking-wide text-primary hover:text-primary-accent hover:border-primary-accent hover:border-b hover:border-primary;*/
-/*}*/
-
-/*.button {*/
-/*    @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:bg-primary-accent transition ease-in-out duration-300;*/
-/*}*/
-
-/*.button-default {*/
-/*    @apply bg-primary hover:bg-primary-accent active:bg-primary-accent focus:bg-primary-accent;*/
-/*}*/
-
-/*.button-success {*/
-/*    @apply bg-green-600 hover:bg-green-500 active:bg-green-700 focus:border-green-700;*/
-/*}*/
-
-/*.pagination-arrow {*/
-/*    @apply flex items-center w-20 mx-8;*/
-/*}*/
-
-/*.validation-error {*/
-/*    @apply text-red-400 font-semibold text-sm mt-2;*/
-/*}*/

@@ -1,5 +1,5 @@
 <template>
-    <Card style="box-shadow: none">
+    <Card>
         <template #header>
             <div v-if="headerImageUrl" class="w-full">
                 <img
@@ -8,10 +8,18 @@
                     class="image-center w-full max-h-24rem"
                 />
             </div>
+
+            <div class="flex justify-content-between px-3 pt-3">
+                <span>{{ formatDutchDate(date) }}</span>
+
+                <span>
+                    <i class="pi pi-comment" />
+                </span>
+            </div>
         </template>
 
-        <template #title>
-            <h1>{{ title }}</h1>
+        <template #subtitle>
+            <h1 class="post-title">{{ title }}</h1>
         </template>
 
         <template #content>
@@ -23,11 +31,13 @@
 </template>
 
 <script setup>
+    import {formatDutchDate} from "@/helpers/miscellaneous";
     import Card from 'primevue/card';
 
     const props = defineProps({
         id: String,
         headerImageUrl: String,
+        date: String,
         title: String,
         previewText: String,
     });

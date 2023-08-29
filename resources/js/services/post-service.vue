@@ -8,6 +8,12 @@ export default {
         return response.data;
     },
 
+    async getPostSuggestions() {
+        const response = await axios.get(`/posts/suggestions`);
+
+        return response.data;
+    },
+
     async getPost(postUuid) {
         const response = await axios.get(`/posts/${postUuid}`);
 

@@ -4,16 +4,8 @@
             v-for="(post, index) in posts"
             :key="index"
             :ref="(el) => (postRefs[index] = el)"
+            class="pb-6"
         >
-            <Divider
-                v-if="index !== 0"
-                type="dashed"
-                align="center"
-                class="py-8"
-            >
-                <i class="pi pi-star text-indigo-200" />
-            </Divider>
-
             <Link
                 :href="`/posts/${post.id}`"
                 :headers="{ originUrl: currentPage, viewIndex: index }"
@@ -24,22 +16,31 @@
                     :header-image-url="post.headerImageUrl"
                     :title="post.title"
                     :preview-text="post.previewText"
+                    :date="post.date"
                 ></PostPreview>
             </Link>
         </div>
 
         <div class="flex align-items-center justify-content-center">
-            <Button @click="previous" :disabled="page === 1">
-                Volgende pagina
-            </Button>
+            <Button
+                @click="previous"
+                :disabled="page === 1"
+                icon="pi pi-arrow-left"
+                text
+                rounded
+            />
 
             <span class="mx-2">
                 Pagina {{ page }} van {{ totalPages }}
             </span>
 
-            <Button @click="next" :disabled="page >= totalPages">
-                Volgende pagina
-            </Button>
+            <Button
+                @click="next"
+                :disabled="page >= totalPages"
+                icon="pi pi-arrow-right"
+                text
+                rounded
+            />
         </div>
     </div>
 </template>
@@ -47,7 +48,6 @@
 <script setup>
     import {computed, onBeforeMount, onMounted, ref} from 'vue';
     import Button from 'primevue/button';
-    import Divider from 'primevue/divider';
     import PostPreview from "@/components/posts/post-preview.vue";
     import {Link, router} from '@inertiajs/vue3'
 

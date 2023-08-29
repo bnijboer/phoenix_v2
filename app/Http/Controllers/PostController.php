@@ -6,9 +6,11 @@ use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostPreviewResource;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Inertia\Inertia;
 use Inertia\Response;
 use Statamic\Facades\Entry;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PostController extends Controller
 {
@@ -50,5 +52,21 @@ class PostController extends Controller
             'tags' => $entry->tags,
             'comments' => CommentResource::collection($comments)
         ]);
+    }
+
+    public function getPostSuggestions(): JsonResponse
+    {
+        $posts = Entry::query()
+            ->where('collection', 'blog')
+            ->get();
+
+        $indices = array_rand($posts->toArray(), 9);
+
+        $postsSelection = array_map(
+            fn ($index) => $posts[$index],
+            $indices
+        );
+
+        return new JsonResponse(PostPreviewResource::collection($postsSelection));
     }
 }

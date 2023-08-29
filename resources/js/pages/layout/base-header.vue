@@ -1,5 +1,5 @@
 <template>
-    <div class="z-2">
+    <div class="sticky top-0 z-2 bg-white p-2">
         <Link
             href="/posts"
             style="text-decoration: none;"
@@ -22,13 +22,13 @@
                 </Link>
 
                 <span v-if="$page.props.auth.user">
-                <Button
-                    class="px-2 mr-2"
-                    @click="logout"
-                >
-                    Uitloggen
-                </Button>
-            </span>
+                    <Button
+                        class="px-2 mr-2"
+                        @click="logout"
+                    >
+                        Uitloggen
+                    </Button>
+                </span>
                 <div v-else>
                     <Link
                         href="/login"
@@ -48,18 +48,12 @@
                 </div>
             </nav>
 
-            <InputText placeholder="Search" type="text" />
+            <InputText placeholder="Zoeken" type="text" />
         </div>
-
-<!--        <Menubar ref="menu" id="overlay_menu" :model="items" :popup="true">-->
-<!--            <template #end>-->
-<!--            </template>-->
-<!--        </Menubar>-->
     </div>
 </template>
 
 <script setup>
-    import {onBeforeMount, ref} from "vue";
     import {Link, router} from '@inertiajs/vue3'
     import Button from 'primevue/button';
     import InputText from 'primevue/inputtext';

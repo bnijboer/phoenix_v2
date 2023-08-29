@@ -1,18 +1,19 @@
 <template>
-    <div class="border-left-1 border-indigo-200">
-        <div v-if="!loading">
-            <img
-                :src="about.image"
-                alt="Over mij afbeelding"
-                class="max-w-full"
-            >
+    <div
+        v-if="!loading"
+        class="sidebar"
+    >
+        <img
+            :src="about.image"
+            alt="Over mij afbeelding"
+            class="max-w-full"
+        >
 
-            <div class="p-4">
-                <div
-                    v-html="about.body"
-                    class="overflow-hidden"
-                />
-            </div>
+        <div class="sidebar-body p-4">
+            <div
+                v-html="about.body"
+                class="overflow-hidden"
+            />
         </div>
     </div>
 </template>
