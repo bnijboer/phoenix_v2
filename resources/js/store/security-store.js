@@ -23,7 +23,7 @@ export const useSecurityStore = defineStore('security', {
 
         async login(formData) {
             try {
-                await axios.post('/login', formData, {
+                await axios.post(route('/login'), formData, {
                     withCredentials: true
                 });
 
@@ -35,7 +35,7 @@ export const useSecurityStore = defineStore('security', {
 
         async register(formData) {
             try {
-                await axios.post('/register', formData);
+                await axios.post(route('/register'), formData);
             } catch (error) {
                 return error;
             }

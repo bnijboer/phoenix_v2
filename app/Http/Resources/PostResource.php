@@ -2,24 +2,36 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use JsonSerializable;
 
 class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  Request  $request
      */
-    public function toArray($request)
+    public function toArray($request): array|Arrayable|JsonSerializable
     {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'body' => $this->body,
+        $response = [
+            'entryId'        => $this->entry_id,
+            'title'          => $this->title,
+            'body'           => $this->body,
             'headerImageUrl' => $this->header_image?->url,
-            'updatedAt' => $this->updated_at,
+            'createdAt'      => $this->date,
         ];
+
+        if ($this->comments) {
+            $response['comments'] = CommentResource::collection($this->comments);
+        }
+
+        if ($this->tags) {
+            $response['tags'] = $this->tags;
+        }
+
+        return $response;
     }
 }

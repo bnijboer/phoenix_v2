@@ -58,7 +58,7 @@
         </Card>
 
         <CommentSection
-            :post-id="id"
+            :entry-id="entryId"
             :comments="comments.data"
         />
 
@@ -84,9 +84,10 @@
     import Tag from 'primevue/tag';
     import CommentSection from "@/components/comments/comment-section.vue";
     import {onMounted} from "vue";
+    import PostService from "@/services/post-service.vue";
 
     const props = defineProps({
-        id: String,
+        entryId: String,
         title: String,
         body: Object,
         headerImageUrl: String,
@@ -94,11 +95,15 @@
         viewIndex: Number,
         tags: Array,
         comments: Object
-    });
+    })
 
     onMounted(() => {
-        console.log(props.tags);
+        setTimeout(updateReaderCount, 15000);
     });
+
+    function updateReaderCount() {
+        PostService.updateReaderCount(props.entryId);
+    }
 
     function getYouTubeEmbedUrl(videoUrl) {
         const urlSegments = videoUrl.split('/watch?v=');

@@ -51,7 +51,7 @@
     import PostService from "@/services/post-service.vue";
 
     onMounted(() => {
-        PostService.getPostSuggestions().then((data) => (posts.value = data.slice(0, 9)));
+        PostService.getPostSuggestions().then(data => posts.value = data.slice(0, 9));
     });
 
     const posts = ref();

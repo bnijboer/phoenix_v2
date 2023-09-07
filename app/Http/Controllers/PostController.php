@@ -2,71 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CommentResource;
-use App\Http\Resources\PostPreviewResource;
-use App\Models\Comment;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Inertia\Inertia;
-use Inertia\Response;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Statamic\Facades\Entry;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
-    public function index(Request $request): Response
+    public function getPostSuggestions(): AnonymousResourceCollection
     {
-        $page = (int) ($request->query('page') ?? 1);
-        $limit = $request->query('limit') ?? 10;
-        $total = Entry::whereCollection('blog')->count();
+        $posts = Entry::whereInCollection(['blog'])->random(9);
 
-        $posts = Entry::query()
-            ->where('collection', 'blog')
-            ->forPage($page, $limit)
-            ->orderBy('date', 'desc')
-            ->get();
-
-        return Inertia::render('posts/index-page', [
-            'posts' => PostPreviewResource::collection($posts),
-            'meta' => [
-                'page' => $page,
-                'total' => $total,
-                'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null
-            ]
-        ]);
+        return PostResource::collection($posts);
     }
 
-    public function show(Request $request, string $id): Response
+    public function updatePost(string $entryId): int
     {
-        $entry = Entry::find($id);
-
-        $comments = Comment::where('post_id', $entry->id)->get();
-
-        return Inertia::render('posts/show-page', [
-            'id' => $entry->id,
-            'title' => $entry->title,
-            'body' => $entry->body,
-            'headerImageUrl' => $entry->header_image?->url,
-            'originUrl' => $request->headers->get('originUrl') ?? route('posts.index'),
-            'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null,
-            'tags' => $entry->tags,
-            'comments' => CommentResource::collection($comments)
+        $post = Post::firstOrNew([
+            'entry_id' => $entryId
         ]);
-    }
 
-    public function getPostSuggestions(): JsonResponse
-    {
-        $posts = Entry::query()
-            ->where('collection', 'blog')
-            ->get();
+        $post->increment('reader_count');
+        $post->save();
 
-        $indices = array_rand($posts->toArray(), 9);
-
-        $postsSelection = array_map(
-            fn ($index) => $posts[$index],
-            $indices
-        );
-
-        return new JsonResponse(PostPreviewResource::collection($postsSelection));
+        return Response::HTTP_NO_CONTENT;
     }
 }

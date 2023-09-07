@@ -72,7 +72,7 @@
     import RegisterForm from "@/components/security/register-form.vue";
 
     const props = defineProps({
-        'postId': String,
+        'entryId': String,
         'comments': Array
     });
 
@@ -86,11 +86,11 @@
     async function submit() {
         const commentRequest = {
             'body': body.value,
-            'postId': props.postId
+            'entryId': props.entryId
         }
 
         try {
-            const response = await axios.post('/comments', commentRequest);
+            const response = await axios.post(route('comments.index'), commentRequest);
 
             const comment = response.data.data;
             body.value = null;

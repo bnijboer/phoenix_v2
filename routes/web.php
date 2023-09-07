@@ -21,19 +21,21 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return redirect()->route('posts.index');
+    return redirect()->route('pages.index');
 });
 
-Route::get('/login', [PageController::class, 'login'])->name('security.login');
-Route::get('/register', [PageController::class, 'register'])->name('security.register');
+Route::get('/login',             [PageController::class, 'loginPage'])         ->name('pages.login');
+Route::get('/register',          [PageController::class, 'registerPage'])      ->name('pages.register');
+Route::get('/posts',             [PageController::class, 'indexPage'])         ->name('pages.index');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::post('/posts/{entryId}/update-reader-count',      [PostController::class, 'updatePost'])        ->name('posts.update-reader-count');
 Route::get('/posts/suggestions', [PostController::class, 'getPostSuggestions'])->name('posts.suggestions');
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
-Route::get('/comments', [CommentController::class, 'index']);
+Route::get('/posts/{entryId}',        [PageController::class, 'showPage'])          ->name('pages.show');
 
-Route::get('/about', [GlobalSetController::class, 'about']);
+Route::get('/comments',          [CommentController::class, 'index'])          ->name('comments.index');
+
+Route::get('/about',             [GlobalSetController::class, 'about'])        ->name('sets.about');
 
 Route::get('/user', function (Request $request) {
     if ($request->user()) {
@@ -44,5 +46,5 @@ Route::get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/comments', [CommentController::class, 'store']);
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });

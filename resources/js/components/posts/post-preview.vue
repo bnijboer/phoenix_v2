@@ -10,7 +10,7 @@
             </div>
 
             <div class="flex justify-content-between px-3 pt-3">
-                <span>{{ formatDutchDate(date) }}</span>
+<!--                <span>{{ formatDutchDate(createdAt) }}</span>-->
 
                 <span>
                     <i class="pi pi-comment" />
@@ -37,8 +37,8 @@
     const props = defineProps({
         id: String,
         headerImageUrl: String,
-        date: String,
         title: String,
         previewText: String,
+        // createdAt: String,
     });
 </script>

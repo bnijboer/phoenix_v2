@@ -16,7 +16,7 @@
                     :header-image-url="post.headerImageUrl"
                     :title="post.title"
                     :preview-text="post.previewText"
-                    :date="post.date"
+                    :created-at="post.createdAt"
                 ></PostPreview>
             </Link>
         </div>
@@ -52,14 +52,14 @@
     import {Link, router} from '@inertiajs/vue3'
 
     const props = defineProps({
-        posts: Object,
+        data: Object,
         meta: Object
     })
 
     const postRefs = ref([])
 
     const posts = ref([]);
-    const loading = ref(false);
+
     const page = ref(1);
     const limit = ref(10);
     const total = ref(0);
@@ -67,7 +67,7 @@
     const totalPages = computed(() => Math.ceil(props.meta.total / limit.value))
 
     const currentPage = computed(() => {
-        return route('posts.index', {
+        return route('pages.index', {
             page: page.value,
             limit: limit.value
         })
@@ -75,7 +75,7 @@
 
     onBeforeMount(() => {
         page.value = props.meta.page;
-        posts.value = props.posts.data;
+        posts.value = props.data.data;
     });
 
     onMounted(() => {

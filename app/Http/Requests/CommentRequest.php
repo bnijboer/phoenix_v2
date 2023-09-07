@@ -25,7 +25,7 @@ class CommentRequest extends FormRequest
     {
         return [
             'body' => 'required|max:255',
-            'postId' => 'required'
+            'entryId' => 'required'
         ];
     }
 }

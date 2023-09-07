@@ -4,14 +4,14 @@
         class="sidebar"
     >
         <img
-            :src="about.image"
+            :src="image"
             alt="Over mij afbeelding"
             class="max-w-full"
         >
 
         <div class="sidebar-body p-4">
             <div
-                v-html="about.body"
+                v-html="body"
                 class="overflow-hidden"
             />
         </div>
@@ -29,12 +29,15 @@
     });
 
     const loading = ref(true);
-    const about = ref(null);
+
+    const image = ref(null);
+    const body = ref(null);
 
     onMounted(async () => {
-        const response = await axios.get(`/about`);
+        const response = await axios.get('/about');
 
-        about.value = response.data.about;
+        image.value = response.data.data.image;
+        body.value = response.data.data.body;
 
         loading.value = false;
     });
