@@ -12,11 +12,11 @@
                 style="text-decoration: none;"
             >
                 <PostPreview
-                    :entry-id="post.entryId"
                     :header-image-url="post.headerImageUrl"
                     :title="post.title"
                     :preview-text="post.previewText"
                     :created-at="post.createdAt"
+                    :comment-count="post.commentCount"
                 ></PostPreview>
             </Link>
         </div>
@@ -67,12 +67,10 @@
 
     const totalPages = computed(() => Math.ceil(props.meta.total / limit.value))
 
-    const currentPage = computed(() => {
-        return route('pages.index', {
-            page: page.value,
-            limit: limit.value
-        })
-    })
+    const currentPage = computed(() => route('pages.index', {
+        page: page.value,
+        limit: limit.value
+    }));
 
     onBeforeMount(() => {
         page.value = props.meta.page;

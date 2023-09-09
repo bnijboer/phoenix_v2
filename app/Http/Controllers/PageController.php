@@ -27,6 +27,15 @@ class PageController extends Controller
 
     public function indexPage(Request $request): Response
     {
+        if ($request->query('query')) {
+            dd($request->query('query'));
+        }
+
+        if ($request->query('tag')) {
+            dd($request->query('tag'));
+        }
+
+
         $page  = (int) $request->query('page', 1);
         $limit = (int) $request->query('limit', 10);
         $total = Entry::whereCollection('blog')->count();

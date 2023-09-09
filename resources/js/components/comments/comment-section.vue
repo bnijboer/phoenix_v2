@@ -31,7 +31,7 @@
         </div>
 
         <div v-if="$page.props.auth.user">
-            <form @submit.prevent="submit" class="mt-8">
+            <form @submit.prevent="onSubmit" class="mt-8">
                 <div class="text-center">
                     <h4>Wat vind je van deze post?</h4>
                 </div>
@@ -84,7 +84,7 @@
         comments.value = props.comments;
     });
 
-    async function submit() {
+    async function onSubmit() {
         const commentRequest = {
             'body': body.value,
             'entryId': props.entryId

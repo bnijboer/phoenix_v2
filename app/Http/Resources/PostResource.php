@@ -22,9 +22,10 @@ class PostResource extends JsonResource
             'title'          => $this->title,
             'body'           => $this->body,
             'headerImageUrl' => $this->header_image?->url,
-            'comments'       => CommentResource::collection(Comment::where('entry_id', $this->id)->get()),
             'tags'           => $this->tags,
-            'createdAt'      => $this->date,
+            'createdAt'      => $this->date->locale('nl')->isoFormat('dddd D MMMM YYYY'),
+            'updatedAt'      => $this->updated_at->locale('nl')->isoFormat('dddd D MMMM YYYY'),
+            'comments'       => CommentResource::collection(Comment::where('entry_id', $this->id)->get()),
         ];
     }
 }

@@ -9,6 +9,8 @@
                         class="image-center w-full max-h-24rem"
                     />
                 </div>
+
+                <span class="capitalize">{{ post.createdAt }}</span>
             </template>
 
             <template #title>
@@ -51,7 +53,10 @@
                         :key="index"
                         class="mr-1"
                     >
-                        <Tag :value="tag.title" />
+                        <Tag
+                            :value="tag.title"
+                            @click="getPostsByTag(tag.title)"
+                        />
                     </span>
                 </div>
             </template>
@@ -77,7 +82,7 @@
 </template>
 
 <script setup>
-    import {Link} from '@inertiajs/vue3'
+import {Link, router} from '@inertiajs/vue3'
     import Button from 'primevue/button';
     import Card from 'primevue/card';
     import Image from 'primevue/image';
@@ -85,6 +90,7 @@
     import CommentSection from "@/components/comments/comment-section.vue";
     import {onBeforeMount, onMounted, ref} from "vue";
     import PostService from "@/services/post-service.vue";
+import route from "ziggy-js";
 
     const props = defineProps({
         data: Object,
@@ -109,5 +115,11 @@
         const urlSegments = videoUrl.split('/watch?v=');
 
         return `${urlSegments[0]}/embed/${urlSegments[urlSegments.length - 1]}`;
+    }
+
+    function getPostsByTag(tagTitle){
+        router.get(
+            route('pages.index', { tag: tagTitle })
+        );
     }
 </script>

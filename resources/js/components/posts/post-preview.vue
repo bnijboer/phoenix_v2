@@ -10,10 +10,11 @@
             </div>
 
             <div class="flex justify-content-between px-3 pt-3">
-<!--                <span>{{ formatDutchDate(createdAt) }}</span>-->
+                <span class="capitalize">{{ createdAt }}</span>
 
                 <span>
                     <i class="pi pi-comment" />
+                    {{ commentCount }}
                 </span>
             </div>
         </template>
@@ -31,14 +32,13 @@
 </template>
 
 <script setup>
-    import {formatDutchDate} from "@/helpers/miscellaneous";
     import Card from 'primevue/card';
 
     const props = defineProps({
-        id: String,
         headerImageUrl: String,
         title: String,
         previewText: String,
-        // createdAt: String,
+        createdAt: String,
+        commentCount: Number
     });
 </script>
