@@ -52,13 +52,11 @@ class PageController extends Controller
 
     public function showPage(Request $request, string $entryId): Response
     {
-        $post = $this->postService->getPostWithComments($entryId);
-
         return inertia('posts/show-page', [
-            'data'  => new PostResource($post),
+            'data'  => new PostResource($this->postService->getPost($entryId)),
             'meta' => [
                 'originUrl' => $request->header('originUrl', route('pages.index')),
-//                'viewIndex' => $request->hasHeader('viewIndex') ? (int)$request->header('viewIndex') : null,
+                'viewIndex' => $request->hasHeader('viewIndex') ? (int)$request->header('viewIndex') : null,
             ]
         ]);
     }

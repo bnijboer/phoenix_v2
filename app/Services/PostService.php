@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use Statamic\Entries\EntryCollection;
+use Statamic\Entries\Entry;
 
 class PostService
 {
     public function __construct(
-        private CommentService $commentService,
         private EntryService $entryService
     ) {}
 
@@ -16,20 +16,8 @@ class PostService
         return $this->entryService->getPostEntries()->random($amount);
     }
 
-    public function getPostWithComments(string $entryId): array
+    public function getPost(string $entryId): Entry
     {
-        $entry = $this->entryService->getPostEntry($entryId);
-
-        $comments = $this->commentService->getCommentsByEntryId($entry->id);
-
-        return [
-            'entryId'        => $entry->id,
-            'title'          => $entry->title,
-            'body'           => $entry->body,
-            'headerImageUrl' => $entry->header_image?->url,
-            'tags'           => $entry->tags,
-            'comments'       => $comments
-        ];
+        return $this->entryService->getPostEntry($entryId);
     }
 }
-

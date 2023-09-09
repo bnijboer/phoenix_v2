@@ -7,17 +7,11 @@ use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 
 class CommentService {
     public function __construct(
         private EntryService $entryService
     ) {}
-
-    public function getCommentsByEntryId(string $entryId): Collection
-    {
-        return Comment::where('entry_id', $entryId)->get();
-    }
 
     /**
      * @throws StatamicEntryNotFoundException

@@ -2,9 +2,9 @@
     <div>
         <Card style="box-shadow: none">
             <template #header>
-                <div v-if="headerImageUrl" class="w-full">
+                <div v-if="post.headerImageUrl" class="w-full">
                     <Image
-                        :src="headerImageUrl"
+                        :src="post.headerImageUrl"
                         alt="Blogpost preview afbeelding"
                         class="image-center w-full max-h-24rem"
                     />
@@ -12,12 +12,12 @@
             </template>
 
             <template #title>
-                <h1>{{ title }}</h1>
+                <h1>{{ post.title }}</h1>
             </template>
 
             <template #content>
                 <div>
-                    <div v-for="element in body">
+                    <div v-for="element in post.body">
                         <div
                             v-if="element.type === 'text'"
                             v-html="element.text"
@@ -47,7 +47,7 @@
             <template #footer>
                 <div>
                     <span
-                        v-for="(tag, index) in tags"
+                        v-for="(tag, index) in post.tags"
                         :key="index"
                         class="mr-1"
                     >
@@ -58,14 +58,14 @@
         </Card>
 
         <CommentSection
-            :entry-id="entryId"
-            :comments="comments.data"
+            :entry-id="post.entryId"
+            :comments="post.comments"
         />
 
         <div class="mt-4">
             <Link
-                :href="originUrl"
-                :headers="{ viewIndex: viewIndex  }"
+                :href="props.meta.originUrl"
+                :headers="{ viewIndex: props.meta.viewIndex  }"
                 style="text-decoration: none;"
             >
                 <Button>
@@ -83,26 +83,26 @@
     import Image from 'primevue/image';
     import Tag from 'primevue/tag';
     import CommentSection from "@/components/comments/comment-section.vue";
-    import {onMounted} from "vue";
+    import {onBeforeMount, onMounted, ref} from "vue";
     import PostService from "@/services/post-service.vue";
 
     const props = defineProps({
-        entryId: String,
-        title: String,
-        body: Object,
-        headerImageUrl: String,
-        originUrl: String,
-        viewIndex: Number,
-        tags: Array,
-        comments: Object
+        data: Object,
+        meta: Object
     })
+
+    const post = ref(null);
+
+    onBeforeMount(() => {
+        post.value = props.data.data;
+    });
 
     onMounted(() => {
         setTimeout(updateReaderCount, 15000);
     });
 
     function updateReaderCount() {
-        PostService.updateReaderCount(props.entryId);
+        PostService.updateReaderCount(post.value.entryId);
     }
 
     function getYouTubeEmbedUrl(videoUrl) {

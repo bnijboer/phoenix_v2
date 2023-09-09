@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Comment;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -16,22 +17,14 @@ class PostResource extends JsonResource
      */
     public function toArray($request): array|Arrayable|JsonSerializable
     {
-        $response = [
+        return [
             'entryId'        => $this->id,
             'title'          => $this->title,
             'body'           => $this->body,
             'headerImageUrl' => $this->header_image?->url,
+            'comments'       => CommentResource::collection(Comment::where('entry_id', $this->id)->get()),
+            'tags'           => $this->tags,
             'createdAt'      => $this->date,
         ];
-
-        if ($this->comments) {
-            $response['comments'] = CommentResource::collection($this->comments);
-        }
-
-        if ($this->tags) {
-            $response['tags'] = $this->tags;
-        }
-
-        return $response;
     }
 }
