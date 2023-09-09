@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import axios from "axios";
+import route from "ziggy-js";
 
 export const useSecurityStore = defineStore('security', {
     state: () => ({
@@ -23,9 +24,11 @@ export const useSecurityStore = defineStore('security', {
 
         async login(formData) {
             try {
-                await axios.post(route('/login'), formData, {
-                    withCredentials: true
-                });
+                await axios.post(
+                    route('/login'), formData, {
+                        withCredentials: true
+                    }
+                );
 
                 this.isLoggedIn = true;
             } catch (error) {
@@ -35,7 +38,9 @@ export const useSecurityStore = defineStore('security', {
 
         async register(formData) {
             try {
-                await axios.post(route('/register'), formData);
+                await axios.post(
+                    route('/register'), formData
+                );
             } catch (error) {
                 return error;
             }

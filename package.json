@@ -25,6 +25,7 @@
         "primeicons": "^6.0.1",
         "primevue": "^3.31.0",
         "vue": "^3.2.45",
-        "vue-final-modal": "^3.4.11"
+        "vue-final-modal": "^3.4.11",
+        "ziggy-js": "^1.6.2"
     }
 }

@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Statamic\Facades\Entry;
 use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
+    public function __construct(
+        private PostService $postService
+    ) {}
+
     public function getPostSuggestions(): AnonymousResourceCollection
     {
-        $posts = Entry::whereInCollection(['blog'])->random(9);
-
-        return PostResource::collection($posts);
+        return PostResource::collection(
+            $this->postService->getRandomizedPostCollection()
+        );
     }
 
     public function updatePost(string $entryId): int

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\StatamicEntryNotFoundException;
-use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostPreviewResource;
-use App\Models\Comment;
+use App\Http\Resources\PostResource;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Statamic\Facades\Entry;
 
 class PageController extends Controller
 {
+    public function __construct(
+        private PostService $postService
+    ) {}
+
     public function loginPage(): Response
     {
         return inertia('security/login-page');
@@ -24,12 +27,12 @@ class PageController extends Controller
 
     public function indexPage(Request $request): Response
     {
-        $page  = ((int) $request->query('page')) ?? 1;
-        $limit = $request->query('limit') ?? 10;
+        $page  = (int) $request->query('page', 1);
+        $limit = (int) $request->query('limit', 10);
         $total = Entry::whereCollection('blog')->count();
 
-        $orderBy        = $request->query('orderBy') ?? 'date';
-        $orderDirection = $request->query('orderDirection') ?? 'desc';
+        $orderBy        = $request->query('orderBy', 'date');
+        $orderDirection = $request->query('orderDirection', 'desc');
 
         $posts = Entry::query()
             ->where('collection', 'blog')
@@ -42,37 +45,21 @@ class PageController extends Controller
             'meta' => [
                 'page' => $page,
                 'total' => $total,
-                'viewIndex' => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null
+                'viewIndex' => $request->hasHeader('viewIndex') ? (int) $request->header('viewIndex') : null
             ]
         ]);
     }
 
-    /**
-     * @throws StatamicEntryNotFoundException
-     */
     public function showPage(Request $request, string $entryId): Response
     {
-        $entry = Entry::whereInCollection(['blog'])->firstOrFail(
-            function ($entry) use ($entryId) {
-                return $entry->id === $entryId;
-            }
-        );
-
-        if ($entry === null) {
-            throw new StatamicEntryNotFoundException();
-        }
-
-        $comments = Comment::where('entry_id', $entryId)->get();
+        $post = $this->postService->getPostWithComments($entryId);
 
         return inertia('posts/show-page', [
-            'entryId'        => $entryId,
-            'title'          => $entry->title,
-            'body'           => $entry->body,
-            'headerImageUrl' => $entry->header_image?->url,
-            'originUrl'      => $request->headers->get('originUrl') ?? route('pages.index'),
-            'viewIndex'      => $request->headers->get('viewIndex') ? (int) $request->headers->get('viewIndex') : null,
-            'tags'           => $entry->tags,
-            'comments'       => CommentResource::collection($comments)
+            'data'  => new PostResource($post),
+            'meta' => [
+                'originUrl' => $request->header('originUrl', route('pages.index')),
+//                'viewIndex' => $request->hasHeader('viewIndex') ? (int)$request->header('viewIndex') : null,
+            ]
         ]);
     }
 }

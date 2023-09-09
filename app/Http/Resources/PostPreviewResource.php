@@ -17,7 +17,7 @@ class PostPreviewResource extends JsonResource
     public function toArray($request): array|Arrayable|JsonSerializable
     {
         return [
-            'id'             => $this->id,
+            'entryId'        => $this->id,
             'title'          => $this->title,
             'headerImageUrl' => $this->header_image?->url,
             'previewText'    => $this->description_text,

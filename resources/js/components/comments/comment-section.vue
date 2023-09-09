@@ -70,6 +70,7 @@
     import axios from "axios";
     import LoginForm from "@/components/security/login-form.vue";
     import RegisterForm from "@/components/security/register-form.vue";
+    import route from "ziggy-js";
 
     const props = defineProps({
         'entryId': String,

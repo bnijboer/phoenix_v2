@@ -7,12 +7,12 @@
             class="pb-6"
         >
             <Link
-                :href="`/posts/${post.id}`"
+                :href="route('pages.show', post.entryId)"
                 :headers="{ originUrl: currentPage, viewIndex: index }"
                 style="text-decoration: none;"
             >
                 <PostPreview
-                    :id="post.id"
+                    :entry-id="post.entryId"
                     :header-image-url="post.headerImageUrl"
                     :title="post.title"
                     :preview-text="post.previewText"
@@ -50,6 +50,7 @@
     import Button from 'primevue/button';
     import PostPreview from "@/components/posts/post-preview.vue";
     import {Link, router} from '@inertiajs/vue3'
+    import route from "ziggy-js";
 
     const props = defineProps({
         data: Object,

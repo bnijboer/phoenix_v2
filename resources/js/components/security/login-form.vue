@@ -29,7 +29,6 @@
     import {ref} from "vue";
     import {useSecurityStore} from "@/store/security-store";
     import axios from "axios";
-    import {router} from "@inertiajs/vue3";
 
     const securityStore = useSecurityStore();
 

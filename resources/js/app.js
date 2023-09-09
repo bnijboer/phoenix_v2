@@ -9,6 +9,7 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import PrimeVue from 'primevue/config';
 import { createPinia } from 'pinia';
 import LayoutDefault from "@/pages/layout/layout-default.vue";
+import route from "ziggy-js";
 
 const pinia = createPinia();
 
@@ -20,11 +21,18 @@ createInertiaApp({
         return page
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(PrimeVue)
-            .use(plugin)
-            .use(pinia)
-            .mount(el)
+        createApp({
+            render: () => h(App, props)
+        })
+        .mixin({
+            methods: {
+                route
+            }
+        })
+        .use(pinia)
+        .use(PrimeVue)
+        .use(plugin)
+        .mount(el)
     },
 });
 

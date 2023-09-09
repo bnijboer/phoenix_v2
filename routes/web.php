@@ -20,15 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return redirect()->route('pages.index');
-});
+Route::permanentRedirect('/', '/posts');
 
 Route::get('/login',             [PageController::class, 'loginPage'])         ->name('pages.login');
 Route::get('/register',          [PageController::class, 'registerPage'])      ->name('pages.register');
 Route::get('/posts',             [PageController::class, 'indexPage'])         ->name('pages.index');
 
-Route::post('/posts/{entryId}/update-reader-count',      [PostController::class, 'updatePost'])        ->name('posts.update-reader-count');
+Route::post('/posts/{entryId}/update-reader-count',      [PostController::class, 'updatePost'])        ->name('posts.update_reader_count');
 Route::get('/posts/suggestions', [PostController::class, 'getPostSuggestions'])->name('posts.suggestions');
 
 Route::get('/posts/{entryId}',        [PageController::class, 'showPage'])          ->name('pages.show');
@@ -37,14 +35,7 @@ Route::get('/comments',          [CommentController::class, 'index'])          -
 
 Route::get('/about',             [GlobalSetController::class, 'about'])        ->name('sets.about');
 
-Route::get('/user', function (Request $request) {
-    if ($request->user()) {
-        return new UserResource($request->user());
-    }
-
-    return null;
-});
-
 Route::middleware(['auth:sanctum'])->group(function () {
+//    Route::get('/user', fn (Request $request) => $request->user() ? new UserResource($request->user()) : null);
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });

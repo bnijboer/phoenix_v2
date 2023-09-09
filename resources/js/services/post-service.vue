@@ -1,5 +1,6 @@
 <script>
     import axios from "axios";
+    import route from "ziggy-js";
 
     export default {
         async getPostSuggestions() {
@@ -12,7 +13,7 @@
 
         async updateReaderCount(entryId) {
             const response = await axios.post(
-                route('posts.update-reader-count', entryId)
+                route('posts.update_reader_count', entryId)
             );
 
             return response.data.data;

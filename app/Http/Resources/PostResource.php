@@ -17,7 +17,7 @@ class PostResource extends JsonResource
     public function toArray($request): array|Arrayable|JsonSerializable
     {
         $response = [
-            'entryId'        => $this->entry_id,
+            'entryId'        => $this->id,
             'title'          => $this->title,
             'body'           => $this->body,
             'headerImageUrl' => $this->header_image?->url,

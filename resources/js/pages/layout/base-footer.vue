@@ -21,14 +21,14 @@
                 <template #item="slotProps">
                     <div class="flex justify-content-around pb-2">
                         <Link
-                            :href="`/posts/${slotProps.data.id}`"
+                            :href="route('pages.show', slotProps.data.entryId)"
                             style="text-decoration: none;"
                             class="relative border-round-lg overflow-hidden"
                         >
                             <img
                                 :src="slotProps.data.headerImageUrl ?? '/assets/small-preview-default.jpeg'"
                                 alt="Blogpost suggestie afbeelding"
-                                class="block bg-cover w-full max-w-14rem h-12rem"
+                                class="block bg-cover w-14rem h-12rem"
                             />
 
                             <div class="absolute bottom-0 left-0 px-3 w-14rem overlay">
@@ -49,6 +49,7 @@
     import {Link} from '@inertiajs/vue3'
     import Carousel from 'primevue/carousel';
     import PostService from "@/services/post-service.vue";
+    import route from "ziggy-js";
 
     onMounted(() => {
         PostService.getPostSuggestions().then(data => posts.value = data.slice(0, 9));
