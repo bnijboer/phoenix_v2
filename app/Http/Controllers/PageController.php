@@ -5,55 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PostPreviewResource;
 use App\Http\Resources\PostResource;
 use App\Services\PostService;
+use App\Traits\RetrievesFilterOptions;
 use Illuminate\Http\Request;
 use Inertia\Response;
-use Statamic\Facades\Entry;
 
 class PageController extends Controller
 {
+    use RetrievesFilterOptions;
+
     public function __construct(
         private PostService $postService
     ) {}
 
-    public function loginPage(): Response
-    {
-        return inertia('security/login-page');
-    }
-
-    public function registerPage(): Response
-    {
-        return inertia('security/register-page');
-    }
-
     public function indexPage(Request $request): Response
     {
-        if ($request->query('query')) {
-            dd($request->query('query'));
-        }
-
-        if ($request->query('tag')) {
-            dd($request->query('tag'));
-        }
-
-
-        $page  = (int) $request->query('page', 1);
-        $limit = (int) $request->query('limit', 10);
-        $total = Entry::whereCollection('blog')->count();
-
-        $orderBy        = $request->query('orderBy', 'date');
-        $orderDirection = $request->query('orderDirection', 'desc');
-
-        $posts = Entry::query()
-            ->where('collection', 'blog')
-            ->forPage($page, $limit)
-            ->orderBy($orderBy, $orderDirection)
-            ->get();
+        $results = $this->postService->getPaginatedPosts($this->getFilterOptions($request));
 
         return inertia('posts/index-page', [
-            'data' => PostPreviewResource::collection($posts),
+            'data' => PostPreviewResource::collection($results->all()),
             'meta' => [
-                'page' => $page,
-                'total' => $total,
+                'page' => $results->currentPage(),
+                'total' => $results->total(),
                 'viewIndex' => $request->hasHeader('viewIndex') ? (int) $request->header('viewIndex') : null
             ]
         ]);
@@ -68,5 +40,15 @@ class PageController extends Controller
                 'viewIndex' => $request->hasHeader('viewIndex') ? (int)$request->header('viewIndex') : null,
             ]
         ]);
+    }
+
+    public function loginPage(): Response
+    {
+        return inertia('security/login-page');
+    }
+
+    public function registerPage(): Response
+    {
+        return inertia('security/register-page');
     }
 }

@@ -47,22 +47,6 @@
                     </Link>
                 </div>
             </nav>
-
-            <form @submit.prevent="onSubmit">
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search" />
-                    <InputText
-                        v-model="query"
-                        placeholder="Wat zoek je?"
-                    />
-                </span>
-
-                <Button
-                    type="submit"
-                    label="Zoeken"
-                    class="ml-2"
-                />
-            </form>
         </div>
     </div>
 </template>
@@ -70,11 +54,7 @@
 <script setup>
     import {Link, router} from '@inertiajs/vue3'
     import Button from 'primevue/button';
-    import InputText from 'primevue/inputtext';
     import route from "ziggy-js";
-    import {ref} from "vue";
-
-    const query = ref(null);
 
     function logout() {
         router.post('/logout');
@@ -82,11 +62,5 @@
         // securityStore.logout();
 
         // window.location.reload();
-    }
-
-    function onSubmit() {
-        router.get(
-            route('pages.index', { query: query.value })
-        );
     }
 </script>

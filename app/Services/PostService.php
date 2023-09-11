@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
-use Statamic\Entries\EntryCollection;
+use App\Exceptions\StatamicEntryNotFoundException;
+use App\Views\FilterOptions;
 use Statamic\Entries\Entry;
+use Statamic\Entries\EntryCollection;
+use Statamic\Extensions\Pagination\LengthAwarePaginator;
 
 class PostService
 {
@@ -11,13 +14,27 @@ class PostService
         private EntryService $entryService
     ) {}
 
-    public function getRandomizedPostCollection($amount = 9): EntryCollection
+    public function getPaginatedPosts(FilterOptions $filterOptions): LengthAwarePaginator
     {
-        return $this->entryService->getPostEntries()->random($amount);
+        return $this->entryService->getPaginatedPostEntries($filterOptions);
     }
 
+    /**
+     * @throws StatamicEntryNotFoundException
+     */
     public function getPost(string $entryId): Entry
     {
-        return $this->entryService->getPostEntry($entryId);
+        $post = $this->entryService->getPostEntry($entryId);
+
+        if ($post === null) {
+            throw new StatamicEntryNotFoundException();
+        }
+
+        return $post;
+    }
+
+    public function getRandomizedPostCollection($amount = 9): EntryCollection
+    {
+        return $this->entryService->postEntries()->get()->random($amount);
     }
 }

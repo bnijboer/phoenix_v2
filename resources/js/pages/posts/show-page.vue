@@ -48,16 +48,16 @@
 
             <template #footer>
                 <div>
-                    <span
+                    <Button
                         v-for="(tag, index) in post.tags"
                         :key="index"
-                        class="mr-1"
+                        class="mr-2"
+                        outlined
+                        size="small"
+                        @click="getPostsByTag(tag.slug)"
                     >
-                        <Tag
-                            :value="tag.title"
-                            @click="getPostsByTag(tag.title)"
-                        />
-                    </span>
+                        #{{ tag.title }}
+                    </Button>
                 </div>
             </template>
         </Card>
@@ -82,7 +82,7 @@
 </template>
 
 <script setup>
-import {Link, router} from '@inertiajs/vue3'
+    import {Link, router} from '@inertiajs/vue3'
     import Button from 'primevue/button';
     import Card from 'primevue/card';
     import Image from 'primevue/image';
@@ -90,7 +90,7 @@ import {Link, router} from '@inertiajs/vue3'
     import CommentSection from "@/components/comments/comment-section.vue";
     import {onBeforeMount, onMounted, ref} from "vue";
     import PostService from "@/services/post-service.vue";
-import route from "ziggy-js";
+    import route from "ziggy-js";
 
     const props = defineProps({
         data: Object,
@@ -117,9 +117,9 @@ import route from "ziggy-js";
         return `${urlSegments[0]}/embed/${urlSegments[urlSegments.length - 1]}`;
     }
 
-    function getPostsByTag(tagTitle){
+    function getPostsByTag(tag){
         router.get(
-            route('pages.index', { tag: tagTitle })
+            route('pages.index', { tag: tag })
         );
     }
 </script>
