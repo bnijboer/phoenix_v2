@@ -38,11 +38,24 @@
 
                 <span class="p-float-label mt-4">
                     <Textarea
+                        id="commentBody"
                         v-model="body"
+                        :class="{ 'p-invalid': validationErrors }"
                         class="w-full h-8rem"
                     />
-                    <label for="value">Reactie</label>
+                    <label for="commentBody">Reactie</label>
                 </span>
+                <section
+                    v-if="validationErrors"
+                    class="p-error text-sm"
+                >
+                    <p
+                        v-for="(errorMessage, index) in validationErrors"
+                        :key="index"
+                    >
+                        {{ errorMessage }}
+                    </p>
+                </section>
 
                 <div class="text-right mt-2">
                     <Button type="submit" label="Versturen" />
@@ -79,6 +92,7 @@
 
     const comments = ref([]);
     const body = ref(null);
+    const validationErrors = ref(null);
 
     onBeforeMount(() => {
         comments.value = props.comments;
@@ -90,14 +104,14 @@
             'entryId': props.entryId
         }
 
-        try {
-            const response = await axios.post(route('comments.index'), commentRequest);
-
-            const comment = response.data.data;
-            body.value = null;
-            comments.value.unshift(comment);
-        } catch {
-            console.log('Error posting comment');
-        }
+        axios.post(route('comments.index'), commentRequest)
+            .then(response => {
+                body.value = null;
+                validationErrors.value = null;
+                comments.value.unshift(response.data.data);
+            })
+            .catch(error => {
+                validationErrors.value = Object.values(error.response.data.errors.body);
+            });
     }
 </script>
