@@ -52,7 +52,9 @@
     import route from "ziggy-js";
 
     onMounted(() => {
-        PostService.getPostSuggestions().then(data => posts.value = data.slice(0, 9));
+        PostService.getPostSuggestions().then(response => {
+            posts.value = response.data.data.slice(0, 9)
+        });
     });
 
     const posts = ref();

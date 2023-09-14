@@ -38,22 +38,22 @@
 
                 <span class="p-float-label mt-4">
                     <Textarea
-                        id="commentBody"
-                        v-model="body"
+                        id="comment-body"
+                        v-model="commentRequest.body"
                         :class="{ 'p-invalid': validationErrors }"
                         class="w-full h-8rem"
                     />
-                    <label for="commentBody">Reactie</label>
+                    <label for="comment-body">Reactie</label>
                 </span>
                 <section
                     v-if="validationErrors"
                     class="p-error text-sm"
                 >
                     <p
-                        v-for="(errorMessage, index) in validationErrors"
+                        v-for="(message, index) in validationErrors"
                         :key="index"
                     >
-                        {{ errorMessage }}
+                        {{ message }}
                     </p>
                 </section>
 
@@ -80,10 +80,9 @@
     import Panel from 'primevue/panel';
     import Textarea from 'primevue/textarea';
     import {onBeforeMount, ref} from 'vue'
-    import axios from "axios";
     import LoginForm from "@/components/security/login-form.vue";
     import RegisterForm from "@/components/security/register-form.vue";
-    import route from "ziggy-js";
+    import CommentService from "@/services/comment-service.vue";
 
     const props = defineProps({
         'entryId': String,
@@ -91,22 +90,19 @@
     });
 
     const comments = ref([]);
-    const body = ref(null);
+    const commentRequest = ref({
+        'body': null
+    });
     const validationErrors = ref(null);
 
     onBeforeMount(() => {
         comments.value = props.comments;
     });
 
-    async function onSubmit() {
-        const commentRequest = {
-            'body': body.value,
-            'entryId': props.entryId
-        }
-
-        axios.post(route('comments.index'), commentRequest)
+    function onSubmit() {
+        CommentService.createComment(props.entryId, commentRequest.value)
             .then(response => {
-                body.value = null;
+                commentRequest.value.body = null;
                 validationErrors.value = null;
                 comments.value.unshift(response.data.data);
             })

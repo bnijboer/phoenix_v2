@@ -37,5 +37,5 @@ Route::get('/about',             [GlobalSetController::class, 'about'])        -
 
 Route::middleware(['auth:sanctum'])->group(function () {
 //    Route::get('/user', fn (Request $request) => $request->user() ? new UserResource($request->user()) : null);
-    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::post('/posts/{entryId}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
