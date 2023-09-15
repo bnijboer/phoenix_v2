@@ -57,10 +57,6 @@
     import route from "ziggy-js";
 
     function logout() {
-        router.post('/logout');
-
-        // securityStore.logout();
-
-        // window.location.reload();
+        router.post(route('logout'));
     }
 </script>

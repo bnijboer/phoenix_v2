@@ -8,7 +8,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 
-class CommentService {
+class PostCommentService {
     public function __construct(
         private EntryService $entryService
     ) {}
@@ -16,7 +16,7 @@ class CommentService {
     /**
      * @throws StatamicEntryNotFoundException
      */
-    public function createComment(User $user, CommentRequest $commentRequest): Comment
+    public function createPostComment(User $user, CommentRequest $commentRequest): Comment
     {
         $entry = $this->entryService->getPostEntry($commentRequest->entryId);
 
@@ -28,12 +28,9 @@ class CommentService {
             'entry_id' => $commentRequest->entryId
         ]);
 
-        /** @var Comment $comment */
-        $comment = $user->comments()->create([
-            'body'     => $commentRequest->body,
-            'entry_id' => $post->entry_id,
+        return $post->comments()->create([
+            'body'    => $commentRequest->body,
+            'user_id' => $user
         ]);
-
-        return $comment;
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <LoginForm />
+    <div class="w-full">
+        <LoginForm class="min-w-min md:max-w-30rem" />
     </div>
 </template>
 

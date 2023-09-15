@@ -7,11 +7,8 @@ import '../css/app.css';
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import PrimeVue from 'primevue/config';
-import { createPinia } from 'pinia';
 import LayoutDefault from "@/pages/layout/layout-default.vue";
 import route from "ziggy-js";
-
-const pinia = createPinia();
 
 createInertiaApp({
     resolve: name => {
@@ -29,11 +26,8 @@ createInertiaApp({
                 route
             }
         })
-        .use(pinia)
         .use(PrimeVue)
         .use(plugin)
         .mount(el)
     },
 });
-
-//     .use(vfmPlugin);

@@ -40,22 +40,13 @@
                     <Textarea
                         id="comment-body"
                         v-model="commentRequest.body"
-                        :class="{ 'p-invalid': validationErrors }"
+                        :class="{ 'p-invalid': !!validationErrors?.body }"
                         class="w-full h-8rem"
+                        required
                     />
                     <label for="comment-body">Reactie</label>
                 </span>
-                <section
-                    v-if="validationErrors"
-                    class="p-error text-sm"
-                >
-                    <p
-                        v-for="(message, index) in validationErrors"
-                        :key="index"
-                    >
-                        {{ message }}
-                    </p>
-                </section>
+                <validation-section :error-bag="validationErrors?.body" />
 
                 <div class="text-right mt-2">
                     <Button type="submit" label="Versturen" />
@@ -83,6 +74,7 @@
     import LoginForm from "@/components/security/login-form.vue";
     import RegisterForm from "@/components/security/register-form.vue";
     import CommentService from "@/services/comment-service.vue";
+    import ValidationSection from "@/components/utilities/validation-section.vue";
 
     const props = defineProps({
         'entryId': String,
@@ -107,7 +99,7 @@
                 comments.value.unshift(response.data.data);
             })
             .catch(error => {
-                validationErrors.value = Object.values(error.response.data.errors.body);
+                validationErrors.value = error.response.data.errors;
             });
     }
 </script>

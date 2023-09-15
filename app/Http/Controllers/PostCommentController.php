@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Exceptions\StatamicEntryNotFoundException;
 use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
-use App\Services\CommentService;
+use App\Services\PostCommentService;
 use Symfony\Component\HttpFoundation\Request;
 
-class CommentController extends Controller
+class PostCommentController extends Controller
 {
     public function __construct(
-        private CommentService $commentService
+        private PostCommentService $postCommentService
     ) {}
 
     /**
@@ -19,7 +19,7 @@ class CommentController extends Controller
      */
     public function store(Request $request, CommentRequest $commentRequest): CommentResource
     {
-        $comment = $this->commentService->createComment(
+        $comment = $this->postCommentService->createPostComment(
             $request->user(),
             $commentRequest
         );
