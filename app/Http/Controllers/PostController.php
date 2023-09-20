@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
-use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,12 +22,7 @@ class PostController extends Controller
 
     public function updatePost(string $entryId): int
     {
-        $post = Post::firstOrNew([
-            'entry_id' => $entryId
-        ]);
-
-        $post->increment('reader_count');
-        $post->save();
+        $this->postService->updatePostReaderCount($entryId);
 
         return Response::HTTP_NO_CONTENT;
     }

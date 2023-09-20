@@ -55,9 +55,8 @@
                         outlined
                         size="small"
                         @click="getPostsByTag(tag.slug)"
-                    >
-                        #{{ tag.title }}
-                    </Button>
+                        :label="`#${tag.title}`"
+                    ></Button>
                 </div>
             </template>
         </Card>
@@ -73,9 +72,7 @@
                 :headers="{ viewIndex: props.meta.viewIndex  }"
                 style="text-decoration: none;"
             >
-                <Button>
-                    Terug naar overzicht
-                </Button>
+                <Button label="Terug naar overzicht"></Button>
             </Link>
         </div>
     </div>
@@ -86,7 +83,6 @@
     import Button from 'primevue/button';
     import Card from 'primevue/card';
     import Image from 'primevue/image';
-    import Tag from 'primevue/tag';
     import CommentSection from "@/components/comments/comment-section.vue";
     import {onBeforeMount, onMounted, ref} from "vue";
     import PostService from "@/services/post-service.vue";

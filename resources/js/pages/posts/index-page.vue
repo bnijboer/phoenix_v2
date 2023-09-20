@@ -8,7 +8,7 @@
         >
             <Link
                 :href="route('pages.show', post.entryId)"
-                :headers="{ originUrl: currentPage, viewIndex: index }"
+                :headers="{ viewIndex: index }"
                 style="text-decoration: none;"
             >
                 <PostPreview

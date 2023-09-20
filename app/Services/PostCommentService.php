@@ -5,12 +5,12 @@ namespace App\Services;
 use App\Exceptions\StatamicEntryNotFoundException;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
-use App\Models\Post;
 use App\Models\User;
 
 class PostCommentService {
     public function __construct(
-        private EntryService $entryService
+        private EntryService $entryService,
+        private PostService $postService,
     ) {}
 
     /**
@@ -24,10 +24,10 @@ class PostCommentService {
             throw new StatamicEntryNotFoundException();
         }
 
-        $post = Post::firstOrCreate([
-            'entry_id' => $commentRequest->entryId
-        ]);
+        $post = $this->postService->findOrCreatePost($commentRequest->entryId);
+        $post->save();
 
+        /** @var Comment */
         return $post->comments()->create([
             'body'    => $commentRequest->body,
             'user_id' => $user

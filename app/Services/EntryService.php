@@ -32,7 +32,9 @@ class EntryService
 
     public function postEntries(): QueryBuilder|EntryQueryBuilder
     {
-        return Entry::query()->where('collection', 'blog');
+        return Entry::query()
+            ->where('collection', 'blog')
+            ->where('status', 'published');
     }
 }
 

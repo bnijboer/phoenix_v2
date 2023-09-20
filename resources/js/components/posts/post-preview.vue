@@ -20,7 +20,7 @@
         </template>
 
         <template #subtitle>
-            <h1 class="post-title">{{ title }}</h1>
+            <h1 class="color-primary">{{ title }}</h1>
         </template>
 
         <template #content>

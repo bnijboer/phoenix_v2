@@ -40,8 +40,12 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.625;
 }
 
-.post-title {
+.color-primary {
     color: var(--purple-700);
+}
+
+.color-text {
+    color: var(--gray-800);
 }
 
 .ellipsis {

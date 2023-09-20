@@ -25,9 +25,8 @@
                     <Button
                         class="px-2 mr-2"
                         @click="logout"
-                    >
-                        Uitloggen
-                    </Button>
+                        label="Uitloggen"
+                    ></Button>
                 </span>
                 <div v-else>
                     <Link

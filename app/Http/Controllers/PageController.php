@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\SubscriptionFrequencyEnum;
+use App\Enums\SubscriptionServiceEnum;
 use App\Http\Resources\PostPreviewResource;
 use App\Http\Resources\PostResource;
+use App\Models\SubscribedEmail;
+use App\Models\Subscription;
+use App\Models\User;
 use App\Services\PostService;
+use App\Services\SubscriptionService;
 use App\Traits\RetrievesFilterOptions;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -14,7 +20,8 @@ class PageController extends Controller
     use RetrievesFilterOptions;
 
     public function __construct(
-        private PostService $postService
+        private PostService $postService,
+        private SubscriptionService $subscriptionService
     ) {}
 
     public function indexPage(Request $request): Response
@@ -33,10 +40,16 @@ class PageController extends Controller
 
     public function showPage(Request $request, string $entryId): Response
     {
+        $referer = $request->headers->get('referer');
+
+        $originUrl = parse_url(config('app.url'), PHP_URL_HOST) === parse_url($referer, PHP_URL_HOST)
+            ? $referer
+            : '';
+
         return inertia('posts/show-page', [
             'data'  => new PostResource($this->postService->getPost($entryId)),
             'meta' => [
-                'originUrl' => $request->header('originUrl', route('pages.index')),
+                'originUrl' => $originUrl,
                 'viewIndex' => $request->hasHeader('viewIndex') ? (int)$request->header('viewIndex') : null,
             ]
         ]);

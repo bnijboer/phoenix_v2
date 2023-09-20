@@ -2,9 +2,9 @@
     <div>
         <BaseHeader></BaseHeader>
 
-        <div class="grid">
+        <div class="grid pt-2">
             <div class="col-12 md:col-9">
-                <main class="pt-8 px-8">
+                <main class="px-8">
                     <slot />
                 </main>
             </div>
