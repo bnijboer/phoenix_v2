@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\PostPublished;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendPostPublishedNotification
 {
@@ -21,7 +19,7 @@ class SendPostPublishedNotification
     /**
      * Handle the event.
      *
-     * @param  \App\Events\PostPublished  $event
+     * @param PostPublished $event
      * @return void
      */
     public function handle(PostPublished $event)

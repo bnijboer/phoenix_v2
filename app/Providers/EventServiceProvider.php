@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Events\PostPublished;
 use App\Listeners\SendPostPublishedNotification;
+use App\Listeners\CreateEditorUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Statamic\Events\UserCreated;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PostPublished::class => [
             SendPostPublishedNotification::class,
+        ],
+        UserCreated::class => [
+            CreateEditorUser::class,
         ],
     ];
 

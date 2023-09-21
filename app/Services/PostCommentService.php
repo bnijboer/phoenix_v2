@@ -16,20 +16,25 @@ class PostCommentService {
     /**
      * @throws StatamicEntryNotFoundException
      */
-    public function createPostComment(User $user, CommentRequest $commentRequest): Comment
-    {
-        $entry = $this->entryService->getPostEntry($commentRequest->get('entryId'));
+    public function createPostComment(
+        string $entryId,
+        User $user,
+        CommentRequest $commentRequest
+    ): Comment {
+        $entry = $this->entryService->getPostEntry($entryId);
 
         if ($entry === null) {
             throw new StatamicEntryNotFoundException();
         }
 
-        $post = Post::firstOrCreate($commentRequest->get('entryId'));
+        Post::firstOrCreate([
+            'entry_id' => $entryId
+        ]);
 
-        /** @var Comment */
-        return $post->comments()->create([
-            'body'    => $commentRequest->get('body'),
-            'user_id' => $user
+        /** @var Comment  */
+        return $user->comments()->create([
+            'body'    => $commentRequest->body,
+            'entry_id' => $entryId
         ]);
     }
 }

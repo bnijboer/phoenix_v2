@@ -7,6 +7,7 @@
 /public/hot
 /public/storage
 /public/vendor/statamic
+/users/*.yaml
 /storage/*.key
 /vendor
 .env

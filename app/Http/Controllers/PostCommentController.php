@@ -17,9 +17,10 @@ class PostCommentController extends Controller
     /**
      * @throws StatamicEntryNotFoundException
      */
-    public function store(Request $request, CommentRequest $commentRequest): CommentResource
+    public function store(Request $request, CommentRequest $commentRequest, string $entryId): CommentResource
     {
         $comment = $this->postCommentService->createPostComment(
+            $entryId,
             $request->user(),
             $commentRequest
         );
