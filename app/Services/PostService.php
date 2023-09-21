@@ -34,19 +34,9 @@ class PostService
         return $post;
     }
 
-    public function findOrCreatePost(string $entryId): Post
+    public function updatePostReaderCount(string $entryId): Post
     {
-        return Post::firstOrNew([
-            'entry_id' => $entryId
-        ]);
-    }
-
-    public function updatePostReaderCount(string $entryId): void
-    {
-        $post = $this->findOrCreatePost($entryId);
-
-        $post->increment('reader_count');
-        $post->save();
+        return Post::firstOrNew($entryId)->increment('reader_count');
     }
 
     public function getRandomizedPostCollection($amount = 9): EntryCollection

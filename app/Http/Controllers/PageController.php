@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\SubscriptionFrequencyEnum;
-use App\Enums\SubscriptionServiceEnum;
+use App\Exceptions\StatamicEntryNotFoundException;
 use App\Http\Resources\PostPreviewResource;
 use App\Http\Resources\PostResource;
-use App\Models\SubscribedEmail;
-use App\Models\Subscription;
-use App\Models\User;
 use App\Services\PostService;
 use App\Services\SubscriptionService;
 use App\Traits\RetrievesFilterOptions;
@@ -38,6 +34,9 @@ class PageController extends Controller
         ]);
     }
 
+    /**
+     * @throws StatamicEntryNotFoundException
+     */
     public function showPage(Request $request, string $entryId): Response
     {
         $referer = $request->headers->get('referer');

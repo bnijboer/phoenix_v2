@@ -14,8 +14,7 @@ class SubscriptionService
         string $email,
         string $service,
         string $frequency
-    ): Subscription
-    {
+    ): Subscription {
         $subscribedEmail = SubscribedEmail::create([
             'email' => $email
         ]);
@@ -31,8 +30,7 @@ class SubscriptionService
         User|SubscribedEmail $model,
         string $service,
         string $frequency
-    ): Subscription
-    {
+    ): Subscription {
         /** @var Subscription */
         return $model->subscriptions()->create([
             'subscribed_service' => $service,

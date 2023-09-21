@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Exceptions\StatamicEntryNotFoundException;
 use App\Views\FilterOptions;
 use Statamic\Contracts\Entries\QueryBuilder;
 use Statamic\Extensions\Pagination\LengthAwarePaginator;
