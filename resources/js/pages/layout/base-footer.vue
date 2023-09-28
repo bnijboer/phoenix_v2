@@ -49,7 +49,7 @@
     import {Link} from '@inertiajs/vue3'
     import Carousel from 'primevue/carousel';
     import PostService from "@/services/post-service.vue";
-    import route from "ziggy-js";
+
 
     onMounted(() => {
         PostService.getPostSuggestions().then(response => {

@@ -28,7 +28,6 @@
 
 <script setup>
     import {router} from "@inertiajs/vue3";
-    import route from "ziggy-js";
     import Button from 'primevue/button';
     import Image from 'primevue/image';
 </script>

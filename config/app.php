@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Statamic'),
+    'name' => env('APP_NAME', 'The Goddess In M<e'),
 
     /*
     |--------------------------------------------------------------------------
@@ -176,7 +176,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
 
     ],
 

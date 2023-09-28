@@ -86,7 +86,7 @@
     import CommentSection from "@/components/comments/comment-section.vue";
     import {onBeforeMount, onMounted, ref} from "vue";
     import PostService from "@/services/post-service.vue";
-    import route from "ziggy-js";
+
 
     const props = defineProps({
         data: Object,

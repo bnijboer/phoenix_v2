@@ -1,6 +1,6 @@
 <script>
     import axios from "axios";
-    import route from "ziggy-js";
+
 
     export default {
         async getPostSuggestions() {

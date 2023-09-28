@@ -54,13 +54,13 @@ class PageController extends Controller
         ]);
     }
 
-    public function loginPage(): Response
-    {
-        return inertia('security/login-page');
-    }
-
-    public function registerPage(): Response
-    {
-        return inertia('security/register-page');
-    }
+//    public function loginPage(): Response
+//    {
+//        return inertia('security/login-page');
+//    }
+//
+//    public function registerPage(): Response
+//    {
+//        return inertia('security/register-page');
+//    }
 }

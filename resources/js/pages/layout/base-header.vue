@@ -30,7 +30,7 @@
                 </span>
                 <div v-else>
                     <Link
-                        :href="route('pages.login')"
+                        :href="'/login'"
                         class="px-2 mr-2"
                         style="text-decoration: none;"
                     >
@@ -38,7 +38,7 @@
                     </Link>
 
                     <Link
-                        :href="route('pages.register')"
+                        :href="'/register'"
                         class="px-2 mr-2"
                         style="text-decoration: none;"
                     >
@@ -53,7 +53,7 @@
 <script setup>
     import {Link, router} from '@inertiajs/vue3'
     import Button from 'primevue/button';
-    import route from "ziggy-js";
+
 
     function logout() {
         router.post(route('logout'));

@@ -50,7 +50,7 @@
     import Button from 'primevue/button';
     import PostPreview from "@/components/posts/post-preview.vue";
     import {Link, router} from '@inertiajs/vue3'
-    import route from "ziggy-js";
+
 
     const props = defineProps({
         data: Object,
