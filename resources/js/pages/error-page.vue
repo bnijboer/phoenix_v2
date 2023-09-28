@@ -17,7 +17,7 @@
 
             <div class="flex mt-6">
                 <Button
-                    @click="router.get(route('pages.index'))"
+                    @click="router.get(route('posts.index'))"
                     class="mx-auto"
                     label="Terug naar overzicht"
                 ></Button>

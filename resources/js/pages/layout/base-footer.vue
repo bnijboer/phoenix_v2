@@ -21,7 +21,7 @@
                 <template #item="slotProps">
                     <div class="flex justify-content-around pb-2">
                         <Link
-                            :href="route('pages.show', slotProps.data.entryId)"
+                            :href="route('posts.show', slotProps.data.entryId)"
                             style="text-decoration: none;"
                             class="relative border-round-lg overflow-hidden"
                         >

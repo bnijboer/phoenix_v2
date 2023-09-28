@@ -115,7 +115,7 @@
 
     function getPostsByTag(tag){
         router.get(
-            route('pages.index', { tag: tag })
+            route('posts.index', { tag: tag })
         );
     }
 </script>

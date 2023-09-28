@@ -1,7 +1,7 @@
 <template>
     <div class="sticky top-0 z-2 bg-white p-2">
         <Link
-            :href="route('pages.index')"
+            :href="route('posts.index')"
             style="text-decoration: none;"
         >
             <img
@@ -14,7 +14,7 @@
         <div class="flex justify-content-between my-4 px-2">
             <nav class="flex align-items-center">
                 <Link
-                    :href="route('pages.index')"
+                    :href="route('posts.index')"
                     class="px-2 mr-2"
                     style="text-decoration: none;"
                 >

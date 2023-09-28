@@ -7,7 +7,7 @@
             class="pb-6"
         >
             <Link
-                :href="route('pages.show', post.entryId)"
+                :href="route('posts.show', post.entryId)"
                 :headers="{ viewIndex: index }"
                 style="text-decoration: none;"
             >
@@ -67,7 +67,7 @@
 
     const totalPages = computed(() => Math.ceil(props.meta.total / limit.value))
 
-    const currentPage = computed(() => route('pages.index', {
+    const currentPage = computed(() => route('posts.index', {
         page: page.value,
         limit: limit.value
     }));

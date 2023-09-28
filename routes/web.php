@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\GlobalSetController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,41 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return Inertia::render('Welcome', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//});
-//
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
-//
-//Route::middleware('auth')->group(function () {
-//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-//});
-
-
 /* Redirects */
 Route::permanentRedirect('/', '/posts');
 
 /* Posts */
+Route::get('/posts', [PostController::class, 'indexPage'])->name('posts.index');
 Route::post('/posts/{entryId}/update-reader-count', [PostController::class, 'updatePost'])->name('posts.update_reader_count');
 Route::get('/posts/suggestions', [PostController::class, 'getPostSuggestions'])->name('posts.suggestions');
-Route::get('/posts/{entryId}', [PageController::class, 'showPage'])->name('pages.show');
+Route::get('/posts/{entryId}', [PostController::class, 'showPage'])->name('posts.show');
 
 /* Comments */
 Route::get('/comments', [PostCommentController::class, 'index'])->name('comments.index');
-
-/* Pages */
-//Route::get('/login', [PageController::class, 'loginPage'])->name('pages.login');
-//Route::get('/register', [PageController::class, 'registerPage'])->name('pages.register');
-Route::get('/posts', [PageController::class, 'indexPage'])->name('pages.index');
 
 /* Global sets */
 Route::get('/about', [GlobalSetController::class, 'about'])->name('sets.about');
