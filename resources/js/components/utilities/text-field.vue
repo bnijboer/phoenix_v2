@@ -1,6 +1,10 @@
 <template>
     <div>
-        <span :class="{ 'p-float-label': label && id }">
+        <div class="field">
+            <label v-if="label && id" :for="id">
+                {{ label }}
+            </label>
+
             <InputText
                 v-model="message"
                 :id="id"
@@ -11,10 +15,7 @@
                 :required="required"
                 class="w-full"
             />
-            <label v-if="label && id" :for="id">
-                {{ label }}
-            </label>
-        </span>
+        </div>
 
         <validation-section :error-bag="errorBag" />
     </div>

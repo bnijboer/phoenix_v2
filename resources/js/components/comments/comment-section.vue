@@ -56,25 +56,31 @@
         <div v-else class="text-center mt-8">
             <h5>Log in om te kunnen reageren</h5>
 
-            <div class="flex justify-content-center">
-<!--                <RegisterForm class="w-6" />-->
-                <LoginForm class="w-6" />
+            <login-form class="mx-auto max-w-24rem mt-4" />
+
+            <div class="mt-4">
+                <Link
+                    :href="route('register')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900"
+                >
+                    Heb je nog geen account?
+                </Link>
             </div>
         </div>
     </Panel>
 </template>
 
 <script setup>
+    import { Link } from '@inertiajs/vue3';
     import {formatDutchDate} from "@/helpers/miscellaneous";
     import Button from 'primevue/button';
     import Card from 'primevue/card';
     import Panel from 'primevue/panel';
     import Textarea from 'primevue/textarea';
     import {onBeforeMount, ref} from 'vue'
-    import LoginForm from "@/components/security/login-form.vue";
-    import RegisterForm from "@/components/security/register-form.vue";
     import CommentService from "@/services/comment-service.vue";
     import ValidationSection from "@/components/utilities/validation-section.vue";
+    import LoginForm from "@/components/auth/login-form.vue";
 
     const props = defineProps({
         'entryId': String,

@@ -1,23 +1,11 @@
 <template>
-    <template>
-        <Card class="mx-4 mt-8">
+    <form-container>
+        <form-card :status="status">
             <template #title>
-                <div v-if="status">
-                    {{ status }}
-                </div>
-
-                <div class="text-gray-600 text-center">
-                    Wachtwoord opnieuw instellen
-                </div>
-
-                <hr class="hr-1 mx-8">
+                Wachtwoord opnieuw instellen
             </template>
-
             <template #content>
-                <form
-                    @submit.prevent="submit"
-                    class="mt-2"
-                >
+                <form @submit.prevent="submit">
                     <text-field
                         v-model="form.email"
                         type="email"
@@ -26,26 +14,25 @@
                     />
 
                     <div class="flex align-items-center justify-content-end mt-4">
-                        <Button
-                            type="submit"
+                        <confirm-button
                             label="Stuur herstel link"
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
+                            :loading="form.processing"
                         />
                     </div>
                 </form>
             </template>
-        </Card>
-    </template>
+        </form-card>
+    </form-container>
 </template>
 
 <script setup>
     import { useForm } from '@inertiajs/vue3';
-    import Button from 'primevue/button';
-    import Card from 'primevue/card';
     import TextField from "@/components/utilities/text-field.vue";
+    import ConfirmButton from "@/components/utilities/confirm-button.vue";
+    import FormContainer from "@/components/utilities/form-container.vue";
+    import FormCard from "@/components/utilities/form-card.vue";
 
-    defineProps({
+    const props = defineProps({
         status: String,
     });
 
