@@ -16,11 +16,11 @@
             </p>
 
             <div class="flex mt-6">
-                <Button
+                <button-secondary
+                    label="Terug naar overzicht"
                     @click="router.get(route('posts.index'))"
                     class="mx-auto"
-                    label="Terug naar overzicht"
-                ></Button>
+                ></button-secondary>
             </div>
         </div>
     </div>
@@ -28,6 +28,6 @@
 
 <script setup>
     import {router} from "@inertiajs/vue3";
-    import Button from 'primevue/button';
     import Image from 'primevue/image';
+    import ButtonSecondary from "@/components/utilities/button-secondary.vue";
 </script>

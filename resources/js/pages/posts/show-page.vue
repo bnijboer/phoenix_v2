@@ -61,7 +61,7 @@
             </template>
         </Card>
 
-        <CommentSection
+        <comment-section
             :entry-id="post.entryId"
             :comments="post.comments"
         />
@@ -72,7 +72,7 @@
                 :headers="{ viewIndex: props.meta.viewIndex  }"
                 style="text-decoration: none;"
             >
-                <Button label="Terug naar overzicht"></Button>
+                <button-secondary label="Terug naar overzicht"></button-secondary>
             </Link>
         </div>
     </div>
@@ -86,7 +86,7 @@
     import CommentSection from "@/components/comments/comment-section.vue";
     import {onBeforeMount, onMounted, ref} from "vue";
     import PostService from "@/services/post-service.vue";
-
+    import ButtonSecondary from "@/components/utilities/button-secondary.vue";
 
     const props = defineProps({
         data: Object,

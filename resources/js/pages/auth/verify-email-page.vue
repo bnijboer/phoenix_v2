@@ -9,21 +9,24 @@
                     Klik op de link in de e-mail die net naar je is verzonden om je aanmelding te bevestigen.
                 </p>
 
-                <p class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent">
+                <p
+                    v-if="verificationLinkSent"
+                    class="mb-4 font-medium text-sm text-green-600"
+                >
                     Er is een nieuwe verificatielink naar je gemaild.
                 </p>
 
                 <form @submit.prevent="submit">
                     <div class="mt-4 flex align-items-center justify-content-between">
-                        <confirm-button
+                        <button-secondary
                             label="Stuur link opnieuw"
                             :loading="form.processing"
                         />
 
-                        <Button
+                        <button-primary
                             label="Uitloggen"
                             @click="logout"
-                        ></Button>
+                        ></button-primary>
                     </div>
                 </form>
             </template>
@@ -34,10 +37,10 @@
 <script setup>
     import { computed } from 'vue';
     import {router, useForm} from '@inertiajs/vue3';
-    import Button from 'primevue/button';
-    import ConfirmButton from "@/components/utilities/confirm-button.vue";
+    import ButtonPrimary from "@/components/utilities/button-primary.vue";
     import FormContainer from "@/components/utilities/form-container.vue";
     import FormCard from "@/components/utilities/form-card.vue";
+    import ButtonSecondary from "@/components/utilities/button-secondary.vue";
 
     const props = defineProps({
         status: String,

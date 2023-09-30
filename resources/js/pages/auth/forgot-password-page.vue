@@ -11,10 +11,11 @@
                         type="email"
                         placeholder="E-mail"
                         required
+                        :error-bag="form.errors.email"
                     />
 
                     <div class="flex align-items-center justify-content-end mt-4">
-                        <confirm-button
+                        <button-primary
                             label="Stuur herstel link"
                             :loading="form.processing"
                         />
@@ -28,7 +29,7 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3';
     import TextField from "@/components/utilities/text-field.vue";
-    import ConfirmButton from "@/components/utilities/confirm-button.vue";
+    import ButtonPrimary from "@/components/utilities/button-primary.vue";
     import FormContainer from "@/components/utilities/form-container.vue";
     import FormCard from "@/components/utilities/form-card.vue";
 

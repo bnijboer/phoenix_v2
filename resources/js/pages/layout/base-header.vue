@@ -21,13 +21,12 @@
                     Home
                 </Link>
 
-                <span v-if="$page.props.auth.user">
-                    <Button
-                        class="px-2 mr-2"
-                        @click="logout"
-                        label="Uitloggen"
-                    ></Button>
-                </span>
+                <button-secondary
+                    v-if="$page.props.auth.user"
+                    class="px-2 mr-2"
+                    @click="logout"
+                    label="Uitloggen"
+                ></button-secondary>
                 <div v-else>
                     <Link
                         :href="'/login'"
@@ -52,8 +51,7 @@
 
 <script setup>
     import {Link, router} from '@inertiajs/vue3'
-    import Button from 'primevue/button';
-
+    import ButtonSecondary from "@/components/utilities/button-secondary.vue";
 
     function logout() {
         router.post(route('logout'));

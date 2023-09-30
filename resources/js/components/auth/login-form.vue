@@ -5,6 +5,7 @@
             type="email"
             placeholder="E-mail"
             required
+            :error-bag="form.errors.email"
         />
 
         <text-field
@@ -13,22 +14,15 @@
             placeholder="Wachtwoord"
             class="mt-4"
             required
+            :error-bag="form.errors.password"
         />
 
         <div class="mt-4">
-            <label class="flex align-items-center">
-                <Checkbox
-                    v-model="form.remember"
-                    name="remember"
-                    inputId="remember"
-                />
-                <label
-                    for="remember"
-                    class="ml-2 text-sm text-gray-600"
-                >
-                    Ingelogd blijven
-                </label>
-            </label>
+            <checkbox-single
+                v-model="form.remember"
+                id="remember"
+                label="Ingelogd blijven"
+            />
         </div>
 
         <div class="flex align-items-center justify-content-end mt-4">
@@ -40,7 +34,7 @@
                 Wachtwoord vergeten?
             </Link>
 
-            <confirm-button
+            <button-primary
                 label="Inloggen"
                 :loading="form.processing"
             />
@@ -50,8 +44,8 @@
 
 <script setup>
     import {Link, useForm} from '@inertiajs/vue3';
-    import Checkbox from 'primevue/checkbox';
-    import ConfirmButton from "@/components/utilities/confirm-button.vue";
+    import CheckboxSingle from "@/components/utilities/checkbox-single.vue";
+    import ButtonPrimary from "@/components/utilities/button-primary.vue";
     import TextField from "@/components/utilities/text-field.vue";
 
     const props = defineProps({
