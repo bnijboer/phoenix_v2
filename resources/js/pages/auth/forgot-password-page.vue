@@ -5,7 +5,10 @@
                 Wachtwoord opnieuw instellen
             </template>
             <template #content>
-                <form @submit.prevent="submit">
+                <form
+                    @submit.prevent="submit"
+                    class="flex flex-column gap-1"
+                >
                     <text-field
                         v-model="form.email"
                         type="email"
@@ -14,12 +17,11 @@
                         :error-bag="form.errors.email"
                     />
 
-                    <div class="flex align-items-center justify-content-end mt-4">
-                        <button-primary
-                            label="Stuur herstel link"
-                            :loading="form.processing"
-                        />
-                    </div>
+                    <button-primary
+                        label="Stuur herstel link"
+                        :loading="form.processing"
+                        class="mx-auto mt-2"
+                    />
                 </form>
             </template>
         </form-card>

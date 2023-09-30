@@ -18,7 +18,6 @@
                         v-model="form.password"
                         type="password"
                         placeholder="Wachtwoord"
-                        class="mt-4"
                         required
                         :error-bag="form.errors.password"
                     />
@@ -27,17 +26,15 @@
                         v-model="form.password_confirmation"
                         type="password"
                         placeholder="Wachtwoord herhaling"
-                        class="mt-4"
                         required
                         :error-bag="form.errors.password_confirmation"
                     />
 
-                    <div class="flex align-items-center justify-content-end mt-4">
-                        <button-primary
-                            label="Bevestigen"
-                            :loading="form.processing"
-                        />
-                    </div>
+                    <button-primary
+                        label="Bevestigen"
+                        :loading="form.processing"
+                        class="mx-auto mt-2"
+                    />
                 </form>
             </template>
         </form-card>

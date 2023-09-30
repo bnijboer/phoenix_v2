@@ -1,5 +1,8 @@
 <template>
-    <form @submit.prevent="submit">
+    <form
+        @submit.prevent="submit"
+        class="flex flex-column gap-1"
+    >
         <text-field
             v-model="form.email"
             type="email"
@@ -12,33 +15,29 @@
             v-model="form.password"
             type="password"
             placeholder="Wachtwoord"
-            class="mt-4"
             required
             :error-bag="form.errors.password"
         />
 
-        <div class="mt-4">
-            <checkbox-single
-                v-model="form.remember"
-                id="remember"
-                label="Ingelogd blijven"
-            />
-        </div>
+        <checkbox-single
+            v-model="form.remember"
+            id="remember"
+            label="Ingelogd blijven"
+        />
 
-        <div class="flex align-items-center justify-content-end mt-4">
-            <Link
-                v-if="canResetPassword"
-                :href="route('password.request')"
-                class="mr-4 underline text-sm text-gray-600 hover:text-gray-900"
-            >
-                Wachtwoord vergeten?
-            </Link>
+        <button-primary
+            label="Inloggen"
+            :loading="form.processing"
+            class="mx-auto mt-2"
+        />
 
-            <button-primary
-                label="Inloggen"
-                :loading="form.processing"
-            />
-        </div>
+        <Link
+            v-if="canResetPassword"
+            :href="route('password.request')"
+            class="mx-auto underline text-sm text-gray-600 hover:text-gray-900 mt-4"
+        >
+            Wachtwoord vergeten?
+        </Link>
     </form>
 </template>
 

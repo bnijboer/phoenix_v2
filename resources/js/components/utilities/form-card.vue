@@ -5,7 +5,7 @@
                 {{ status }}
             </div>
 
-            <div class="text-gray-600 text-center">
+            <div class="color-primary text-center">
                 <slot name="title" />
             </div>
 
@@ -13,7 +13,7 @@
         </template>
 
         <template #content>
-            <div class="mt-2">
+            <div class="color-text px-4">
                 <slot name="content" />
             </div>
         </template>

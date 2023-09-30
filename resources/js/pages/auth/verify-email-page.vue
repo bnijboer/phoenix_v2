@@ -1,34 +1,35 @@
 <template>
     <form-container>
-        <form-card :status="status">
+        <form-card>
             <template #title>
                 Bedankt voor je aanmelding!
             </template>
             <template #content>
-                <p class="mb-4 text-sm text-gray-600">
-                    Klik op de link in de e-mail die net naar je is verzonden om je aanmelding te bevestigen.
-                </p>
+                <div class="flex flex-column gap-1">
+                    <InlineMessage
+                        v-if="verificationLinkSent"
+                        severity="success"
+                        class="mb-2"
+                    >
+                        <div class="ml-2">
+                            Er is een nieuwe bevestigingslink naar je verzonden
+                        </div>
+                    </InlineMessage>
 
-                <p
-                    v-if="verificationLinkSent"
-                    class="mb-4 font-medium text-sm text-green-600"
-                >
-                    Er is een nieuwe verificatielink naar je gemaild.
-                </p>
+                    <p>
+                        Klik op de link in de e-mail die net naar je is verzonden om je aanmelding te bevestigen.
+                    </p>
 
-                <form @submit.prevent="submit">
-                    <div class="mt-4 flex align-items-center justify-content-between">
+                    <form
+                        @submit.prevent="submit"
+                        class="text-center mt-2"
+                    >
                         <button-secondary
-                            label="Stuur link opnieuw"
+                            label="Geen e-mail ontvangen?"
                             :loading="form.processing"
                         />
-
-                        <button-primary
-                            label="Uitloggen"
-                            @click="logout"
-                        ></button-primary>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </template>
         </form-card>
     </form-container>
@@ -36,8 +37,8 @@
 
 <script setup>
     import { computed } from 'vue';
-    import {router, useForm} from '@inertiajs/vue3';
-    import ButtonPrimary from "@/components/utilities/button-primary.vue";
+    import { useForm } from '@inertiajs/vue3';
+    import InlineMessage from 'primevue/inlinemessage';
     import FormContainer from "@/components/utilities/form-container.vue";
     import FormCard from "@/components/utilities/form-card.vue";
     import ButtonSecondary from "@/components/utilities/button-secondary.vue";
@@ -53,8 +54,4 @@
     const submit = () => {
         form.post(route('verification.send'));
     };
-
-    function logout() {
-        router.post(route('logout'));
-    }
 </script>

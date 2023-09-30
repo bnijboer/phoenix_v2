@@ -23,6 +23,7 @@
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
+        "laravel-lang/common": "*",
         "laravel/breeze": "^1.19",
         "laravel/sail": "^1.13",
         "mockery/mockery": "^1.4.4",

@@ -5,7 +5,10 @@
                 Account aanmaken
             </template>
             <template #content>
-                <form @submit.prevent="submit">
+                <form
+                    @submit.prevent="submit"
+                    class="flex flex-column gap-1"
+                >
                     <text-field
                         v-model="form.name"
                         type="test"
@@ -18,7 +21,6 @@
                         v-model="form.email"
                         type="email"
                         placeholder="E-mail"
-                        class="mt-4"
                         required
                         :error-bag="form.errors.email"
                     />
@@ -27,7 +29,6 @@
                         v-model="form.password"
                         type="password"
                         placeholder="Wachtwoord"
-                        class="mt-4"
                         required
                         :error-bag="form.errors.password"
                     />
@@ -36,32 +37,28 @@
                         v-model="form.password_confirmation"
                         type="password"
                         placeholder="Wachtwoord bevestigen"
-                        class="mt-4"
                         required
                         :error-bag="form.errors.password_confirmation"
                     />
 
-                    <div class="mt-4">
-                        <checkbox-single
-                            v-model="form.remember"
-                            id="remember"
-                            label="Ingelogd blijven"
-                        />
-                    </div>
+                    <checkbox-single
+                        v-model="form.remember"
+                        id="remember"
+                        label="Ingelogd blijven"
+                    />
 
-                    <div class="flex align-items-center justify-content-end mt-4">
-                        <Link
-                            :href="route('login')"
-                            class="mr-4 underline text-sm text-gray-600 hover:text-gray-900"
-                        >
-                            Heb je al een account?
-                        </Link>
+                    <button-primary
+                        label="Registreren"
+                        :loading="form.processing"
+                        class="mx-auto mt-2"
+                    />
 
-                        <button-primary
-                            label="Registreren"
-                            :loading="form.processing"
-                        />
-                    </div>
+                    <Link
+                        :href="route('login')"
+                        class="mx-auto underline text-sm text-gray-600 hover:text-gray-900 mt-4"
+                    >
+                        Heb je al een account?
+                    </Link>
                 </form>
             </template>
         </form-card>
