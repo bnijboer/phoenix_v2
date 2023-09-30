@@ -32,14 +32,6 @@ class Post extends Model
         'reader_count'
     ];
 
-    public function increment($column, $amount = 1, array $extra = []): Post
-    {
-        $this->increment($column);
-        $this->save();
-
-        return $this;
-    }
-
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'entry_id');

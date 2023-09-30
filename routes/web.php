@@ -29,10 +29,10 @@ Route::get('/posts/{entryId}', [PostController::class, 'showPage'])->name('posts
 Route::get('/comments', [PostCommentController::class, 'index'])->name('comments.index');
 
 /* Global sets */
-Route::get('/about', [GlobalSetController::class, 'about'])->name('sets.about');
+Route::get('/about', [GlobalSetController::class, 'about'])->name('globals.about');
 
 /* Guarded */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/posts/{entryId}/comments', [PostCommentController::class, 'store'])->name('comments.store');
 });
 

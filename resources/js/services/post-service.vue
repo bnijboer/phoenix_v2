@@ -1,7 +1,4 @@
 <script>
-    import axios from "axios";
-
-
     export default {
         async getPostSuggestions() {
             return await axios.get(
