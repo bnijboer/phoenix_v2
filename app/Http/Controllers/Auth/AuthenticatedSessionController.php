@@ -34,6 +34,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (Auth::check() && url()->previous() !== route('login')) {
+            app('redirect')->setIntendedUrl(url()->previous());
+
+            return redirect()->intended(RouteServiceProvider::HOME)->withFragment('#form');
+        }
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -45,9 +51,10 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        app('redirect')->setIntendedUrl(url()->previous());
+
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }

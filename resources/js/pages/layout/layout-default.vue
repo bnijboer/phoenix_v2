@@ -1,6 +1,6 @@
 <template>
     <div>
-        <BaseHeader></BaseHeader>
+        <base-header />
 
         <div class="grid pt-2">
             <div class="col-12 md:col-9">
@@ -10,11 +10,11 @@
             </div>
 
             <div class="hidden md:block col-3">
-                <BaseSidebar></BaseSidebar>
+                <base-sidebar />
             </div>
         </div>
 
-        <BaseFooter class="mt-8" />
+        <base-footer class="mt-8" />
     </div>
 </template>
 

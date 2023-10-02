@@ -4,7 +4,7 @@
             v-for="(post, index) in posts"
             :key="index"
             :ref="(el) => (postRefs[index] = el)"
-            class="pb-6"
+            class="scroll-margin pb-6"
         >
             <Link
                 :href="route('posts.show', post.entryId)"
@@ -50,7 +50,6 @@
     import Button from 'primevue/button';
     import PostPreview from "@/components/posts/post-preview.vue";
     import {Link, router} from '@inertiajs/vue3'
-
 
     const props = defineProps({
         data: Object,

@@ -1,5 +1,5 @@
 <template>
-    <div class="sticky top-0 z-2 bg-white p-2">
+    <div class="sticky top-0 z-2 bg-white p-2 header">
         <Link
             :href="route('posts.index')"
             style="text-decoration: none;"

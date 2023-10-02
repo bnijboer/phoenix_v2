@@ -5,7 +5,10 @@
                 Nieuw wachtwoord instellen
             </template>
             <template #content>
-                <form @submit.prevent="submit">
+                <form
+                    @submit.prevent="submit"
+                    class="flex flex-column gap-1"
+                >
                     <text-field
                         v-model="form.email"
                         type="email"
@@ -33,7 +36,7 @@
                     <button-primary
                         label="Bevestigen"
                         :loading="form.processing"
-                        class="mx-auto mt-2"
+                        class="mx-auto"
                     />
                 </form>
             </template>

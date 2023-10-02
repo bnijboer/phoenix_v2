@@ -1,10 +1,6 @@
 <template>
     <Card>
         <template #title>
-            <div v-if="status">
-                {{ status }}
-            </div>
-
             <div class="color-primary text-center">
                 <slot name="title" />
             </div>
@@ -22,8 +18,4 @@
 
 <script setup>
     import Card from 'primevue/card';
-
-    const props = defineProps({
-        status: String,
-    });
 </script>
