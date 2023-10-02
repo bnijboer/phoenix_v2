@@ -2,14 +2,14 @@
 
 namespace App\Events;
 
-use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PostPublished
+class PostCommented
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -18,8 +18,9 @@ class PostPublished
      *
      * @return void
      */
-    public function __construct(public Post $post)
-    {
+    public function __construct(
+        public Comment $comment
+    ) {
     }
 
     /**

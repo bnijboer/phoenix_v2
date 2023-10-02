@@ -1,11 +1,11 @@
 <script>
     export default {
-        async createComment(entryId, commentRequest) {
+        async createComment(entryId, formData) {
             return await axios.post(
                 route('comments.store', {
                     entryId: entryId
                 }),
-                commentRequest
+                formData
             );
         }
     }

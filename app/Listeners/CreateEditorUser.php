@@ -25,11 +25,18 @@ class CreateEditorUser
      */
     public function handle(UserCreated $event): void
     {
-        User::create([
-            'name' => $event->user->name,
-            'email' => $event->user->email,
-            'role' => $event->user->isSuper() ? 'editor' : null,
-            'password' => $event->user->getAuthPassword(),
-        ]);
+        if ($event->user instanceof User) {
+            $user = User::make([
+                'name' => $event->user->name,
+                'email' => $event->user->email,
+                'password' => $event->user->getAuthPassword(),
+            ]);
+
+            if ($event->user->isSuper()) {
+                $user->role = 'editor';
+            }
+
+            $user->save();
+        }
     }
 }

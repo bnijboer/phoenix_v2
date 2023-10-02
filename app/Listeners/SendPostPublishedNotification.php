@@ -2,7 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\PostPublished;
+use App\Services\SubscriptionService;
+use Statamic\Entries\Entry;
+use Statamic\Events\EntryCreated;
 
 class SendPostPublishedNotification
 {
@@ -11,19 +13,25 @@ class SendPostPublishedNotification
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+    public function __construct(
+        private SubscriptionService $subscriptionService
+    ) {
     }
 
     /**
      * Handle the event.
      *
-     * @param PostPublished $event
+     * @param EntryCreated $event
      * @return void
      */
-    public function handle(PostPublished $event)
+    public function handle(EntryCreated $event)
     {
-        //
+        if ($event->entry instanceof Entry) {
+            if ($event->entry->published()) {
+                $subscribedEmailAccounts = $this->subscriptionService->getEmailAccountsSubscribedToNewsletter();
+
+                dd($subscribedEmailAccounts);
+            }
+        }
     }
 }

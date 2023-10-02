@@ -2,12 +2,18 @@
 
 namespace App\Providers;
 
-use App\Events\PostPublished;
+use App\Events\PostCommented;
+use App\Events\UserSubscribed;
+use App\Listeners\SendPostCommentedNotification;
 use App\Listeners\SendPostPublishedNotification;
 use App\Listeners\CreateEditorUser;
+use App\Listeners\SendUserSubscribedNotification;
+use App\Listeners\SetLastLoginTimestamp;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Statamic\Events\EntryCreated;
 use Statamic\Events\UserCreated;
 
 class EventServiceProvider extends ServiceProvider
@@ -21,11 +27,20 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        PostPublished::class => [
-            SendPostPublishedNotification::class,
+        Login::class => [
+            SetLastLoginTimestamp::class,
         ],
         UserCreated::class => [
             CreateEditorUser::class,
+        ],
+        UserSubscribed::class => [
+            SendUserSubscribedNotification::class,
+        ],
+        EntryCreated::class => [
+            SendPostPublishedNotification::class,
+        ],
+        PostCommented::class => [
+            SendPostCommentedNotification::class,
         ],
     ];
 

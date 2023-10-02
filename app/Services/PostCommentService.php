@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\PostCommented;
 use App\Exceptions\StatamicEntryNotFoundException;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
@@ -31,10 +32,14 @@ class PostCommentService {
             'entry_id' => $entryId
         ]);
 
-        /** @var Comment  */
-        return $user->comments()->create([
+        /** @var Comment $comment */
+        $comment = $user->comments()->create([
             'body'    => $commentRequest->body,
             'entry_id' => $entryId
         ]);
+
+        PostCommented::dispatch($comment);
+
+        return $comment;
     }
 }

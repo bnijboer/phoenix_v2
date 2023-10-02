@@ -101,7 +101,6 @@
         'comments': Array
     });
 
-
     const form = useForm({
         'body': ''
     });
@@ -116,16 +115,16 @@
 
     function submit() {
         highlightFirst.value = false;
+        form.clearErrors();
 
         CommentService.createComment(props.entryId, form)
             .then(response => {
                 form.reset();
-                form.clearErrors();
 
                 comments.value.unshift(response.data.data);
+
                 highlightFirst.value = true;
                 overview.value.scrollIntoView({ behavior: 'smooth' });
-
             })
             .catch(error => {
                 form.setError(error.response.data.errors);
