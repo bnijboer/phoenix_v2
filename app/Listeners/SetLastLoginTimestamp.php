@@ -23,7 +23,7 @@ class SetLastLoginTimestamp
      * @param Login $event
      * @return void
      */
-    public function handle(Login $event)
+    public function handle(Login $event): void
     {
         if ($event->user instanceof User) {
             $event->user->update([

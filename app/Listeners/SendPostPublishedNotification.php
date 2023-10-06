@@ -24,13 +24,19 @@ class SendPostPublishedNotification
      * @param EntryCreated $event
      * @return void
      */
-    public function handle(EntryCreated $event)
+    public function handle(EntryCreated $event): void
     {
+        logger('firing sendPostPublishedNotification listener');
+
         if ($event->entry instanceof Entry) {
             if ($event->entry->published()) {
-                $subscribedEmailAccounts = $this->subscriptionService->getEmailAccountsSubscribedToNewsletter();
-
-                dd($subscribedEmailAccounts);
+                foreach ($this->subscriptionService->getEmailAccountsSubscribedToNewsletter() as $email) {
+                    $this->subscriptionService->sendNewsletterMail($email, [
+                        'title'          => $event->entry->get('title'),
+                        'viewPostUrl'    => route('posts.show', $event->entry->id()),
+                        'unsubscribeUrl' => route('newsletter.save_preferences')
+                    ]);
+                }
             }
         }
     }

@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use App\Events\PostCommented;
-use App\Events\UserSubscribed;
+use App\Events\NewSubscriber;
 use App\Listeners\SendPostCommentedNotification;
 use App\Listeners\SendPostPublishedNotification;
 use App\Listeners\CreateEditorUser;
-use App\Listeners\SendUserSubscribedNotification;
+use App\Listeners\SendNewSubscriberNotification;
 use App\Listeners\SetLastLoginTimestamp;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
@@ -33,8 +33,8 @@ class EventServiceProvider extends ServiceProvider
         UserCreated::class => [
             CreateEditorUser::class,
         ],
-        UserSubscribed::class => [
-            SendUserSubscribedNotification::class,
+        NewSubscriber::class => [
+            SendNewSubscriberNotification::class,
         ],
         EntryCreated::class => [
             SendPostPublishedNotification::class,

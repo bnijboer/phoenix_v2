@@ -75,23 +75,55 @@
                 <button-secondary label="Terug naar overzicht"></button-secondary>
             </Link>
         </div>
+
+        <Toast position="bottom-right" group="subscription-modal">
+            <template #message="slotProps">
+                <div class="flex flex-column align-items-center" style="flex: 1">
+                    <div class="text-center mb-2">
+                        <p class="font-semibold text-lg mb-2">
+                            Op de hoogte blijven?
+                        </p>
+                        <p>Schrijf je in</p>
+                    </div>
+                    <form @submit.prevent="submit">
+                        <text-field
+                            v-model="form.email"
+                            type="email"
+                            placeholder="E-mail"
+                            :error-bag="form.errors.email"
+                        />
+                    </form>
+                </div>
+            </template>
+        </Toast>
     </div>
 </template>
 
 <script setup>
-    import {Link, router} from '@inertiajs/vue3'
+    import {onBeforeMount, onMounted, ref} from "vue";
+    import {Link, router, useForm} from '@inertiajs/vue3'
+    import { useToast } from 'primevue/usetoast';
     import Button from 'primevue/button';
     import Card from 'primevue/card';
     import Image from 'primevue/image';
-    import CommentSection from "@/components/comments/comment-section.vue";
-    import {onBeforeMount, onMounted, ref} from "vue";
+    import Toast from 'primevue/toast';
     import PostService from "@/services/post-service.vue";
+    import CommentSection from "@/components/comments/comment-section.vue";
     import ButtonSecondary from "@/components/utilities/button-secondary.vue";
+    import TextField from "@/components/utilities/text-field.vue";
 
     const props = defineProps({
         data: Object,
         meta: Object
     })
+
+    const toast = useToast();
+
+    const form = useForm({
+        email: '',
+        password: '',
+        remember: false,
+    });
 
     const post = ref(null);
 
@@ -100,10 +132,29 @@
     });
 
     onMounted(() => {
-        setTimeout(updateReaderCount, 15000);
+        setTimeout(() => {
+            if (props.meta.showSubscriptionModal) {
+                showSubscriptionModalPopUp();
+            }
+
+            updateReaderCount();
+        }, 15000);
     });
 
-    function updateReaderCount() {
+    const submit = async () => {
+        await axios.post(route('subscriptions.save_preferences'), form);
+
+        toast.removeGroup('subscription-modal');
+    };
+
+    const showSubscriptionModalPopUp = () => {
+        toast.add({
+            severity: 'info',
+            group: 'subscription-modal'
+        });
+    }
+
+    const updateReaderCount = () => {
         PostService.updateReaderCount(post.value.entryId);
     }
 

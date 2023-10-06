@@ -47,6 +47,12 @@
                         label="Ingelogd blijven"
                     />
 
+                    <checkbox-single
+                        v-model="form.newsletter"
+                        id="newsletter"
+                        label="Hou mij op de hoogte bij nieuwe posts"
+                    />
+
                     <button-primary
                         label="Registreren"
                         :loading="form.processing"
@@ -80,6 +86,7 @@
         password_confirmation: '',
         remember: false,
         terms: false,
+        newsletter: true,
     });
 
     const submit = () => {

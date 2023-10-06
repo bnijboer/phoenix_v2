@@ -10,6 +10,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
 import LayoutDefault from "@/pages/layout/layout-default.vue";
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
@@ -27,6 +28,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue)
+            .use(ToastService)
             .mount(el)
     },
 });

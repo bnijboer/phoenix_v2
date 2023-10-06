@@ -25,13 +25,13 @@ class PostService
      */
     public function getPost(string $entryId): Entry
     {
-        $post = $this->entryService->getPostEntry($entryId);
+        $postEntry = $this->entryService->getPostEntry($entryId);
 
-        if ($post === null) {
+        if ($postEntry === null) {
             throw new StatamicEntryNotFoundException();
         }
 
-        return $post;
+        return $postEntry;
     }
 
     public function updatePostReaderCount(string $entryId): Post

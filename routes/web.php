@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\GlobalSetController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,10 @@ Route::get('/posts/{entryId}', [PostController::class, 'showPage'])->name('posts
 
 /* Comments */
 Route::get('/comments', [PostCommentController::class, 'index'])->name('comments.index');
+
+/* Subscriptions */
+Route::post('/subscriptions/preferences', [SubscriptionController::class, 'savePreferences'])->name('subscriptions.save_preferences');
+
 
 /* Global sets */
 Route::get('/about', [GlobalSetController::class, 'about'])->name('globals.about');

@@ -2,14 +2,13 @@
 
 namespace App\Events;
 
-use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserSubscribed
+class NewSubscriber
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,7 +18,7 @@ class UserSubscribed
      * @return void
      */
     public function __construct(
-        public User $user
+        public string $email
     ) {
     }
 
