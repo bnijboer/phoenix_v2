@@ -21,7 +21,10 @@
             />
         </div>
 
-        <validation-section :error-bag="errorBag" />
+        <validation-section
+            v-if="error"
+            :error="error"
+        />
     </div>
 </template>
 
@@ -38,7 +41,7 @@
         placeholder: String,
         label: String,
         isInvalid: Boolean,
-        errorBag: Array,
+        error: String,
         required: {
             type: Boolean,
             default: false
@@ -49,5 +52,5 @@
 
     const message = useModelWrapper(props, emit, 'modelValue');
 
-    const isInvalid = computed(() => !!props.errorBag);
+    const isInvalid = computed(() => !!props.error);
 </script>

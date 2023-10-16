@@ -1,11 +1,11 @@
 <template>
-    <p class=" p-error text-left text-sm ml-1">
-        {{ message }}
+    <p class="p-error text-sm">
+        {{ error }}
     </p>
 </template>
 
 <script setup>
     const props = defineProps({
-        message: Array
+        error: String
     });
 </script>

@@ -14,7 +14,7 @@
                         type="email"
                         placeholder="E-mail"
                         required
-                        :error-bag="form.errors.email"
+                        :error="form.errors.email"
                     />
 
                     <text-field
@@ -22,7 +22,7 @@
                         type="password"
                         placeholder="Wachtwoord"
                         required
-                        :error-bag="form.errors.password"
+                        :error="form.errors.password"
                     />
 
                     <text-field
@@ -30,7 +30,7 @@
                         type="password"
                         placeholder="Wachtwoord herhaling"
                         required
-                        :error-bag="form.errors.password_confirmation"
+                        :error="form.errors.password_confirmation"
                     />
 
                     <button-primary

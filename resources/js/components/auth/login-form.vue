@@ -8,7 +8,7 @@
             type="email"
             placeholder="E-mail"
             required
-            :error-bag="form.errors.email"
+            :error="form.errors.email"
         />
 
         <text-field
@@ -16,7 +16,7 @@
             type="password"
             placeholder="Wachtwoord"
             required
-            :error-bag="form.errors.password"
+            :error="form.errors.password"
         />
 
         <checkbox-single

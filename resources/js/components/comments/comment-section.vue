@@ -42,26 +42,60 @@
                 Er zijn nog geen reacties.
             </div>
 
-            <form
-                v-if="$page.props.auth.user"
-                id="form"
-                @submit.prevent="submit"
-                class="mt-8"
-            >
-                <text-area
-                    v-model="form.body"
-                    id="comment-body"
-                    label="Wat vind je van deze post?"
-                    :error-message="form.errors.body"
-                />
-
-                <div class="text-right mt-4">
-                    <button-primary
-                        label="Versturen"
-                        :loading="form.processing"
+            <div v-if="$page.props.auth.user">
+                <form
+                    v-if="$page.props.auth.user.email_verified_at"
+                    id="form"
+                    @submit.prevent="submit($page.props.auth.user)"
+                    class="mt-8"
+                >
+                    <text-area
+                        v-model="form.body"
+                        id="comment-body"
+                        label="Wat vind je van deze post?"
+                        required
+                        :error="form.errors.body"
                     />
+
+                    <div v-if="form.errors.body">
+                        <p
+                            v-for="error in form.errors.body"
+                            class="p-error text-sm"
+                        >
+                            {{ error }}
+                        </p>
+                    </div>
+
+                    <div class="text-right mt-4">
+                        <button-primary
+                            label="Versturen"
+                            :loading="form.processing"
+                        />
+                    </div>
+                </form>
+                <div
+                    v-else
+                    class="text-center mt-8"
+                >
+                    <h5>Activeer je account om te kunnen reageren</h5>
+
+                    <div class="mt-4">
+                        <p>
+                            Klik op de link in de e-mail die naar je is verzonden om je account te activeren.
+                        </p>
+
+                        <form
+                            @submit.prevent="sendActivationLink"
+                            class="text-center mt-2"
+                        >
+                            <button-secondary
+                                label="Geen e-mail ontvangen?"
+                                :loading="form.processing"
+                            />
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
             <div
                 v-else
                 class="text-center mt-8"
@@ -94,6 +128,7 @@
     import LoginForm from "@/components/auth/login-form.vue";
     import TextArea from "@/components/utilities/text-area.vue";
     import ButtonPrimary from "@/components/utilities/button-primary.vue";
+    import ButtonSecondary from "@/components/utilities/button-secondary.vue";
 
     const props = defineProps({
         'entryId': String,
@@ -129,14 +164,20 @@
             })
             .catch(error => {
                 form.setError(error.response.data.errors);
+            });
+    }
 
+    const sendActivationLink = () => {
+        form.post(route('verification.send'), {
+            onSuccess: () => {
                 toast.add({
-                    severity: 'error',
-                    summary: 'Er is iets misgegaan bij het plaatsen van je reactie',
+                    severity: 'success',
+                    summary: 'Er is een nieuwe activatielink naar je verzonden',
                     group: 'flash',
                     life: 3000,
                     closable: false
                 });
-            });
-    }
+            }
+        });
+    };
 </script>

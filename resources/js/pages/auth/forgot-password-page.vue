@@ -14,7 +14,7 @@
                         type="email"
                         placeholder="E-mail"
                         required
-                        :error-bag="form.errors.email"
+                        :error="form.errors.email"
                     />
 
                     <button-primary

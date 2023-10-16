@@ -18,23 +18,19 @@
                 {{ label }}
             </label>
         </div>
-
-        <validation-section :message="errorMessage" />
     </div>
 </template>
 
 <script setup>
     import {computed} from 'vue';
     import Textarea from 'primevue/textarea';
-    import ValidationSection from "@/components/utilities/validation-section.vue";
     import {useModelWrapper} from "@/helpers/model-wrapper";
 
     const props = defineProps({
         modelValue: String,
         id: String,
         label: String,
-        isInvalid: Boolean,
-        errorMessage: Array,
+        error: String,
         required: {
             type: Boolean,
             default: false
@@ -45,5 +41,5 @@
 
     const body = useModelWrapper(props, emit, 'modelValue');
 
-    const isInvalid = computed(() => !!props.errorMessage);
+    const isInvalid = computed(() => !!props.error);
 </script>
