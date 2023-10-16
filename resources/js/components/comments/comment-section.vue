@@ -9,10 +9,8 @@
                     v-for="(comment, index) in comments"
                     :key="index"
                     class="mb-2"
-                    :class="{'highlight': highlightFirst === true && index === 0}"
+                    :class="{'highlight': highlightFirst && index === 0}"
                 >
-
-                    <!--                    :class="(highlightFirst === true && index === 0) ? 'highlight' : ''"-->
                     <Card>
                         <template #subtitle>
                             <div class="flex justify-content-between">
@@ -86,11 +84,12 @@
 </template>
 
 <script setup>
+    import {onBeforeMount, ref} from 'vue'
     import {Link, useForm} from '@inertiajs/vue3';
-    import {formatDutchDate} from "@/helpers/miscellaneous";
+    import {useToast} from "primevue/usetoast";
     import Card from 'primevue/card';
     import Panel from 'primevue/panel';
-    import {onBeforeMount, ref} from 'vue'
+    import {formatDutchDate} from "@/helpers/miscellaneous";
     import CommentService from "@/services/comment-service.vue";
     import LoginForm from "@/components/auth/login-form.vue";
     import TextArea from "@/components/utilities/text-area.vue";
@@ -100,6 +99,8 @@
         'entryId': String,
         'comments': Array
     });
+
+    const toast = useToast();
 
     const form = useForm({
         'body': ''
@@ -128,6 +129,14 @@
             })
             .catch(error => {
                 form.setError(error.response.data.errors);
+
+                toast.add({
+                    severity: 'error',
+                    summary: 'Er is iets misgegaan bij het plaatsen van je reactie',
+                    group: 'flash',
+                    life: 3000,
+                    closable: false
+                });
             });
     }
 </script>

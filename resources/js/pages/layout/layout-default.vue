@@ -15,10 +15,16 @@
         </div>
 
         <base-footer class="mt-8" />
+
+        <Toast
+            position="bottom-right"
+            group="flash"
+        />
     </div>
 </template>
 
 <script setup>
+    import Toast from 'primevue/toast';
     import BaseSidebar from "@/pages/layout/base-sidebar.vue";
     import BaseHeader from "@/pages/layout/base-header.vue";
     import BaseFooter from "@/pages/layout/base-footer.vue";

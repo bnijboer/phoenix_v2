@@ -35,7 +35,7 @@ class NewsletterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Newsletter',
+            subject: 'Blog update',
         );
     }
 

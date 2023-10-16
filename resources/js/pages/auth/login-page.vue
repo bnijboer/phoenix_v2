@@ -1,17 +1,19 @@
 <template>
-    <form-container>
-        <form-card>
-            <template #title>
-                Inloggen
-            </template>
-            <template #content>
-                <login-form
-                    :status="status"
-                    :can-reset-password="canResetPassword"
-                />
-            </template>
-        </form-card>
-    </form-container>
+    <div>
+        <form-container>
+            <form-card>
+                <template #title>
+                    Inloggen
+                </template>
+                <template #content>
+                    <login-form
+                        :status="status"
+                        :can-reset-password="canResetPassword"
+                    />
+                </template>
+            </form-card>
+        </form-container>
+    </div>
 </template>
 
 <script setup>

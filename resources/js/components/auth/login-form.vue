@@ -46,10 +46,13 @@
     import CheckboxSingle from "@/components/utilities/checkbox-single.vue";
     import ButtonPrimary from "@/components/utilities/button-primary.vue";
     import TextField from "@/components/utilities/text-field.vue";
+    import {useToast} from "primevue/usetoast";
 
     const props = defineProps({
         canResetPassword: Boolean
     });
+
+    const toast = useToast();
 
     const form = useForm({
         email: '',
@@ -59,7 +62,18 @@
 
     const submit = () => {
         form.post(route('login'), {
-            onFinish: () => form.reset('password'),
+            onSuccess: () => {
+                toast.add({
+                    severity: 'success',
+                    summary: 'Je bent nu ingelogd',
+                    group: 'flash',
+                    life: 3000,
+                    closable: false
+                });
+            },
+            onFinish: () => {
+                form.reset('password');
+            }
         });
     };
 </script>

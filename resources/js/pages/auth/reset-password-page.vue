@@ -46,6 +46,7 @@
 
 <script setup>
     import { useForm } from '@inertiajs/vue3';
+    import {useToast} from "primevue/usetoast";
     import ButtonPrimary from "@/components/utilities/button-primary.vue";
     import TextField from "@/components/utilities/text-field.vue";
     import FormContainer from "@/components/utilities/form-container.vue";
@@ -56,6 +57,8 @@
         token: String,
     });
 
+    const toast = useToast();
+
     const form = useForm({
         token: props.token,
         email: props.email,
@@ -65,6 +68,15 @@
 
     const submit = () => {
         form.post(route('password.store'), {
+            onSuccess: () => {
+                toast.add({
+                    severity: 'success',
+                    summary: 'Je wachtwoord is opnieuw ingesteld',
+                    group: 'flash',
+                    life: 3000,
+                    closable: false
+                });
+            },
             onFinish: () => form.reset('password', 'password_confirmation'),
         });
     };

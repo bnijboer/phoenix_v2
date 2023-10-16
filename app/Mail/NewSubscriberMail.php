@@ -31,7 +31,7 @@ class NewSubscriberMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Subscriber',
+            subject: 'Nieuwe aanmelding voor de nieuwsbrief',
         );
     }
 

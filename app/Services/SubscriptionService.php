@@ -24,8 +24,8 @@ class SubscriptionService
             $this->unsubscribe($subscriptionRequest->email);
         } else {
             $this->createSubscribedEmail(
-                email: $subscriptionRequest->email,
-                service: SubscriptionServiceEnum::NEWSLETTER,
+                email:     $subscriptionRequest->email,
+                service:   SubscriptionServiceEnum::NEWSLETTER,
                 frequency: SubscriptionFrequencyEnum::IMMEDIATE
             );
         }
